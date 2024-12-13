@@ -1,13 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { BrowserRouter } from 'react-router-dom'
-import AppRoutes from './routes/AppRoutes'
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  useEffect(() => {
+    AOS.init({
+      duration: 1000, // Animation duration in milliseconds
+      once: true, // Animation triggers only once
+      offset: 100, // Offset for triggering animation
+      delay: 100, // Delay before animation starts
+    });
+    AOS.refresh(); // Refresh AOS on component load
+  }, []);
   return (
     <BrowserRouter>
       <AppRoutes></AppRoutes>
@@ -15,4 +22,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
