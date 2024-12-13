@@ -155,12 +155,14 @@ export const Navbar = () => {
           </div>
 
           <div className="buttons flex gap-4">
-            <button
-              onClick={() => setIsLoginOpen(true)} // Open login popup
-              className="text-white text-lg bg-[--btn-primary] px-6 py-2 rounded-lg font-semibold hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
-            >
-              Login
-            </button>
+            <Link to={"/login"}>
+              <button
+                onClick={() => setIsLoginOpen(true)} // Open login popup
+                className="text-white text-lg bg-[--btn-primary] px-6 py-2 rounded-lg font-semibold hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
+              >
+                Login
+              </button>
+            </Link>
             <Link to={"/hostel"}>
               <button className="text-white text-lg bg-[--btn-primary] px-6 py-2 rounded-lg font-semibold hover:bg-[--btn-secondary] transition-all active:translate-y-0.5">
                 Book
@@ -178,7 +180,7 @@ export const Navbar = () => {
         >
           <img
             className="h-20 mr-4 mb-4"
-            src="/assets/chatbot-icon.png"
+            src="/assets/chatbot_icon.png"
             alt="chatbot icon"
           />
         </div>

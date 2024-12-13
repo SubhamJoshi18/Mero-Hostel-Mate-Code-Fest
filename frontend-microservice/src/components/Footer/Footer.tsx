@@ -81,18 +81,18 @@ export default function Footer() {
             </div>
             <div>
               <h3 className="mb-3 font-bold text-[18px]">Social Media Links</h3>
-              <ul className="flex gap-3">
-                <a href="#">
-                  <FacebookOutlinedIcon style={{ color: "black" }} />
+              <ul className="flex gap-6">
+                <a href="#" className="text-black hover:text-[--primary-color]">
+                  <FacebookOutlinedIcon />
                 </a>
-                <a href="#">
-                  <InstagramIcon style={{ color: "black" }} />
+                <a href="#" className="text-black hover:text-[--primary-color]">
+                  <InstagramIcon />
                 </a>
-                <a href="#">
-                  <LinkedInIcon style={{ color: "black" }} />
+                <a href="#" className="text-black hover:text-[--primary-color]">
+                  <LinkedInIcon />
                 </a>
-                <a href="#">
-                  <XIcon style={{ color: "black" }} />
+                <a href="#" className="text-black hover:text-[--primary-color]">
+                  <XIcon />
                 </a>
               </ul>
             </div>

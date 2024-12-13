@@ -4,6 +4,7 @@ import About from "../pages/About";
 import HomePage from "../pages/HomePage";
 import { Navbar } from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
+import Login from "../pages/Login";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -36,10 +37,10 @@ export default function AppRoutes() {
       {!hideNavbarFooter && <Navbar />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* <Route
+        <Route
           path="/login"
           element={<Login onClose={() => console.log("Login closed")} />}
-        /> */}
+        />
         <Route path="/about" element={<About />} />
         {/* <Route path="/hostel" element={<Hostel />} /> */}
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}

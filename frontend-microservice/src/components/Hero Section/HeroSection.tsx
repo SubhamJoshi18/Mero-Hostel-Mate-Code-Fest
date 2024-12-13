@@ -16,7 +16,7 @@ export const HeroSection = () => {
           className="text-[150px] font-extrabold uppercase tracking-wider"
           style={{ fontFamily: "Oswald" }}
         >
-          Perfect Matrimony
+          Perfect Stay
         </h1>
         <p className="w-[700px] text-center leading-loose pb-16 mt-8">
           Experience comfort and convenience with our expertly curated hostel
