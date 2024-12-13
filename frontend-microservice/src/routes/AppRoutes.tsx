@@ -9,6 +9,8 @@ import Login from "../pages/Login";
 export default function AppRoutes() {
   const location = useLocation();
 
+
+
   useEffect(() => {
     const handleScroll = () => {
       window.requestAnimationFrame(() => {
