@@ -52,7 +52,7 @@ export const News = () => {
       <div className="dynamic-renderer container mx-auto px-12 mt-16">
         {newsArticles.map((article, index) => (
           <div key={index} className="mb-12">
-            <h1 className="text-2xl font-medium my-4">{article.title}</h1>
+            <h1 className="text-2xl font-medium text-[--primary-color] my-4">{article.title}</h1>
             <p className="text-gray-500 italic">{article.date}</p>
             <p className="text-gray-700">{article.content}</p>
           </div>
