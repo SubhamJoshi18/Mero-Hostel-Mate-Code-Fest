@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -6,7 +7,7 @@ import {
   faGithub,
   faLinkedinIn,
 } from '@fortawesome/free-brands-svg-icons';
-import axios from 'axios';
+// import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../configs/axiosConfig';
