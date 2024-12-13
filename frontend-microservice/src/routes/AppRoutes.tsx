@@ -15,6 +15,8 @@ import DashBoard from '../pages/Dashboards/AdminDashboard/Dashboard';
 import AdminDashBoard from '../pages/Dashboards/AdminDashboard/AdminDashboard';
 import RegisterUser from '../pages/Dashboards/AdminDashboard/RegisterUser';
 import Attendance from '../pages/Dashboards/AdminDashboard/Attendance';
+import PendingBooking from '../pages/Dashboards/AdminDashboard/PendingBooking';
+import HostelerList from '../pages/Dashboards/AdminDashboard/HostelerList';
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -72,6 +74,14 @@ export default function AppRoutes() {
         <Route
           path="/dashboard-admin/attendance"
           element={<AdminDashBoard children={<Attendance />} />}
+        />
+        <Route
+          path="/dashboard-admin/pendingbooking"
+          element={<AdminDashBoard children={<PendingBooking />} />}
+        />
+        <Route
+          path="/dashboard-admin/hostelerlist"
+          element={<AdminDashBoard children={<HostelerList />} />}
         />
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
         {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
