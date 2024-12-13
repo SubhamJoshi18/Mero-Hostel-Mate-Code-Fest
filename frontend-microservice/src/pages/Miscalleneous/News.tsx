@@ -51,10 +51,23 @@ export const News = () => {
       </div>
       <div className="dynamic-renderer container mx-auto px-12 mt-16">
         {newsArticles.map((article, index) => (
-          <div key={index} className="mb-12">
-            <h1 className="text-2xl font-medium text-[--primary-color] my-4">{article.title}</h1>
-            <p className="text-gray-500 italic">{article.date}</p>
-            <p className="text-gray-700">{article.content}</p>
+          <div
+            key={index}
+            data-aos="fade-up"
+            className="mb-12 p-4 bg-[#f5efeb] rounded-xl shadow-lg"
+          >
+            <h1
+              data-aos="fade-up"
+              className="text-2xl font-medium text-[--primary-color]"
+            >
+              {article.title}
+            </h1>
+            <p data-aos="fade-up" className="text-gray-500 italic text-sm mb-4">
+              {article.date}
+            </p>
+            <p data-aos="fade-up" className="text-gray-700">
+              {article.content}
+            </p>
           </div>
         ))}
       </div>
