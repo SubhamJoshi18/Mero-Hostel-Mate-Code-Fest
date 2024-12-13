@@ -142,7 +142,7 @@ export default function Login({ onClose }: LoginProps) {
               Sign In as Owner
             </h1>
             <div className="text-[--primary-color] flex space-x-3 mb-6">
-              <a href="#" className="py-2 px-3  rounded-full">
+              <a href="#" className="py-2 px-3 border rounded-full">
                 <FontAwesomeIcon icon={faGooglePlusG} />
               </a>
               <a href="#" className="py-2 px-4  border rounded-full">
@@ -265,7 +265,7 @@ export default function Login({ onClose }: LoginProps) {
             style={{ zIndex: 10 }}
           >
             <h1 className="text-3xl font-bold mb-6 text-white">
-              {isSignUpVisible ? 'Welcome Back!' : 'Hello, Friend!'}
+              {isSignUpVisible ? 'Welcome Back!' : 'Hello, Admin!'}
             </h1>
             <p className="mb-4 text-white">
               {isSignUpVisible
