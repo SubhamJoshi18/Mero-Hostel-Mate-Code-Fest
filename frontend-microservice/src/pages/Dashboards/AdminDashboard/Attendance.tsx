@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
 
@@ -14,8 +13,8 @@ const Attendance = () => {
       contact: '+1 (555) 123-4567',
       faculty: 'Computer Science',
       attendance: {
-        [getTodayDate()]: null
-      }
+        [getTodayDate()]: null,
+      },
     },
     {
       id: 2,
@@ -23,8 +22,8 @@ const Attendance = () => {
       contact: '+1 (555) 987-6543',
       faculty: 'Electrical Engineering',
       attendance: {
-        [getTodayDate()]: null
-      }
+        [getTodayDate()]: null,
+      },
     },
     {
       id: 3,
@@ -32,17 +31,19 @@ const Attendance = () => {
       contact: '+1 (555) 456-7890',
       faculty: 'Mechanical Engineering',
       attendance: {
-        [getTodayDate()]: null
-      }
-    }
+        [getTodayDate()]: null,
+      },
+    },
   ]);
 
-  const [attendanceHistory, setAttendanceHistory] = useState([  {
-    studentId: '',
-    studentName: '',
-    date: '',
-    status: ''
-  }]);
+  const [attendanceHistory, setAttendanceHistory] = useState([
+    {
+      studentId: '',
+      studentName: '',
+      date: '',
+      status: '',
+    },
+  ]);
   const [currentView, setCurrentView] = useState('attendance');
   const [selectedStudent, setSelectedStudent] = useState(null);
 
@@ -50,8 +51,8 @@ const Attendance = () => {
   const markAttendance = (studentId, status) => {
     const today = getTodayDate();
 
-    setStudents(prevStudents => 
-      prevStudents.map(student => {
+    setStudents((prevStudents) =>
+      prevStudents.map((student) => {
         if (student.id === studentId) {
           // Check if attendance is already marked for today
           if (student.attendance[today] !== null) {
@@ -62,23 +63,23 @@ const Attendance = () => {
           // Create a new attendance object
           const updatedAttendance = {
             ...student.attendance,
-            [today]: status
+            [today]: status,
           };
 
           // Add to attendance history
-          setAttendanceHistory(prev => [
-            ...prev, 
+          setAttendanceHistory((prev) => [
+            ...prev,
             {
               studentId: student.id as any,
               studentName: student.name as any,
               date: today as any,
-              status: status as any
-            }
+              status: status as any,
+            },
           ]);
 
           return {
             ...student,
-            attendance: updatedAttendance
+            attendance: updatedAttendance,
           };
         }
         return student;
@@ -88,9 +89,9 @@ const Attendance = () => {
 
   // View attendance history for a student
   const viewStudentHistory = (studentId) => {
-    const student = students.find(s => s.id === studentId);
+    const student = students.find((s) => s.id === studentId);
     const studentHistory = attendanceHistory.filter(
-      record => record.studentId === studentId
+      (record) => record.studentId === studentId
     );
 
     setSelectedStudent(student);
@@ -128,13 +129,13 @@ const Attendance = () => {
                   <td className="px-4 py-3 text-center">
                     {!isAttendanceMarked ? (
                       <div className="flex justify-center space-x-2">
-                        <button 
+                        <button
                           onClick={() => markAttendance(student.id, 'Present')}
                           className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                         >
                           Present
                         </button>
-                        <button 
+                        <button
                           onClick={() => markAttendance(student.id, 'Absent')}
                           className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                         >
@@ -142,12 +143,14 @@ const Attendance = () => {
                         </button>
                       </div>
                     ) : (
-                      <span 
+                      <span
                         className={`
                           px-3 py-1 rounded 
-                          ${todayAttendance === 'Present' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-red-100 text-red-800'}
+                          ${
+                            todayAttendance === 'Present'
+                              ? 'bg-green-100 text-green-800'
+                              : 'bg-red-100 text-red-800'
+                          }
                         `}
                       >
                         {todayAttendance}
@@ -155,7 +158,7 @@ const Attendance = () => {
                     )}
                   </td>
                   <td className="px-4 py-3 text-center">
-                    <button 
+                    <button
                       onClick={() => viewStudentHistory(student.id)}
                       className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                     >
@@ -178,7 +181,7 @@ const Attendance = () => {
         <h2 className="text-2xl font-bold">
           Attendance History for {selectedStudent?.name}
         </h2>
-        <button 
+        <button
           onClick={() => setCurrentView('attendance')}
           className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
         >
@@ -197,12 +200,14 @@ const Attendance = () => {
             <tr key={index} className="border-b hover:bg-gray-50">
               <td className="px-4 py-3">{record.date}</td>
               <td className="px-4 py-3 text-center">
-                <span 
+                <span
                   className={`
                     px-3 py-1 rounded 
-                    ${record.status === 'Present' 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-red-100 text-red-800'}
+                    ${
+                      record.status === 'Present'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                    }
                   `}
                 >
                   {record.status}
@@ -216,10 +221,11 @@ const Attendance = () => {
   );
   return (
     <div>
-      {currentView === 'attendance' 
-        ? renderAttendanceTable(): renderAttendanceHistory()}
-        </div>
-      );
-    };
-    
-    export default Attendance;
+      {currentView === 'attendance'
+        ? renderAttendanceTable()
+        : renderAttendanceHistory()}
+    </div>
+  );
+};
+
+export default Attendance;

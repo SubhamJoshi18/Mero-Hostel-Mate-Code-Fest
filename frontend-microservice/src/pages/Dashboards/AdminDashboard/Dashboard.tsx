@@ -107,13 +107,8 @@ export default function DashBoard() {
             <img src="" alt="" />
           </div>
           <div>
-            {}
-            <h1 className="font-bold text-xl">
-              {userData.name
-                ? userData.email
-                : 'Owner Does not Have Register Hostel'}
-            </h1>
-            <p>{userData.email}</p>
+            <h1 className="font-bold text-xl">Admin 1</h1>
+            <p>Hostel 420</p>
           </div>
         </div>
       </header>
@@ -121,20 +116,20 @@ export default function DashBoard() {
       {/* Statistics */}
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-white p-4 rounded-md shadow space-y-2">
-          <h3 className="text-5xl font-bold">{statistics.totalHostelers}</h3>
+          <h3 className="text-5xl font-bold">30</h3>
           <p className="text-lg font-bold text-gray-400">Total Hostelers</p>
         </div>
         <div className="bg-white p-4 rounded-md shadow space-y-2">
-          <h3 className="text-5xl font-bold">{statistics.present}</h3>
+          <h3 className="text-5xl font-bold">25</h3>
           <p className="text-lg font-bold text-gray-400">Present</p>
         </div>
         <div className="bg-white p-4 rounded-md shadow space-y-2">
-          <h3 className="text-5xl font-bold">{statistics.review}</h3>
-          <p className="text-lg font-bold text-gray-400">Review</p>
+          <h3 className="text-5xl font-bold">5</h3>
+          <p className="text-lg font-bold text-gray-400">Leave Requests</p>
         </div>
         <div className="bg-white p-4 rounded-md shadow space-y-2">
-          <h3 className="text-5xl font-bold">{statistics.pendingClient}</h3>
-          <p className="text-lg font-bold text-gray-400">Pending Client</p>
+          <h3 className="text-5xl font-bold">25</h3>
+          <p className="text-lg font-bold text-gray-400">Pending Bookings</p>
         </div>
       </div>
 
@@ -143,58 +138,19 @@ export default function DashBoard() {
         <div className="bg-white p-4 rounded-md shadow">
           <h3 className="text-lg font-bold mb-4">Projects</h3>
           <ul className="space-y-2">
-            {projects.map((project, index) => (
-              <li key={index} className="flex justify-between items-center">
-                <span>{project.name}</span>
-                <span className="text-gray-500">{project.progress}%</span>
-              </li>
-            ))}
+            <li className="flex justify-between items-center">
+              <span>Material XD Version</span>
+              <span className="text-gray-500">60%</span>
+            </li>
           </ul>
         </div>
 
         <div className="bg-white p-4 rounded-md shadow">
           <h3 className="text-lg font-bold mb-4">Orders Overview</h3>
           <ul className="space-y-2">
-            {orders.map((order, index) => (
-              <li key={index}>
-                {order.description} - {order.date}
-              </li>
-            ))}
+            <li>$2400, Design changes - 22 Dec 7:20 PM</li>
           </ul>
         </div>
-      </div>
-
-      {/* User Hostel Information */}
-      <div className="bg-white p-4 rounded-md shadow mt-6">
-        <h3 className="text-lg font-bold mb-4">User Hostel Information</h3>
-        {userHostel ? (
-          <div>
-            <p>Hostel Name: {userHostel.name}</p>
-            <p>Hostel Address: {userHostel.address}</p>
-            {/* Add more hostel details as needed */}
-          </div>
-        ) : (
-          <p>No hostel for Owner, Please Register the Hostel First</p>
-        )}
-      </div>
-
-      {/* Student Requests */}
-      <div className="bg-white p-4 rounded-md shadow mt-6">
-        <h3 className="text-lg font-bold mb-4">Current Student Requests</h3>
-        <ul className="space-y-2">
-          {studentRequests.map((request, index) => (
-            <li key={index} className="flex justify-between items-center">
-              <span>{request.name}</span>
-              <span className="text-gray-500">{request.date}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Hostel Occupancy Graph */}
-      <div className="bg-white p-4 rounded-md shadow mt-6">
-        <h3 className="text-lg font-bold mb-4">Hostel Occupancy Graph</h3>
-        <Bar data={chartData} options={chartOptions} />
       </div>
     </main>
   );

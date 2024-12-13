@@ -60,6 +60,17 @@ class HostelController {
       next(err);
     }
   };
+
+  registerHosteler = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 export default new HostelController();
