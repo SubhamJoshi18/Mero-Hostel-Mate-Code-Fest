@@ -139,22 +139,26 @@ export default function Login({ onClose }: LoginProps) {
               isSignUpVisible ? "opacity-0 pointer-events-none" : "opacity-100"
             }`}
           >
-            <h1 className="text-3xl font-bold mb-6">Sign In</h1>
-            <div className="flex space-x-3 mb-6">
-              <a href="#" className="py-2 px-3 border rounded-full">
+            <h1 className="text-3xl text-[--primary-color] font-bold mb-6">
+              Sign In
+            </h1>
+            <div className="text-[--primary-color] flex space-x-3 mb-6">
+              <a href="#" className="py-2 px-3  rounded-full">
                 <FontAwesomeIcon icon={faGooglePlusG} />
               </a>
-              <a href="#" className="py-2 px-4 border rounded-full">
+              <a href="#" className="py-2 px-4  border rounded-full">
                 <FontAwesomeIcon icon={faFacebookF} />
               </a>
-              <a href="#" className="py-2 px-3 border rounded-full">
+              <a href="#" className="py-2 px-3  border rounded-full">
                 <FontAwesomeIcon icon={faGithub} />
               </a>
-              <a href="#" className="py-2 px-3 border rounded-full">
+              <a href="#" className="py-2 px-3  border rounded-full">
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
             </div>
-            <span className="text-sm mb-4">or use your email to sign in</span>
+            <span className=" text-[--primary-color] text-sm mb-4">
+              or use your email to sign in
+            </span>
             <input
               type="email"
               placeholder="Email"
@@ -190,8 +194,10 @@ export default function Login({ onClose }: LoginProps) {
               isSignUpVisible ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
-            <h1 className="text-3xl font-bold mb-6">Create Account</h1>
-            <div className="flex space-x-3 mb-6">
+            <h1 className="text-3xl text-[--primary-color] font-bold mb-6">
+              Create Account
+            </h1>
+            <div className="flex text-[--primary-color] space-x-3 mb-6">
               <a href="#" className="py-2 px-3 border rounded-full">
                 <FontAwesomeIcon icon={faGooglePlusG} />
               </a>
@@ -205,7 +211,7 @@ export default function Login({ onClose }: LoginProps) {
                 <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
             </div>
-            <span className="text-sm mb-4">
+            <span className=" text-[--primary-color] text-sm mb-4">
               or use your email for registration
             </span>
             <input
@@ -268,7 +274,7 @@ export default function Login({ onClose }: LoginProps) {
                 : "Don't have an account? Sign up and join us."}
             </p>
             <button
-              className="bg-transparent border-white border py-2 px-6 rounded-full"
+              className="bg-transparent border-white text-white border py-2 px-6 rounded-full"
               onClick={isSignUpVisible ? handleSignInClick : handleSignUpClick}
             >
               {isSignUpVisible ? "Sign In" : "Sign Up"}
