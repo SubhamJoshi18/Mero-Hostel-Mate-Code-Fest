@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Link, NavLink } from "react-router-dom";
+import PrimaryButton from "../Button/PrimaryButton";
 
 export const Navbar = () => {
   const [isBlogHover, setIsBlogHover] = useState(false);
@@ -156,17 +157,13 @@ export const Navbar = () => {
 
           <div className="buttons flex gap-4">
             <Link to={"/login"}>
-              <button
-                onClick={() => setIsLoginOpen(true)} // Open login popup
-                className="text-white text-lg bg-[--btn-primary] px-6 py-2 rounded-lg font-semibold hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
-              >
-                Login
-              </button>
+              <PrimaryButton
+                title="Login"
+                onClick={() => setIsLoginOpen(true)}
+              />
             </Link>
             <Link to={"/hostel"}>
-              <button className="text-white text-lg bg-[--btn-primary] px-6 py-2 rounded-lg font-semibold hover:bg-[--btn-secondary] transition-all active:translate-y-0.5">
-                Book
-              </button>
+              <PrimaryButton title="Book" />
             </Link>
           </div>
         </div>

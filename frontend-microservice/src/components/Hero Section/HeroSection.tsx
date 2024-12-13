@@ -25,7 +25,7 @@ export const HeroSection = () => {
 
         {/* Search Button */}
         <button
-          className="w-[300px] text-2xl bg-[--btn-primary] py-4 rounded-xl font-medium text-white hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
+          className=" text-md bg-[--btn-primary] py-4 px-5 rounded-xl text-white hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
           onClick={handleSearchNavigate}
         >
           Search Hostels

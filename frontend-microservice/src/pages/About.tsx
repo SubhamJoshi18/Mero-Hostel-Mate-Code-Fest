@@ -71,7 +71,7 @@ export default function About() {
         <div className="relative flex flex-col items-center justify-center">
           <h1
             data-aos="fade-up"
-            className="text-[150px] text-gray-100 font-mono font-semibold uppercase"
+            className="text-[150px] text-gray-200 font-mono font-semibold uppercase"
             style={{ fontFamily: "Oswald" }}
           >
             Welcome to
@@ -100,7 +100,7 @@ export default function About() {
       <div className="relative flex flex-col items-center justify-center">
         <h1
           data-aos="fade-up"
-          className="text-[150px] text-gray-100 font-mono font-semibold uppercase"
+          className="text-[150px] text-gray-200 font-mono font-semibold uppercase"
           style={{ fontFamily: "Oswald" }}
         >
           Missions
@@ -142,7 +142,7 @@ export default function About() {
       <div className="relative flex flex-col items-center justify-center">
         <h1
           data-aos="fade-up"
-          className="text-[150px] text-gray-100 font-mono font-semibold uppercase"
+          className="text-[150px] text-gray-200 font-mono font-semibold uppercase"
           style={{ fontFamily: "Oswald" }}
         >
           Services
