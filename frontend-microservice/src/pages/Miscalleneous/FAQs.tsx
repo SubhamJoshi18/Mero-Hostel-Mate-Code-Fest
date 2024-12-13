@@ -65,11 +65,13 @@ export const FAQs = () => {
       </div>
       <div className="dynamic-renderer container mx-auto px-12 mt-16">
         {faqList.map((faq, index) => (
-          <div key={index} className="mb-12">
-            <h1 className="text-2xl font-medium my-4">{`${index + 1}. ${
-              faq.question
-            }`}</h1>
-            <p className="text-gray-700">{faq.answer}</p>
+          <div data-aos="fade-up" key={index} className="mb-12">
+            <h1 data-aos="fade-up" className="text-2xl font-medium my-4">{`${
+              index + 1
+            }. ${faq.question}`}</h1>
+            <p data-aos="fade-up" className="text-gray-700">
+              {faq.answer}
+            </p>
           </div>
         ))}
       </div>

@@ -13,6 +13,7 @@ import OwnerDashboard from "../pages/Dashboards/OwnerDashboard";
 import { News } from "../pages/Miscalleneous/News";
 import { FAQs } from "../pages/Miscalleneous/FAQs";
 import { PrivacyPolicy } from "../pages/Miscalleneous/PrivacyPolicy";
+import { TermsAndCondition } from "../pages/Miscalleneous/TermsAndCondition";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -61,6 +62,7 @@ export default function AppRoutes() {
         <Route path="/news" element={<News />} />
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/termsandcondition" element={<TermsAndCondition />} />
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
         {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
         {/* <Route path="/news" element={<News />} />
