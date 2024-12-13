@@ -1,6 +1,7 @@
 import { Users } from '../database/models/user.entity';
 import { DatabaseException } from '../exceptions';
 import { HelperJsonWebToken } from '../helpers/HelperJwt';
+import { ownerRole, userRole } from '../constants/roleConstant';
 
 class AuthService {
   public helperJwt: HelperJsonWebToken | null = null;
@@ -9,12 +10,17 @@ class AuthService {
     this.helperJwt = new HelperJsonWebToken();
   }
 
-  async registerUser(validData: {
-    name: string;
-    email: string;
-    password: string;
-  }) {
-    const { name, email, password } = validData;
+  async registerUser(
+    validData: {
+      name: string;
+      email: string;
+      phoneNumber: string;
+      password: string;
+    },
+    roleParams: string
+  ) {
+    let roleUpdate = '';
+    const { name, email, password, phoneNumber } = validData;
 
     const isEmail = await Users.findOne({
       where: { email },
@@ -34,13 +40,23 @@ class AuthService {
       genSalt as string
     );
 
+    switch (roleParams) {
+      case ownerRole:
+        roleUpdate = ownerRole;
+        break;
+      case userRole:
+        roleUpdate = userRole;
+        break;
+    }
+
     const storedResult = Users.create({
       name: name,
       email: email,
       password: hashPassword as any,
+      phoneNumber: validData.phoneNumber,
+      role: roleUpdate,
     }).save();
 
-    console.log(storedResult);
     return storedResult;
   }
 
@@ -72,6 +88,7 @@ class AuthService {
     }
 
     const newAccessToken = await this.helperJwt?.createAccessToken(paylaod);
+    
     return {
       newAccessToken,
       ...isUser,

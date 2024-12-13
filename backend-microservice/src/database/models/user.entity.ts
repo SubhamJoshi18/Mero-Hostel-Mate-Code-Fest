@@ -23,6 +23,9 @@ export class Users extends BaseEntity {
   @Column({ type: 'varchar', length: 255 })
   email!: string;
 
+  @Column({ type: 'varchar', length: 15, nullable: true })
+  phoneNumber!: string;
+
   @Column({ type: 'text', nullable: true })
   role!: string;
 

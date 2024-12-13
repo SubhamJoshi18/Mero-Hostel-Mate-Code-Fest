@@ -7,10 +7,12 @@ class AuthController {
   registerUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const value = req.body;
+      const roleParams = req.query.role;
+
       if (Object.entries(value).length === 0) {
         throw new ValidationException(403, 'Validation Error');
       }
-      const data = await AuthService.registerUser(value);
+      const data = await AuthService.registerUser(value, roleParams as string);
       return res.status(201).json(data);
     } catch (err) {
       console.log(err);
@@ -20,7 +22,7 @@ class AuthController {
 
   loginUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const value = await loginValidator.validateAsync(req.body);
+      const value = await req.body;
 
       if (!value) {
         throw new ValidationException(403, 'Validation Error');

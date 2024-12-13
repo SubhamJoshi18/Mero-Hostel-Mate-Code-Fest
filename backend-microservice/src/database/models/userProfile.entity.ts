@@ -11,8 +11,7 @@ export class UserProfile extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'varchar', length: 15 })
-  phoneNumber!: string;
+
 
   @Column({ type: 'varchar', length: 50 })
   college!: string;
