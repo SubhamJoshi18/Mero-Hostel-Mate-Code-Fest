@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
