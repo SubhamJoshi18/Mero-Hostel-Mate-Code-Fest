@@ -8,33 +8,24 @@ import HandshakeIcon from "@mui/icons-material/Handshake";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Slider from "../../components/Extras/Slider";
 
-export default function About() {
-  // Initialize AOS in useEffect
-  useEffect(() => {
-    AOS.init({
-      duration: 1200, // Animation duration
-      once: true, // Whether animation should happen only once or every time you scroll
-    });
-    AOS.refresh(); // Refresh AOS after the component is rendered
-  }, []);
-
+export default function About() { 
   return (
     <>
       <div className="bg-[url(/assets/image.png)] bg-center bg-no-repeat bg-cover top-0 w-full">
         <div className="container mx-auto">
-        <div className="Hero-section h-[100vh] py-32 pt-48 flex-col flex items-center justify-center mx-auto px-12 text-white leading-none">
-          <h1
-            className="text-[150px] font-extrabold uppercase tracking-wider"
-            style={{ fontFamily: "Oswald" }}
-          >
-            About us
-          </h1>
-          <p className="w-[700px] text-center leading-loose mt-8">
-            Experience comfort and convenience with our expertly curated hostel
-            listings, designed to match students with their perfect living
-            space.
-          </p>
-          {/* <div className="images grid grid-cols-4 items-center gap-4 h-52 mt-8">
+          <div className="Hero-section h-[100vh] py-32 pt-48 flex-col flex items-center justify-center mx-auto px-12 text-white leading-none">
+            <h1
+              className="text-[150px] font-extrabold uppercase tracking-wider"
+              style={{ fontFamily: "Oswald" }}
+            >
+              About us
+            </h1>
+            <p className="w-[700px] text-center leading-loose mt-8">
+              Experience comfort and convenience with our expertly curated
+              hostel listings, designed to match students with their perfect
+              living space.
+            </p>
+            {/* <div className="images grid grid-cols-4 items-center gap-4 h-52 mt-8">
               <div className="h-52 w-auto shadow-2xl">
                 <img
                   className="rounded-2xl h-full"
@@ -64,8 +55,8 @@ export default function About() {
                 />
               </div>
             </div> */}
-          <Slider />
-        </div>
+            <Slider />
+          </div>
         </div>
       </div>
 
