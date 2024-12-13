@@ -38,6 +38,6 @@ function createLogger(service: string): winston.Logger {
 
 const etlLogger = createLogger('etl-pim-consumer');
 const mtfLogger = createLogger('mtf-pim-consumer');
-const stcLogger = createLogger('status-consumer');
+const errorLogger = createLogger('status-consumer');
 
-export { createLogger, etlLogger, mtfLogger, stcLogger };
+export { createLogger, etlLogger, mtfLogger, errorLogger };

@@ -3,6 +3,8 @@ import { getEnv } from './utils/getEnv';
 import { createLogger } from './logger/logger';
 import { serverMiddleware } from './middleware/serverMiddleware';
 import { mainRouter } from './routes/server.route';
+import DatabaseDataSource from '../src/database/connect';
+import { DataSource } from 'typeorm';
 
 const logger = createLogger('user-microservice');
 const port = getEnv('PORT');
@@ -11,8 +13,22 @@ const app = express();
 app.disable('x-powered-by');
 app.use(express.json());
 
-
 serverMiddleware(app as Application);
+
+(async () => {
+  await DatabaseDataSource.initialize()
+    .then((db: DataSource) => {
+      logger.info(`Initialized '${db.options.database}' database successfully`);
+    })
+    .catch((err: Error) => {
+      logger.error(
+        'Error while intializing database inside expressAppIntializer. Error: ' +
+          err
+      );
+      process.exit(0);
+    });
+})();
+
 mainRouter(app as Application);
 
 process.on('uncaughtException', function (err) {

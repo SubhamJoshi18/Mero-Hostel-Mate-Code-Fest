@@ -1,7 +1,15 @@
+import type, { Request, Response } from 'express';
 import { Application } from 'express';
+import authRouter from './auth.route';
+import { errorHandler } from '../middleware/errorMiddleware';
 
 export const mainRouter = async (expressApplication: Application) => {
-  expressApplication.get('/test', () => {
-    console.log('testing');
+  expressApplication.use('/api', [authRouter]);
+
+  expressApplication.use('*', (req: Request, res: Response): any => {
+    return res.status(40).json({
+      message: `${req.originalUrl} does not exists`,
+    });
   });
+  expressApplication.use(errorHandler as any);
 };
