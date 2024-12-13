@@ -15,6 +15,8 @@ import { News } from "../pages/Miscalleneous/News";
 import { FAQs } from "../pages/Miscalleneous/FAQs";
 import { PrivacyPolicy } from "../pages/Miscalleneous/PrivacyPolicy";
 import { TermsAndCondition } from "../pages/Miscalleneous/TermsAndCondition";
+import { Search } from "../pages/Miscalleneous/Search";
+import { SearchOption } from "../pages/Miscalleneous/SearchOption";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -65,6 +67,8 @@ export default function AppRoutes() {
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/termsandcondition" element={<TermsAndCondition />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/searchOption" element={<SearchOption />} />
 
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
         {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
