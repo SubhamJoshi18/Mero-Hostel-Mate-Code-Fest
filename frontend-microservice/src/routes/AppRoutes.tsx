@@ -10,6 +10,7 @@ import { Contact } from '../pages/Contacts/Contact';
 import LoginAdmin from '../pages/Logins/LoginAdmin';
 import UserDashboard from '../pages/Dashboards/UserDashboard';
 import OwnerDashboard from '../pages/Dashboards/OwnerDashboard';
+import HostelDetails from '../pages/Hostels/HostelDetails';
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -55,6 +56,8 @@ export default function AppRoutes() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/dashboard-user" element={<UserDashboard />} />
         <Route path="/dashboard-admin" element={<OwnerDashboard />} />
+        <Route path="/hostel/:place_id" element={<HostelDetails />} />
+
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
         {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
         {/* <Route path="/news" element={<News />} />

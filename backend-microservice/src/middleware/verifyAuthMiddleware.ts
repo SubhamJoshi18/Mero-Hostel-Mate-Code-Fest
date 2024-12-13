@@ -46,3 +46,21 @@ export const verifyAuthMiddleware = async (
     next(err);
   }
 };
+
+export const checkBookMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log(req.path);
+  if (req.path.includes('/book/hostel')) {
+    const userToken = req.headers['authorization'] ?? req.headers.authorization;
+    if (!userToken) {
+      return res.status(401).json({
+        message: 'Please Login First To Book The Hostel',
+      });
+    }
+  } else {
+    next();
+  }
+};
