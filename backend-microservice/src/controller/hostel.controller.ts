@@ -46,6 +46,20 @@ class HostelController {
       next(err);
     }
   };
+
+  fetchUserHostel = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userId = req.user._id;
+      const parseUserId = Number(req.user._id);
+      const response = await HostelService.fetchUserHostel(parseUserId);
+      return res.status(201).json({
+        message: `User Hostels`,
+        response,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 export default new HostelController();

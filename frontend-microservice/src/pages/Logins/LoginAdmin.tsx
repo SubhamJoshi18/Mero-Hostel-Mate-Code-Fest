@@ -60,7 +60,9 @@ export default function Login({ onClose }: LoginProps) {
 
       console.log("Sign In Success:", data); // Handle successful sign-in
       const userRole = response.data.role;
-      console.log(userRole);
+      localStorage.setItem('token', data.newAccessToken);
+      localStorage.setItem('role', userRole);
+
       // Show success alert
       Swal.fire({
         icon: "success",

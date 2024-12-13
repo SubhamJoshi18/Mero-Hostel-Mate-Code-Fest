@@ -11,9 +11,7 @@ class UserProfileController {
   getUserProfile = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const id =
-        typeof req.params.id === 'string'
-          ? Number(req.params.id)
-          : req.params.id;
+        typeof req.user._id === 'string' ? Number(req.user._id) : req.user._id;
 
       const response = await this.userProfileService?.getUserProfile(id);
       return res.status(201).json({

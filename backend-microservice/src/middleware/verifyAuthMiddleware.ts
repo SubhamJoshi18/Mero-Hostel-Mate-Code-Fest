@@ -17,6 +17,7 @@ export const verifyAuthMiddleware = async (
 ) => {
   try {
     const userToken = req.headers['authorization'] ?? req.headers.authorization;
+
     if (!userToken) {
       return res.status(401).json({
         message: 'Unauthorized',
@@ -60,7 +61,6 @@ export const checkBookMiddleware = async (
         message: 'Please Login First To Book The Hostel',
       });
     }
-  } else {
     next();
   }
 };
