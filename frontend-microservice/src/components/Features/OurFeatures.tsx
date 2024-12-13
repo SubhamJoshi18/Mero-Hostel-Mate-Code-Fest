@@ -64,7 +64,7 @@ export default function OurFeatures() {
                   },
                 })}
               </div>
-              <h3 className="feature-title text-[20px] font-semibold mb-2">
+              <h3 className="feature-title text-[20px] text-[--primary-color] font-semibold mb-2">
                 {feature.title}
               </h3>
               <p className="feature-description">{feature.description}</p>

@@ -32,7 +32,9 @@ export const HowItWorks = () => {
                 style={{ color: "var(--primary-color)", fontSize: 70 }}
               />
             </div>
-            <h1 className="text-xl  font-medium mt-8 mb-4">Hostel Planning</h1>
+            <h1 className="text-xl  font-medium mt-8  text-[--primary-color] mb-4">
+              Hostel Planning
+            </h1>
             <p className="text-center">
               We help you find the best hostel near your campus that suits your
               preferences.
@@ -48,7 +50,9 @@ export const HowItWorks = () => {
                 style={{ color: "var(--primary-color)", fontSize: 70 }}
               />
             </div>
-            <h1 className="text-xl  font-medium  mt-8 mb-4">Room Booking</h1>
+            <h1 className="text-xl text-[--primary-color]  font-medium  mt-8 mb-4">
+              Room Booking
+            </h1>
             <p className="text-center">
               We handle all your hostel bookings, ensuring a smooth and
               hassle-free experience.
@@ -64,7 +68,7 @@ export const HowItWorks = () => {
                 style={{ color: "var(--primary-color)", fontSize: 70 }}
               />
             </div>
-            <h1 className="text-xl  font-medium  mt-8 mb-4">
+            <h1 className="text-xl text-[--primary-color] font-medium  mt-8 mb-4">
               Stay Preparation
             </h1>
             <p className="text-center">
@@ -82,7 +86,7 @@ export const HowItWorks = () => {
                 style={{ color: "var(--primary-color)", fontSize: 70 }}
               />
             </div>
-            <h1 className="text-xl  font-medium  mt-8 mb-4">
+            <h1 className="text-xl text-[--primary-color] font-medium  mt-8 mb-4">
               Living Experience
             </h1>
             <p className="text-center">

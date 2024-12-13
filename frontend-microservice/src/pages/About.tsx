@@ -103,7 +103,7 @@ export default function About() {
           className="text-[150px] text-gray-200 font-mono font-semibold uppercase"
           style={{ fontFamily: "Oswald" }}
         >
-          Missions
+          Targets
         </h1>
         <h2
           data-aos="fade-up"
@@ -121,16 +121,23 @@ export default function About() {
           />
         </div>
         <div className="w-full">
-          <h2 className="text-5xl mb-8" style={{ fontFamily: "Oswald" }}>
+          <h2
+            data-aos="fade-up"
+            className="text-5xl text-[--primary-color] font-bold mb-8"
+            style={{ fontFamily: "Oswald" }}
+          >
             We ensure every hosteler's need
           </h2>
-          <p className="w-full leading-loose">
+          <p data-aos="fade-up" className="w-full leading-loose">
             At Mero Hostel Mate, we aim to revolutionize the way students find
             housing. We connect you with verified hostels that offer comfort,
             community, and convenience.
           </p>
           <div className="border-l-4 border-[--primary-color] pl-4">
-            <p className="w-full leading-loose font-bold italic mt-4">
+            <p
+              data-aos="fade-up"
+              className="w-full leading-loose font-bold italic mt-4 text-[--accent-color]"
+            >
               "Everything you need to feel at home. Our platform simplifies the
               search and booking process, so you can focus on your studies while
               we take care of the rest."
@@ -165,7 +172,7 @@ export default function About() {
               style={{ color: "var(--primary-color)", fontSize: 70 }}
             />
           </div>
-          <h1 className="text-xl font-medium mt-8 mb-4">
+          <h1 className="text-xl font-medium mt-8 mb-4 text-[--primary-color]">
             Customer Satisfaction
           </h1>
           <p className="text-center">
@@ -183,7 +190,7 @@ export default function About() {
               style={{ color: "var(--primary-color)", fontSize: 70 }}
             />
           </div>
-          <h1 className="text-xl font-medium mt-8 mb-4">
+          <h1 className="text-xl text-[--primary-color] font-medium mt-8 mb-4">
             Authentic Hostel Experience
           </h1>
           <p className="text-center">
@@ -202,7 +209,7 @@ export default function About() {
               style={{ color: "var(--primary-color)", fontSize: 70 }}
             />
           </div>
-          <h1 className="text-xl font-medium mt-8 mb-4">
+          <h1 className="text-xl  text-[--primary-color] font-medium mt-8 mb-4">
             Trusted Hostel Listings
           </h1>
           <p className="text-center">
@@ -221,7 +228,9 @@ export default function About() {
               style={{ color: "var(--primary-color)", fontSize: 70 }}
             />
           </div>
-          <h1 className="text-xl font-medium mt-8 mb-4">Community Focused</h1>
+          <h1 className="text-xl text-[--primary-color] font-medium mt-8 mb-4">
+            Community Focused
+          </h1>
           <p className="text-center">
             Join a vibrant community of students, share experiences, and make
             lifelong friends while enjoying your stay at our hostels.
