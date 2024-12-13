@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "../Button/PrimaryButton";
 
 export const HeroSection = () => {
   const navigate = useNavigate();
@@ -24,12 +25,13 @@ export const HeroSection = () => {
         </p>
 
         {/* Search Button */}
-        <button
-          className=" text-md bg-[--btn-primary] py-4 px-5 rounded-xl text-white hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
-          onClick={handleSearchNavigate}
-        >
-          Search Hostels
-        </button>
+        <div className="shadow-2xl">
+          <PrimaryButton
+            title={"Search Hostels"}
+            className=" text-3xl z-30 bg-[--btn-primary] py-4 px-10 rounded-xl text-white hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
+            onClick={handleSearchNavigate}
+          />
+        </div>
       </div>
     </div>
   );

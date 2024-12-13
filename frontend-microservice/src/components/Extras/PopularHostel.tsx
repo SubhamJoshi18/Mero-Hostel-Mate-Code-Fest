@@ -72,11 +72,11 @@ export default function PopularHostel() {
           />
           <PrimaryButton
             title={"Boys"}
-            className="px-3 py-1 border rounded-3xl hover:text-white border-gray-300 hover:bg-[--btn-primary]"
+            className="px-3 py-1 text-[--primary-color] border rounded-3xl hover:text-white border-[--btn-color] hover:bg-[--btn-primary]"
           />
           <PrimaryButton
             title={"Girls"}
-            className="px-3 py-1 border rounded-3xl hover:text-white border-gray-300 hover:bg-[--btn-primary]"
+            className="px-3 py-1 text-[--primary-color] border rounded-3xl hover:text-white border-[--btn-color] hover:bg-[--btn-primary]"
           />
         </div>
         <div
