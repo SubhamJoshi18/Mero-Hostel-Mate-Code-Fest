@@ -38,7 +38,7 @@ export default function AllHostels() {
 
   return (
     <>
-      <div className="h-20 bg-black"></div>
+      <div className="h-20 bg-[--tertiary-color]"></div>
       <div className="h-[88vh] w-screen container mx-auto mb-5">
         <div className="relative flex items-center justify-center">
           <h1

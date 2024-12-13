@@ -4,12 +4,14 @@ import authRouter from './auth.route';
 import documentRouter from './document.route';
 import { errorHandler } from '../middleware/errorMiddleware';
 import userProfileRouter from './userprofile.route';
+import hostelRouter from './hostels.route';
 
 export const mainRouter = async (expressApplication: Application) => {
   expressApplication.use('/api', [
     authRouter,
     documentRouter,
     userProfileRouter,
+    hostelRouter,
   ]);
 
   expressApplication.use('*', (req: Request, res: Response): any => {

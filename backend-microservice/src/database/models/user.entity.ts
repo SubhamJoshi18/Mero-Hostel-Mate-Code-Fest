@@ -5,7 +5,9 @@ import {
   BaseEntity,
   DeleteDateColumn,
   CreateDateColumn,
+  ManyToMany,
 } from 'typeorm';
+import Hostel from './hostel.entiy';
 
 enum RoleEnum {
   OWNER = 'owner',
@@ -37,4 +39,7 @@ export class Users extends BaseEntity {
 
   @DeleteDateColumn()
   deletedAt!: Date;
+
+  @ManyToMany(() => Hostel, (hostel) => hostel.users)
+  hostels!: Hostel[];
 }
