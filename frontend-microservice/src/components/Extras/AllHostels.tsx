@@ -1,22 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from "react-router-dom";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import { RenderStar } from "../components/Cards/RenderStar";
+import { RenderStar } from "../Cards/RenderStar";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PrimaryButton from "../components/Button/PrimaryButton";
-import SecondaryButton from "../components/Button/SecondaryButton";
-// import Image from "../../../public/image2.jpg";
+import Image from "../../../public/image2.jpg";
 
-export default function PopularHostel() {
+export default function AllHostels() {
   const [hostelData, setHostelData] = useState([]);
-  const [visiblecount, setVisibleCount] = useState(4);
-  const [hasClickedShowMore, setHasClickedShowMore] = useState(false);
-
-  const handleShowMore = () => {
-    setVisibleCount(8); // Show a total of 8 items on the first click
-    setHasClickedShowMore(true); // Indicate that the user clicked "Show More"
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,40 +41,37 @@ export default function PopularHostel() {
         <div className="relative flex items-center justify-center">
           <h1
             data-aos="fade-up"
-            className="text-[150px] text-gray-200 font-mono font-semibold"
+            className="text-[150px] text-gray-100 font-mono font-semibold"
             style={{ fontFamily: "Oswald" }}
           >
-            HOSTELS
+            COLLECTION
           </h1>
           <h2
             data-aos="fade-up"
             className="absolute tracking-widest text-center text-xl top-[47%] text-[--primary-color] font-sans uppercase"
           >
-            Popular Hostels
+            AVAILABLE HOSTELS
           </h2>
         </div>
         <p data-aos="fade-up" className="text-center mb-8">
           Take a detour at our most popular hostel for this season
         </p>
         <div data-aos="fade-up" className="flex justify-center flex-wrap gap-5">
-          <SecondaryButton
-            title={"All"}
-            className="px-3 py-1 rounded-3xl bg-[--btn-primary] text-white"
-          />
-          <SecondaryButton
-            title={"Boys"}
-            className="px-3 py-1 border rounded-3xl border-gray-400 hover:bg-[--btn-primary] hover:text-white hover:border-[--btn-primary]"
-          />
-          <SecondaryButton
-            title={"Girls"}
-            className="px-3 py-1 border rounded-3xl border-gray-400 hover:bg-[--btn-primary] hover:text-white hover:border-[--btn-primary]"
-          />
+          <button className="px-3 py-1 rounded-3xl bg-[#0cafff] text-white">
+            All
+          </button>
+          <button className="px-3 py-1 border rounded-3xl border-gray-500 hover:bg-[#0cafff]">
+            Boys
+          </button>
+          <button className="px-3 py-1 border rounded-3xl border-gray-500 hover:bg-[#0cafff]">
+            Girls
+          </button>
         </div>
         <div
           data-aos="fade-up"
           className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 py-10 px-16"
         >
-          {hostelData.slice(0, visiblecount).map((hostel) => (
+          {hostelData.map((hostel) => (
             <Link to={`/hostel/${hostel._id}`} key={hostel._id}>
               <div
                 className="shadow-lg border border-gray-200 rounded-2xl cursor-pointer overflow-hidden hover:-translate-y-2 transition-transform"
@@ -121,25 +108,11 @@ export default function PopularHostel() {
             </Link>
           ))}
         </div>
-        {visiblecount < 8 ? (
-          <div data-aos="fade-up" className="flex justify-center">
-            <button
-              onClick={handleShowMore}
-              className="bg-white text-lg shadow-2xl px-6 py-3 rounded-lg font-semibold text-[--primary-color] hover:text-white hover:bg-[--btn-primary] border border-[--btn-primary] transition-all active:translate-y-0.5"
-            >
-              More
-            </button>
-          </div>
-        ) : (
-          <div data-aos="fade-up" className="flex justify-center">
-            <Link
-              to="/hostel"
-              className="bg-white text-lg shadow-2xl px-6 py-3 rounded-lg font-semibold text-[--primary-color] hover:text-white hover:bg-[--btn-primary] border border-[--btn-primary] transition-all active:translate-y-0.5"
-            >
-              Go to Hostel List
-            </Link>
-          </div>
-        )}
+        <div data-aos="fade-up" className="flex justify-center">
+          <button className="bg-white text-lg shadow-2xl px-6 py-3 rounded-lg font-semibold text-[--primary-color] hover:text-white hover:bg-[--btn-primary] border border-[--btn-primary] transition-all active:translate-y-0.5">
+            View all Hostels
+          </button>
+        </div>
       </div>
     </>
   );
