@@ -4,6 +4,7 @@ import { RenderStar } from "../Cards/RenderStar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "../../../public/image2.jpg";
+import PrimaryButton from "../Button/PrimaryButton";
 
 export default function AllHostels() {
   const [hostelData, setHostelData] = useState([]);
@@ -37,11 +38,12 @@ export default function AllHostels() {
 
   return (
     <>
-      <div className="h-auto w-screen container mx-auto mb-5">
+      <div className="h-20 bg-black"></div>
+      <div className="h-[88vh] w-screen container mx-auto mb-5">
         <div className="relative flex items-center justify-center">
           <h1
             data-aos="fade-up"
-            className="text-[150px] text-gray-100 font-mono font-semibold"
+            className="text-[150px] text-gray-200 font-mono font-semibold"
             style={{ fontFamily: "Oswald" }}
           >
             COLLECTION
@@ -57,15 +59,18 @@ export default function AllHostels() {
           Take a detour at our most popular hostel for this season
         </p>
         <div data-aos="fade-up" className="flex justify-center flex-wrap gap-5">
-          <button className="px-3 py-1 rounded-3xl bg-[#0cafff] text-white">
-            All
-          </button>
-          <button className="px-3 py-1 border rounded-3xl border-gray-500 hover:bg-[#0cafff]">
-            Boys
-          </button>
-          <button className="px-3 py-1 border rounded-3xl border-gray-500 hover:bg-[#0cafff]">
-            Girls
-          </button>
+          <PrimaryButton
+            title={"All"}
+            className="px-3 py-1 rounded-3xl bg-[--btn-primary] text-white"
+          />
+          <PrimaryButton
+            title={"Boys"}
+            className="px-3 py-1 border rounded-3xl hover:text-white border-gray-300 hover:bg-[--btn-primary]"
+          />
+          <PrimaryButton
+            title={"Girls"}
+            className="px-3 py-1 border rounded-3xl hover:text-white border-gray-300 hover:bg-[--btn-primary]"
+          />
         </div>
         <div
           data-aos="fade-up"
