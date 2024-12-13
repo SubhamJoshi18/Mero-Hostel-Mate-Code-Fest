@@ -1,15 +1,16 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import About from '../pages/About/About';
-import HomePage from '../pages/Home/HomePage';
-import { Navbar } from '../components/Navbar/Navbar';
-import Footer from '../components/Footer/Footer';
-import Login from '../pages/Logins/Login';
-import AllHostels from '../components/Extras/AllHostels';
-import { Contact } from '../pages/Contacts/Contact';
-import LoginAdmin from '../pages/Logins/LoginAdmin';
-import UserDashboard from '../pages/Dashboards/UserDashboard';
-import OwnerDashboard from '../pages/Dashboards/OwnerDashboard';
+import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import About from "../pages/About/About";
+import HomePage from "../pages/Home/HomePage";
+import { Navbar } from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
+import Login from "../pages/Logins/Login";
+import AllHostels from "../components/Extras/AllHostels";
+import { Contact } from "../pages/Contacts/Contact";
+import LoginAdmin from "../pages/Logins/LoginAdmin";
+import UserDashboard from "../pages/Dashboards/UserDashboard";
+import OwnerDashboard from "../pages/Dashboards/OwnerDashboard";
+import { News } from "../pages/Miscalleneous/News";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -19,7 +20,7 @@ export default function AppRoutes() {
       window.requestAnimationFrame(() => {
         window.scrollTo({
           top: 0,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       });
     };
@@ -31,7 +32,7 @@ export default function AppRoutes() {
     return () => clearTimeout(timer);
   }, [location]);
 
-  const noNavbarFooterRoutes = ['/dashboard', '/dashboard/*'];
+  const noNavbarFooterRoutes = ["/dashboard", "/dashboard/*"];
 
   const hideNavbarFooter = noNavbarFooterRoutes.some((route) =>
     location.pathname.startsWith(route)
@@ -44,17 +45,18 @@ export default function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/login-user"
-          element={<Login onClose={() => console.log('Login closed')} />}
+          element={<Login onClose={() => console.log("Login closed")} />}
         />
         <Route
           path="/login-admin"
-          element={<LoginAdmin onClose={() => console.log('Login closed')} />}
+          element={<LoginAdmin onClose={() => console.log("Login closed")} />}
         />
         <Route path="/about" element={<About />} />
         <Route path="/hostel" element={<AllHostels />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/dashboard-user" element={<UserDashboard />} />
         <Route path="/dashboard-admin" element={<OwnerDashboard />} />
+        <Route path="/news" element={<News />} />
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
         {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
         {/* <Route path="/news" element={<News />} />

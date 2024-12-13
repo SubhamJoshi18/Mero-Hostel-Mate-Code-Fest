@@ -6,10 +6,10 @@ import HandshakeIcon from "@mui/icons-material/Handshake";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Slider from "../../components/Extras/Slider";
 
-export default function About() { 
+export default function About() {
   return (
     <>
-      <div className="bg-[url(/assets/image.png)] bg-center bg-no-repeat bg-cover top-0 w-full">
+      <div className="bg-[url(/assets/aboutBackground.png)] bg-center bg-no-repeat bg-cover top-0 w-full">
         <div className="container mx-auto">
           <div className="Hero-section h-[100vh] py-32 pt-48 flex-col flex items-center justify-center mx-auto px-12 text-white leading-none">
             <h1
@@ -106,6 +106,7 @@ export default function About() {
       <div className="grid grid-cols-2 items-center gap-8 w-full container mx-auto px-12 py-16">
         <div className="w-full">
           <img
+            data-aos="fade-up"
             className="rounded-xl"
             src="/assets/our_mission.png"
             alt="our mission"
