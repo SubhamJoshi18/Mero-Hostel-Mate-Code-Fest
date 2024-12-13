@@ -12,7 +12,7 @@ export default function AllHostels() {
   const [hostelData, setHostelData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +25,7 @@ export default function AllHostels() {
         const data = response.data.hostels.map((hostel) => ({
           _id: hostel.place_id,
           title: hostel.name,
-          location: hostel.vicinity,
+          location: hostel.location,
           rating: hostel.rating,
           img: hostel.img
             ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hostel.img}&key=${GOOGLE_MAPS_API_KEY}`

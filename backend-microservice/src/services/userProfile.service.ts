@@ -12,8 +12,10 @@ class UserProfileService {
     if (!userData) {
       throw new DatabaseException(400, 'User not Found');
     }
-    return [userData];
+    return userData;
   }
+
+  async updateUserProfile(id: number) {}
 }
 
 export default new UserProfileService();

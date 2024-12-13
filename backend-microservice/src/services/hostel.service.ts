@@ -96,8 +96,6 @@ class HostelService {
           : [];
       const updatedHostel = {
         ...isHostel,
-        owner: placeDetails.owner || 'No Info', // Assuming owner info is available
-        price: placeDetails.price_level || 'No Price Info',
         review_comments: placeDetails.reviews || 'No Review Info',
         phoneNumber: placeDetails.formatted_phone_number || 'No Phone Info',
         photos: photoReferences,
@@ -109,9 +107,27 @@ class HostelService {
       throw new DatabaseException(500, 'Failed to fetch place details');
     }
   };
+
+  private assertGender(item: any) {
+    if (item.toLowerCase().includes('boys')) {
+      return 'Boys';
+    } else if (
+      item.toLowerCase().includes('girls') ||
+      item.toLowerCase().includes('ladies') ||
+      item.toLowerCase().includes('girl')
+    ) {
+      return 'Girls';
+    } else {
+      return 'Both';
+    }
+  }
+
   private async insertDb(data: any) {
     try {
       const count = await Hostel.count();
+      const randomizePrice = [2000, 3000, 2500, 5000, 2300, 1220, 3500, 1200];
+      const roomLeft = [, 9, 12, 5, 4, 6, 7, 3, 1, 2];
+      const ownerName = ['John Doe', 'Jane Doe', 'John Smith', 'Jane Smith'];
       if (count === 0) {
         for (const item of data) {
           const payload = {
@@ -124,6 +140,12 @@ class HostelService {
               item.photos && item.photos.length > 0
                 ? item.photos[0].photo_reference
                 : null,
+            price:
+              randomizePrice[Math.floor(Math.random() * randomizePrice.length)], // Randomize price
+            hostel_type: this.assertGender(item.name),
+            total_rooms_left:
+              roomLeft[Math.floor(Math.random() * roomLeft.length)],
+            owner_name: ownerName[Math.floor(Math.random() * ownerName.length)],
           };
 
           console.log('Inserting item:', payload);
@@ -173,6 +195,18 @@ class HostelService {
       throw new DatabaseException(500, 'Internal Server Error');
     }
   };
+
+  async fetchUserHostel(userId: number) {
+    const userData = await Users.findOne({
+      where: {
+        id: userId,
+      },
+      relations: {
+        hostels: true,
+      },
+    });
+    return userData;
+  }
 }
 
 export default new HostelService();
