@@ -5,11 +5,14 @@ import { serverMiddleware } from './middleware/serverMiddleware';
 import { mainRouter } from './routes/server.route';
 import DatabaseDataSource from '../src/database/connect';
 import { DataSource } from 'typeorm';
+import { corsConfig } from './config/corsConfig';
+import cors from 'cors';
 
 const logger = createLogger('user-microservice');
 const port = getEnv('PORT');
 const app = express();
 
+app.use(cors(corsConfig));
 app.disable('x-powered-by');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -1,4 +1,4 @@
-import { Users } from '../database/entity/user.entity';
+import { Users } from '../database/models/user.entity';
 import { DatabaseException } from '../exceptions';
 import { HelperJsonWebToken } from '../helpers/HelperJwt';
 

@@ -6,6 +6,10 @@ class RabbitMqProducer {
   private channel: amqp.Channel | null = null;
   private url = queueConfig;
 
+  constructor() {
+    this.connect();
+  }
+
   async connect(): Promise<void> {
     this.connection = await amqp.connect(this.url);
     this.channel = await this.connection.createChannel();

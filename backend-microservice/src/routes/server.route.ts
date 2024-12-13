@@ -3,9 +3,14 @@ import { Application } from 'express';
 import authRouter from './auth.route';
 import documentRouter from './document.route';
 import { errorHandler } from '../middleware/errorMiddleware';
+import userProfileRouter from './userprofile.route';
 
 export const mainRouter = async (expressApplication: Application) => {
-  expressApplication.use('/api', [authRouter, documentRouter]);
+  expressApplication.use('/api', [
+    authRouter,
+    documentRouter,
+    userProfileRouter,
+  ]);
 
   expressApplication.use('*', (req: Request, res: Response): any => {
     return res.status(40).json({

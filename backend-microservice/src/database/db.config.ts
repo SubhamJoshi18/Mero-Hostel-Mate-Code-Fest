@@ -1,6 +1,7 @@
 import { DataSourceOptions } from 'typeorm';
 import { getEnv } from '../utils/getEnv';
-import { Users } from './entity/user.entity';
+import { Users } from './models/user.entity';
+import { UserProfile } from './models/userProfile.entity';
 
 export function getDbConfig(): DataSourceOptions {
   return {
@@ -11,7 +12,7 @@ export function getDbConfig(): DataSourceOptions {
     password: getEnv('DB_PASSWORD') as string,
     database: getEnv('DB_DATABASE') as string,
     synchronize: true,
-    logging: false, // Enable logging
-    entities: [Users],
+    logging: true, // Enable logging
+    entities: [Users, UserProfile],
   } as DataSourceOptions;
 }
