@@ -1,349 +1,199 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-// import axios from 'axios';
-import Swal from "sweetalert2";
-import {
-  Button,
-  Typography,
-  CircularProgress,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  DialogContent,
-} from "@mui/material";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  DirectionsRenderer,
-} from "@react-google-maps/api";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import axiosInstance from "../../configs/axiosConfig";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PhoneIcon from "@mui/icons-material/Phone";
+import HomeIcon from "@mui/icons-material/Home";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import StarsIcon from "@mui/icons-material/Stars";
+import EmailIcon from "@mui/icons-material/Email";
+import BathtubIcon from "@mui/icons-material/Bathtub";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import LayersIcon from "@mui/icons-material/Layers";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import VerifiedIcon from "@mui/icons-material/Verified";
 import { RenderStar } from "../../components/Cards/RenderStar";
+import PrimaryButton from "../../components/Button/PrimaryButton";
 
-const mapContainerStyle = {
-  width: "100%",
-  height: "400px", // Adjust height as needed
-};
-
-const defaultCenter = { lat: 27.7107273, lng: 85.3109501 }; // Default center coordinates
+const HostelData = [
+  {
+    id: 1,
+    hostelName: "Nepzone Boyz Hostel",
+    location: "Dillibazar, Kathmandu",
+    phone: "123456789",
+    PANno: 984564,
+    roomType: "Shared",
+    ownerName: "Ram Lal Upadhya",
+    totalCapacity: 30,
+    hostelType: "Boys",
+    email: "nep.zoneboyzhostel@gmail.com",
+    rating: 4,
+    noOfRooms: 30,
+    price: 12000,
+    isElectricity: false,
+    isHotWater: true,
+    isParking: false,
+    isLaundry: true,
+    isLockerRoom: false,
+    isWifi: true,
+    description:
+      "Nepzone Boyz Hostel is located at the very core area of Kathmandy city, Nepzone Boyz Hostel delivers a safe, secured and admirably hospitable student environment. It may be the best choice for the student near Dilibazar.",
+  },
+];
+// Default center coordinates
 
 export default function HostelDetails() {
-  const { place_id } = useParams();
-
-  const [hostelItem, setHostelItem] = useState(null);
-  const [activeTab, setActiveTab] = useState("description");
-  const [directionsResponse, setDirectionsResponse] = useState(null);
-  const [location, setLocation] = useState(defaultCenter);
-  const [savedHostels, setSavedHostels] = useState([]);
-  const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [currentDistance, setCurrentDistance] = useState("");
-  const [currentDuration, setCurrentDuration] = useState("");
-
-  useEffect(() => {
-    const fetchHostelDetails = async () => {
-      console.log("Hostel Id", place_id);
-      setLoading(true);
-      try {
-        const response = await axiosInstance.get(`/hostel/${place_id}`);
-        const data = response.data.hostel;
-        console.log(data);
-
-        if (data) {
-          setHostelItem(data);
-          setReviews(data.review_comments || []);
-        }
-      } catch (error) {
-        console.error("Error fetching hostel details:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchHostelDetails();
-
-    // Load saved hostels from localStorage
-    const saved = JSON.parse(localStorage.getItem("savedHostels")) || [];
-    setSavedHostels(saved);
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      });
-    }
-  }, [place_id]);
-
-  const calculateRoute = async () => {
-    if (!hostelItem) return;
-
-    const directionsService = new window.google.maps.DirectionsService();
-    directionsService.route(
-      {
-        origin: location,
-        destination: {
-          lat: hostelItem.location.latitude,
-          lng: hostelItem.location.longitude,
-        },
-        travelMode: window.google.maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (status === window.google.maps.DirectionsStatus.OK) {
-          setDirectionsResponse(result);
-          setCurrentDistance(result.routes[0].legs[0].distance.text);
-          setCurrentDuration(result.routes[0].legs[0].duration.text);
-          handleOpenDialog(); // Open dialog when route is calculated
-        } else {
-          console.error("Error fetching directions:", result);
-        }
-      }
-    );
-  };
-
-  const handleSaveHostel = async (place_id: any) => {
-    try {
-      const response = await axiosInstance.post(`/book/hostel/${place_id}`);
-      if (response) {
-        setSavedHostels([...savedHostels, response.data.hostel]);
-      }
-      Swal.fire({
-        title: "Success!",
-        text: "Hostel booked successfully.",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-    } catch (err) {
-      console.error(err);
-      Swal.fire({
-        title: "Error!",
-        text: "Failed to book hostel. Please Log in First to Book Hostel",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-    }
-  };
-
-  const handleOpenDialog = () => {
-    setDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
-
-  if (loading) return <CircularProgress />;
-
   return (
     <>
       <div className="w-full h-20 bg-[--tertiary-color]"></div>
       <div className="container mx-auto">
-        <h2 className="text-center text-5xl font-semibold py-12">
-          Hostel <span className="text-[--primary-color]">Details</span>
+        <h2 className="text-center text-5xl font-semibold py-8">
+          Book Your <span className="text-[--primary-color]">Dream Hostel</span>
         </h2>
 
-        {hostelItem ? (
-          <div className="hostel">
-            <div className="grid grid-cols-12 gap-4 px-12 py-5 items-center">
-              <div className="bg-[--primary-color] shadow-xl flex justify-center rounded-md overflow-hidden h-96 w-full col-span-5">
-                <img
-                  className="h-full w-full"
-                  src={
-                    hostelItem.img
-                      ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hostelItem.img}&key=AIzaSyChRHG8gb0TwMq2YOdf_djXNkDxtokdAJI`
-                      : hostelItem.icon
-                  }
-                  alt={hostelItem.name}
-                />
+        <div className="hostelMap px-12">
+          {HostelData.map((hostel) => (
+            <div className="mt-8 shadow-2xl p-8 border rounded-2xl">
+              <div className="header flex items-center justify-between gap-4">
+                <div className="flex flex-col gap">
+                  <h1 className="font-semibold text-3xl text-[--primary-color]">
+                    {hostel.hostelName}
+                  </h1>
+                  <p className="flex gap-2 items-center">
+                    <LocationOnIcon style={{ color: "#00ff00" }} />
+                    {hostel.location}
+                  </p>
+                </div>
+                <div>
+                  <PrimaryButton title={"Book Now"} />
+                </div>
               </div>
-              <div className="bg-white p-2 h-full col-span-4">
-                <h2 className="text-3xl font-semibold mb-2">
-                  {hostelItem.name}
+              <div className="details-1 mt-8 gap-4 flex items-center justify-between">
+                <div className="part-1 flex flex-col gap-4 rounded-xl shadow-xl border p-4 w-full">
+                  <h3 className="flex gap-2 items-center">
+                    <PhoneIcon style={{ color: "#041E42" }} />
+                    {hostel.phone}
+                  </h3>
+                  <h3 className="flex gap-2 items-center">
+                    <PersonPinIcon style={{ color: "#041E42" }} />
+                    {hostel.ownerName}
+                  </h3>
+                </div>
+                <div className="part-2 flex flex-col gap-4 rounded-xl shadow-xl border p-4 w-full">
+                  <h3 className="flex gap-2 items-center">
+                    <HomeIcon style={{ color: "#041E42" }} />
+                    {hostel.roomType}
+                  </h3>
+                  <h3 className="flex gap-2 items-center">
+                    <StarsIcon style={{ color: "#041E42" }} />
+                    {RenderStar(hostel.rating)}
+                  </h3>
+                </div>
+                <div className="part-3 flex flex-col gap-4 rounded-xl shadow-xl border p-4 w-full">
+                  <h3 className="flex gap-2 items-center">
+                    <EmailIcon style={{ color: "#041E42" }} />
+                    {hostel.email}
+                  </h3>
+                  <h3 className="flex gap-2 items-center">
+                    PAN no:{" " + hostel.PANno}
+                  </h3>
+                </div>
+              </div>
+              <div className="hostelDetails mt-8">
+                <h2 className="text-xl font-medium text-[--primary-color]">
+                  Hostel Description
                 </h2>
-                {RenderStar(hostelItem.rating)}
-                <p className="pt-2 pb-2 text-sm flex">
-                  <LocationOnOutlinedIcon
-                    fontSize="small"
-                    style={{ color: "var(--primary-color)" }}
-                  />
-                  {hostelItem.address}
-                </p>
-                <div className="flex flex-col gap-y-1 mb-4 border-t border-b py-1 w-max">
-                  <div className="flex gap-2">
-                    <h3 className="font-medium text-[17px]">Owner Name:</h3>
-                    <p>
-                      {hostelItem.owner || (
-                        <span className="italic">No Info</span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="flex gap-2">
-                    <h3 className="font-medium text-[17px]">Hostel Type:</h3>
-                    <p>
-                      {hostelItem.type || (
-                        <span className="italic">No Info</span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="flex gap-2">
-                    <h3 className="font-medium text-[17px]">Hostel Price:</h3>
-                    <p>
-                      {`NPR. ${hostelItem.price}` || (
-                        <span className="italic">No Price</span>
-                      )}
-                    </p>
-                  </div>
-                  <div className="flex gap-2">
-                    <h3 className="font-medium text-[17px]">
-                      Hostel Owner Phone Number:
+                <p className="mt-4">{hostel.description}</p>
+                <div className="details-1 pl-4 mt-8 gap-4 flex items-center justify-between">
+                  <div className="part-1 flex flex-col gap-4 w-full">
+                    <h3 className="flex gap-2 items-center">
+                      <HomeIcon style={{ color: "#333333" }} />
+                      Rooms: 10
                     </h3>
-                    <p>
-                      {` ${hostelItem.phoneNumber}` || (
-                        <span className="italic">No Phone Number</span>
-                      )}
-                    </p>
+                    <h3 className="flex gap-2 items-center">
+                      <BathtubIcon style={{ color: "#333333" }} />
+                      Hot Water:
+                      {hostel.isHotWater ? " Yes" : " No"}
+                    </h3>
+                  </div>
+                  <div className="part-2 flex flex-col gap-4 w-full">
+                    <h3 className="flex gap-2 items-center">
+                      <AttachMoneyIcon style={{ color: "#333333" }} />
+                      Price:
+                      {" " + hostel.price}
+                    </h3>
+                    <h3 className="flex gap-2 items-center">
+                      <LayersIcon style={{ color: "#333333" }} />
+                      Floors: "N/A"
+                    </h3>
+                  </div>
+                  <div className="part-3 flex flex-col gap-4 w-full">
+                    <h3 className="flex gap-2 items-center">
+                      <PeopleAltIcon style={{ color: "#333333" }} />
+                      Total Students: "N/A"
+                    </h3>
+                    <h3 className="flex gap-2 items-center">
+                      <StarsIcon style={{ color: "#333333" }} />
+                      {RenderStar(hostel.rating)}
+                    </h3>
                   </div>
                 </div>
-                <div className="buttons-links flex flex-wrap gap-4 items-center">
-                  <button
-                    className="flex justify-center border border-gray-300 px-8 py-2 rounded-lg font-semibold hover:bg-[--btn-primary] hover:text-white active:translate-y-0.5 transition-all"
-                    onClick={() => handleSaveHostel(hostelItem.place_id)}
-                  >
-                    Book
-                  </button>
-                  <button
-                    className="flex justify-center border border-gray-300 px-8 py-2 rounded-lg font-semibold hover:bg-[--btn-primary] hover:text-white active:translate-y-0.5 transition-all"
-                    onClick={calculateRoute}
-                  >
-                    Get Direction
-                  </button>
-                  <FavoriteIcon
-                    className="cursor-pointer"
-                    style={{ color: "#F5F7F8" }}
-                  />
+              </div>
+              <div className="hostelDetails mt-8">
+                <h2 className="text-xl font-medium text-[--primary-color]">
+                  Hostel Features
+                </h2>
+                <div className="details-1 pl-4 mt-8 gap-4 flex items-center justify-between">
+                  <div className="part-1 flex flex-col gap-4 w-full">
+                    <h3 className="flex gap-2 items-center">
+                      <VerifiedIcon style={{ color: "#00ff00" }} />
+                      {hostel.isElectricity
+                        ? "24hrs Electricity"
+                        : "No Electricity"}
+                    </h3>
+                    <h3 className="flex gap-2 items-center">
+                      <VerifiedIcon style={{ color: "#00ff00" }} />
+                      {hostel.isWifi ? "Relaible Wi-Fi" : "No Wi-Fi"}
+                    </h3>
+                  </div>
+                  <div className="part-2 flex flex-col gap-4 w-full">
+                    <h3 className="flex gap-2 items-center">
+                      <VerifiedIcon style={{ color: "#00ff00" }} />
+                      {hostel.isHotWater ? "Hot Water" : "No Hot Water"}
+                    </h3>
+                    <h3 className="flex gap-2 items-center">
+                      <VerifiedIcon style={{ color: "#00ff00" }} />
+                      {hostel.isParking ? "Parking" : "No Parking"}
+                    </h3>
+                  </div>
+                  <div className="part-3 flex flex-col gap-4 w-full">
+                    <h3 className="flex gap-2 items-center">
+                      <VerifiedIcon style={{ color: "#00ff00" }} />
+                      {hostel.isLaundry ? "Laundry" : "No Laundry"}
+                    </h3>
+                    <h3 className="flex gap-2 items-center">
+                      <VerifiedIcon style={{ color: "#00ff00" }} />
+                      {hostel.isLockerRoom
+                        ? "Locker Facility"
+                        : "No Locker Facility"}
+                    </h3>
+                  </div>
                 </div>
               </div>
-              <div className="col-span-3 h-full w-full">
-                <LoadScript googleMapsApiKey="AIzaSyChRHG8gb0TwMq2YOdf_djXNkDxtokdAJI">
-                  <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    center={location}
-                    zoom={15}
-                  >
-                    <Marker position={location} label="You" />
-                    <Marker
-                      position={{
-                        lat: hostelItem.location.latitude,
-                        lng: hostelItem.location.longitude,
-                      }}
-                      label={hostelItem.name}
-                    />
-                    {directionsResponse && (
-                      <DirectionsRenderer directions={directionsResponse} />
-                    )}
-                  </GoogleMap>
-                </LoadScript>
-              </div>
-            </div>
-
-            {/* Tab Navigation */}
-            <div className="flex justify-center gap-10 mb-10">
-              <button
-                className={`px-0 py-2 ${
-                  activeTab === "description"
-                    ? "border-b-2 border-[--primary-color] font-semibold text-[--primary-color]"
-                    : "font-semibold"
-                }`}
-                onClick={() => setActiveTab("description")}
-              >
-                Description
-              </button>
-              <button
-                className={`px-0 py-2 ${
-                  activeTab === "reviews"
-                    ? "border-b-2 border-[--primary-color] font-semibold text-[--primary-color]"
-                    : "font-semibold"
-                }`}
-                onClick={() => setActiveTab("reviews")}
-              >
-                Reviews
-              </button>
-            </div>
-
-            {/* Tab Content */}
-            {activeTab === "description" ? (
-              <div className="px-12 py-4">
-                <h3 className="text-2xl font-semibold mb-2">Description</h3>
-                <p>{hostelItem.description || "No description available."}</p>
-              </div>
-            ) : (
-              <div className="px-12 py-4 mb-12">
-                <h3 className="text-3xl font-semibold mb-8">Reviews</h3>
-                <div className="gap-8 flex flex-wrap">
-                  {reviews.length > 0 ? (
-                    reviews.map((review) => (
-                      <div
-                        key={review.time}
-                        className="border-2 border-gray-300 rounded-lg p-4 w-full hover:scale-105"
-                      >
-                        <div className="flex justify-between mb-4">
-                          <div className="flex items-center gap-2">
-                            <img
-                              src={review.profile_photo_url}
-                              alt={review.author_name}
-                              className="w-10 h-10 rounded-full"
-                            />
-                            <div>
-                              <h3 className="font-semibold text-xl">
-                                {review.author_name}
-                              </h3>
-                              <a
-                                href={review.author_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-sm text-blue-500"
-                              >
-                                View Profile
-                              </a>
-                            </div>
-                          </div>
-                          <div>{RenderStar(review.rating)}</div>
-                        </div>
-                        <p>{review.text}</p>
-                        <p className="text-sm text-gray-500">
-                          {review.relative_time_description}
-                        </p>
-                      </div>
-                    ))
-                  ) : (
-                    <p>No reviews available</p>
-                  )}
+              <div className="map-location mt-8">
+                <h2 className="font-medium text-xl text-[--primary-color]">
+                  {hostel.hostelName + " Location"}
+                </h2>
+                <div className="mt-4">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.1585252284285!2d85.34202727481528!3d27.71239132527021!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1970a9ff7041%3A0xfcaa45db29104458!2sTexas%20International%20College!5e0!3m2!1sen!2snp!4v1734182003395!5m2!1sen!2snp"
+                    width="100%"
+                    height="450"
+                    loading="lazy"
+                  ></iframe>
                 </div>
               </div>
-            )}
-          </div>
-        ) : (
-          <p>Hostel not found</p>
-        )}
-
-        {/* Directions Dialog */}
-        <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-          <DialogTitle>Directions to {hostelItem?.name}</DialogTitle>
-          <DialogContent>
-            <Typography variant="body1">Distance: {currentDistance}</Typography>
-            <Typography variant="body1">Duration: {currentDuration}</Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseDialog} color="primary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
