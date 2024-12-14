@@ -2,6 +2,23 @@ import type, { Request, Response, NextFunction } from 'express';
 import HostelService from '../services/hostel.service';
 
 class HostelController {
+  adminDashboardData = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const hostelId = req.params.hostelId;
+      const response = await HostelService.adminDashboardData(hostelId);
+      return res.status(201).json({
+        message: 'Admin Dashboard Data',
+        response,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
   fetchHostel = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const lat = req.query.lat;

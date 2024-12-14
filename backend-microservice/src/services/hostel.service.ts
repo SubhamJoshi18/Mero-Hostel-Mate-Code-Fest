@@ -19,6 +19,34 @@ class HostelService {
     this.producer = new RabbitMqProducer();
   }
 
+  adminDashboardData = async (hostelId: string) => {
+    const hostel = await Hostel.findOne({
+      where: {
+        place_id: hostelId,
+      },
+    });
+    if (!hostel) {
+      throw new DatabaseException(403, 'Hostel not Found');
+    }
+    if (hostel.hostelers.length === 0) {
+      throw new DatabaseException(404, 'No Hostelers found');
+    }
+
+    const totalHostelers = hostel.hostelers.length;
+    const totalApproved = hostel.hostelers.filter(
+      (data: any) => data.status === 'approved'
+    ).length;
+
+    const totalPendings = hostel.hostelers.filter(
+      (data: any) => data.status === 'pending'
+    );
+    return {
+      totalApproved,
+      totalHostelers,
+      totalPendings,
+    };
+  };
+
   fetchAllHostel = async (coordinates: { lat: string; lng: string }) => {
     const allHostels = [];
     const radius = 50000;
@@ -354,7 +382,7 @@ class HostelService {
       place_id: uuidv1(),
       name: validData.hostelName,
       owner_id: user.id as any,
-      location: validData.address,
+      address: validData.address,
       pan_number: validData.panNumber,
       price: validData.price,
       room_type: validData.roomType,

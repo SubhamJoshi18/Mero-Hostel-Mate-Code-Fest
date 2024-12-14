@@ -32,16 +32,12 @@ export default function DashBoard() {
   const [orders, setOrders] = useState([]);
   const [userData, setUserData] = useState({} as any);
   const [userHostel, setUserHostel] = useState(null);
-  const [studentRequests, setStudentRequests] = useState([
-    { name: 'John Doe', date: '2023-10-01' },
-    { name: 'Jane Smith', date: '2023-10-02' },
-    { name: 'Alice Johnson', date: '2023-10-03' },
-  ]);
+
   const [statistics, setStatistics] = useState({
     totalHostelers: 0,
-    present: 0,
+    totalApproved: 0,
     review: 0,
-    pendingClient: studentRequests.length,
+    totalPendings: 0,
   });
   const triggerClick = () => {
     setOnClick(!onClick);
@@ -55,7 +51,7 @@ export default function DashBoard() {
             Authorization: localStorage.getItem('token'),
           },
         });
-        console.log(userDetails.data);
+
         setUserData(userDetails.data.data);
         if (userDetails.data.response) {
           setStatistics((prevStats) => ({
@@ -82,7 +78,24 @@ export default function DashBoard() {
     fetchHostelData();
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const hostelId = localStorage.getItem('hostelId');
+        const token = localStorage.getItem('token');
+        const response = await axiosInstance.get(`/dashboard/${hostelId}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        setStatistics(response.data.response);
+      } catch (err) {
+        console.log('Error fetching data:', err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const chartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -119,9 +132,9 @@ export default function DashBoard() {
       {
         data: [
           statistics.totalHostelers,
-          statistics.present,
+          statistics.totalApproved,
           statistics.review,
-          statistics.pendingClient,
+          statistics.totalPendings,
         ],
         backgroundColor: [
           'rgba(75, 192, 192, 0.6)',
@@ -171,13 +184,22 @@ export default function DashBoard() {
         }`}
       >
         <div className="userDetails flex flex-col text-white gap-2">
-          <div className='absolute right-6 top-6' onClick={() => triggerClick()}>
-            <NoAccountsIcon className="block" style={{fontSize:'50px'}} />
+          <div
+            className="absolute right-6 top-6"
+            onClick={() => triggerClick()}
+          >
+            <NoAccountsIcon className="block" style={{ fontSize: '50px' }} />
           </div>
           <h2 className="block">{username}</h2>
           <h2 className="block">{email}</h2>
           <div>
-            <PrimaryButton title={"Logout"} onClick={() => {localStorage.clear(); window.location.reload();}} />
+            <PrimaryButton
+              title={'Logout'}
+              onClick={() => {
+                localStorage.clear();
+                window.location.reload();
+              }}
+            />
           </div>
         </div>
       </div>
@@ -188,7 +210,7 @@ export default function DashBoard() {
           <p className="text-lg font-bold text-gray-400">Total Hostelers</p>
         </div>
         <div className="bg-white p-4 rounded-md shadow space-y-2">
-          <h3 className="text-5xl font-bold">{statistics.present}</h3>
+          <h3 className="text-5xl font-bold">{statistics.totalApproved}</h3>
           <p className="text-lg font-bold text-gray-400">Present</p>
         </div>
         <div className="bg-white p-4 rounded-md shadow space-y-2">
@@ -196,7 +218,7 @@ export default function DashBoard() {
           <p className="text-lg font-bold text-gray-400">Leave Requests</p>
         </div>
         <div className="bg-white p-4 rounded-md shadow space-y-2">
-          <h3 className="text-5xl font-bold">{statistics.pendingClient}</h3>
+          <h3 className="text-5xl font-bold">{statistics.totalPendings}</h3>
           <p className="text-lg font-bold text-gray-400">Pending Bookings</p>
         </div>
       </div>

@@ -63,4 +63,10 @@ hostelRouter.post(
 
 hostelRouter.get('/search', HostelController.searchByPrefreneces as any);
 
+hostelRouter.post(
+  '/dashboard/:hostelId',
+  verifyAuthMiddleware as any,
+  HostelController.adminDashboardData as any
+);
+
 export default hostelRouter;
