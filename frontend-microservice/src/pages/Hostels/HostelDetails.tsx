@@ -51,9 +51,9 @@ export default function HostelDetails() {
 
         <div className="hostelMap px-12">
           {HostelData.map((hostel) => (
-            <div className="mt-8 shadow-2xl p-8 border rounded-2xl">
+            <div className="my-8 shadow-2xl p-8 border rounded-2xl">
               <div className="header flex items-center justify-between gap-4">
-                <div className="flex flex-col gap">
+                <div className="flex flex-col gap-4">
                   <h1 className="font-semibold text-3xl text-[--primary-color]">
                     {hostel.hostelName}
                   </h1>
