@@ -143,12 +143,15 @@ const HostelRegistrationForm = () => {
               name="roomType"
               value={formData.roomType}
               onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               required
             >
-              <option value="">Select Room Type</option>
-              <option value="single">Single</option>
-              <option value="multiple">Multiple</option>
+              <option selected hidden>
+                Choose Your Room Type
+              </option>
+              <option value="1">Single</option>
+              <option value="2">Shared</option>
+              <option value="3">Both</option>
             </select>
           </div>
 
@@ -163,12 +166,14 @@ const HostelRegistrationForm = () => {
               name="hostelType"
               value={formData.hostelType}
               onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               required
             >
-              <option value="">Select Hostel Type</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option selected hidden>
+                Choose Your Hostel Type
+              </option>
+              <option value="1">Girls</option>
+              <option value="2">Boys</option>
             </select>
           </div>
 

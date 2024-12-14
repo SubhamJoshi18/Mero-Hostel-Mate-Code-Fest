@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MarkUnreadChatAltOutlinedIcon from "@mui/icons-material/MarkUnreadChatAltOutlined";
@@ -26,7 +27,7 @@ export default function SideBar() {
       <div className="scrolled-logo">
         <NavLink to="/dashboard-admin">
           <img
-            className="h-12 my-2 w-auto flex-shrink-0"
+            className="h-12 my-2 mb-4 w-auto flex-shrink-0"
             src="/assets/mhmlogo_White.png"
             alt="Scrolled logo"
           />
@@ -92,6 +93,7 @@ export default function SideBar() {
                         : "p-3 flex items-center rounded-lg text-white"
                     }
                   >
+                    <FormatListBulletedIcon />
                     <span className="ml-2">Hosteller List</span>
                   </NavLink>
                 </li>
