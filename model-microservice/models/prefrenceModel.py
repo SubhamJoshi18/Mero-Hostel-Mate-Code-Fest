@@ -16,6 +16,7 @@ def select_refrence_model(hostel_data):
         nearbyNames = {hostel['name'] for hostel in nearbyResultList}
      
         matching_hostels = [hostel for hostel in allMongoList if hostel['name'] in nearbyNames]
+        print('This is',matching_hostels)
         
         return jsonify(matching_hostels)
 

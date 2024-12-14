@@ -181,16 +181,14 @@ class HostelService {
       const ownerName = ['John Doe', 'Jane Doe', 'John Smith', 'Jane Smith'];
       if (count === 0) {
         for (const item of data) {
+          console.log(item);
           const payload = {
             place_id: item.place_id,
             name: item.name,
-            location: item.vicinity,
+            address: item.vicinity,
             rating: item.rating,
             user_ratings_total: item.user_ratings_total,
-            img:
-              item.photos && item.photos.length > 0
-                ? item.photos[0].photo_reference
-                : null,
+            img: item.photos.length > 0 ? item.photos[0].photo_reference : null,
             price:
               randomizePrice[Math.floor(Math.random() * randomizePrice.length)], // Randomize price
             hostel_type: this.assertGender(item.name),

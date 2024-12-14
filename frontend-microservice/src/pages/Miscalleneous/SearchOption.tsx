@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import PrimaryButton from '../../components/Button/PrimaryButton';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import axiosInstance from '../../configs/axiosConfig';
+import { RenderStar } from '../../components/Cards/RenderStar';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export const SearchOption = () => {
+  const GOOGLE_MAPS_API_KEY = 'AIzaSyChRHG8gb0TwMq2YOdf_djXNkDxtokdAJI';
   const [showDiv, setShowDiv] = useState('search1');
+  const [trainData, setTrainData] = useState([]);
   const [formData, setFormData] = useState({
     location: '',
     priceRange: '',
@@ -11,6 +17,7 @@ export const SearchOption = () => {
     faculty: '',
     collegeName: '',
   });
+  const [loading, setLoading] = useState(false);
 
   const handleSearchClick = (searchType) => {
     setShowDiv(searchType);
@@ -21,12 +28,38 @@ export const SearchOption = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const fetchPhotoUrl = (photoReference) => {
+    return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${GOOGLE_MAPS_API_KEY}`;
+  };
+
+  const fetchPhotoReference = async (placeId) => {
+    try {
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_MAPS_API_KEY}`
+      );
+      if (
+        response.data.result.photos &&
+        response.data.result.photos.length > 0
+      ) {
+        return response.data.result.photos[0].photo_reference;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error(
+        'Error fetching photo reference from Google Places:',
+        error
+      );
+      return null;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const queryParams = {} as any;
 
     // Construct query parameters based on selected fields
-    if (formData.location) queryParams.location = formData.location;
     if (formData.priceRange) queryParams.priceRange = formData.priceRange;
     if (formData.gender) queryParams.gender = formData.gender;
     if (formData.faculty) queryParams.faculty = formData.faculty;
@@ -42,10 +75,21 @@ export const SearchOption = () => {
 
     try {
       const response = await axiosInstance.get(`/search?${encodedQueryParams}`);
-      console.log(response.data);
+      const data = await Promise.all(
+        response.data.data.map(async (hostel) => {
+          const photoReference = await fetchPhotoReference(hostel.place_id);
+          const img = photoReference ? fetchPhotoUrl(photoReference) : null;
+          return { ...hostel, img };
+        })
+      );
+      console.log('This is data', data);
+      setTrainData(data);
+      setLoading(false);
+
       // Handle the response data as needed
     } catch (error) {
       console.error('Error fetching hostels:', error);
+      setLoading(false);
     }
   };
 
@@ -56,7 +100,7 @@ export const SearchOption = () => {
           className={`text-lg font-medium cursor-pointer ${
             showDiv === 'search1'
               ? 'text-[--primary-color] border-b-2 border-b-[--primary-color]'
-              : 'text-white'
+              : 'text-black'
           }`}
           onClick={() => handleSearchClick('search1')}
         >
@@ -66,7 +110,7 @@ export const SearchOption = () => {
           className={`text-lg font-medium cursor-pointer ${
             showDiv === 'search2'
               ? 'text-[--primary-color] border-b-2 border-b-[--primary-color]'
-              : 'text-white'
+              : 'text-black'
           }`}
           onClick={() => handleSearchClick('search2')}
         >
@@ -75,7 +119,7 @@ export const SearchOption = () => {
       </div>
       {showDiv === 'search1' ? (
         <form onSubmit={handleSubmit}>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden w-[80%] mx-auto pt-4">
             <div className="grid grid-cols-4 gap-4">
               <div>
                 <input
@@ -138,7 +182,7 @@ export const SearchOption = () => {
                   name="collegeName"
                   value={formData.collegeName}
                   onChange={handleInputChange}
-                  className="py-2 px-2 w-full outline-none text-gray-500 rounded-lg shadow placeholder-gray-400"
+                  className="py-2 px-2 w-full outline-none border text-gray-500 rounded-lg shadow placeholder-gray-400"
                   placeholder="Enter College Name (Optional)"
                 />
               </div>
@@ -158,6 +202,43 @@ export const SearchOption = () => {
           <p className="mt-2">Coming soon! Stay tuned for updates.</p>
         </div>
       )}
+
+      <div
+        data-aos="fade-up"
+        className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 py-10 px-16"
+      >
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : (
+          trainData.map((hostel) => (
+            <Link to={`/hostel/${hostel.place_id}`} key={hostel.place_id}>
+              <div className="shadow-lg border border-gray-200 rounded-2xl cursor-pointer overflow-hidden hover:-translate-y-2 transition-transform">
+                <div className="object-cover">
+                  <img
+                    src={hostel.img}
+                    alt={hostel.name}
+                    className="w-full h-48 object-cover"
+                  />
+                </div>
+                <div className="px-5">
+                  <p className="text-lg py-2 font-semibold">{hostel.title}</p>
+                  {RenderStar(hostel.rating)}
+                  <p className="mb-4 text-[#acacac] text-sm mt-1">
+                    <LocationOnOutlinedIcon
+                      fontSize="small"
+                      style={{ color: 'var(--btn-primary)' }}
+                    />
+                    {hostel.address}
+                  </p>
+                  <button className="w-full flex justify-center mb-5 border border-gray-300 lg:px-12 lg:py-2 md:px-16 md:py-2 px-16 py-2 rounded-lg font-semibold gap-2 hover:bg-[--btn-primary] hover:border-none hover:text-white transition-all">
+                    View
+                  </button>
+                </div>
+              </div>
+            </Link>
+          ))
+        )}
+      </div>
     </>
   );
 };

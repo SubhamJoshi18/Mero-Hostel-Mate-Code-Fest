@@ -26,12 +26,13 @@ import UserNews from '../pages/Dashboards/UserDashboard/UserNews';
 import UserPayments from '../pages/Dashboards/UserDashboard/UserPayments';
 import UserNotification from '../pages/Dashboards/UserDashboard/UserNotification';
 import UserSupport from '../pages/Dashboards/UserDashboard/UserSupport';
-import UserSetting from '../pages/Dashboards/UserDashboard/UserSetting';
+import { UserSetting } from '../pages/Dashboards/UserDashboard/UserSetting';
 import UserChat from '../pages/Dashboards/UserDashboard/UserChat';
 import { News } from '../pages/Miscalleneous/News';
 import { FAQs } from '../pages/Miscalleneous/FAQs';
 import { PrivacyPolicy } from '../pages/Miscalleneous/PrivacyPolicy';
 import { TermsAndCondition } from '../pages/Miscalleneous/TermsAndCondition';
+import { SearchBox } from '../pages/Miscalleneous/SearchBox';
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -147,6 +148,7 @@ export default function AppRoutes() {
         />
         <Route path="/news" element={<News />} />
         <Route path="/faqs" element={<FAQs />} />
+        <Route path="/search" element={<SearchBox />} />
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/termsandcondition" element={<TermsAndCondition />} />
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
