@@ -1,21 +1,26 @@
 import { Link } from 'react-router-dom';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import { RenderStar } from '../Cards/RenderStar';
+import { RenderStar } from '../../../components/Cards/RenderStar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import Image from '../../../public/image2.jpg';
-import PrimaryButton from '../Button/PrimaryButton';
-import axiosInstance from '../../configs/axiosConfig';
+import { Image } from 'lucide-react';
+import PrimaryButton from '../../../components/Button/PrimaryButton';
+import Pagination from '@mui/material/Pagination';
+import axiosInstance from '../../../configs/axiosConfig';
 
-export default function AllHostels() {
+export default function HostelsMarket() {
   const [hostelData, setHostelData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [filter, setFilter] = useState('All');
+  const itemsPerPage = 8;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const GOOGLE_MAPS_API_KEY = 'AIzaSyChRHG8gb0TwMq2YOdf_djXNkDxtokdAJI';
         const response = await axiosInstance.get(
-          `/hostels?lat=27.7219&lng=85.324`
+          `/hostels?lat=27.7219&lng=85.324&page=${currentPage}&limit=${itemsPerPage}&type=${filter}`
         );
         console.log(response.data.hostels);
         const data = response.data.hostels.map((hostel) => ({
@@ -28,18 +33,28 @@ export default function AllHostels() {
             : Image,
         }));
         setHostelData(data);
+        setTotalPages(Math.ceil(response.data.total / itemsPerPage));
       } catch (err) {
         console.error(err);
       }
     };
 
     fetchData();
-  }, []);
+  }, [currentPage, filter]);
+
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    setCurrentPage(1); // Reset to the first page when filter changes
+  };
 
   return (
     <>
       <div className="h-20 bg-[--tertiary-color]"></div>
-      <div className="h-[88vh] w-screen container mx-auto mb-5">
+      <div className="min-h-screen w-screen container mx-auto mb-5">
         <div className="relative flex items-center justify-center">
           <h1
             data-aos="fade-up"
@@ -58,18 +73,36 @@ export default function AllHostels() {
         <p data-aos="fade-up" className="text-center mb-8">
           Take a detour at our most popular hostel for this season
         </p>
-        <div data-aos="fade-up" className="flex justify-center flex-wrap gap-5">
+        <div
+          data-aos="fade-up"
+          className="flex justify-center flex-wrap gap-5 mb-8"
+        >
           <PrimaryButton
             title={'All'}
-            className="px-3 py-1 rounded-3xl bg-[--btn-primary] text-white"
+            className={`px-3 py-1 rounded-3xl ${
+              filter === 'All'
+                ? 'bg-[--btn-primary] text-white'
+                : 'text-[--primary-color] border border-[--btn-color] hover:text-white hover:bg-[--btn-primary]'
+            }`}
+            onClick={() => handleFilterChange('All')}
           />
           <PrimaryButton
             title={'Boys'}
-            className="px-3 py-1 text-[--primary-color] border rounded-3xl hover:text-white border-[--btn-color] hover:bg-[--btn-primary]"
+            className={`px-3 py-1 rounded-3xl ${
+              filter === 'Boys'
+                ? 'bg-[--btn-primary] text-white'
+                : 'text-[--primary-color] border border-[--btn-color] hover:text-white hover:bg-[--btn-primary]'
+            }`}
+            onClick={() => handleFilterChange('Boys')}
           />
           <PrimaryButton
             title={'Girls'}
-            className="px-3 py-1 text-[--primary-color] border rounded-3xl hover:text-white border-[--btn-color] hover:bg-[--btn-primary]"
+            className={`px-3 py-1 rounded-3xl ${
+              filter === 'Girls'
+                ? 'bg-[--btn-primary] text-white'
+                : 'text-[--primary-color] border border-[--btn-color] hover:text-white hover:bg-[--btn-primary]'
+            }`}
+            onClick={() => handleFilterChange('Girls')}
           />
         </div>
         <div
@@ -112,6 +145,14 @@ export default function AllHostels() {
               </div>
             </Link>
           ))}
+        </div>
+        <div data-aos="fade-up" className="flex justify-center mb-8">
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+          />
         </div>
         <div data-aos="fade-up" className="flex justify-center">
           <button className="bg-white text-lg shadow-2xl px-6 py-3 rounded-lg font-semibold text-[--primary-color] hover:text-white hover:bg-[--btn-primary] border border-[--btn-primary] transition-all active:translate-y-0.5">

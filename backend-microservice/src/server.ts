@@ -22,7 +22,6 @@ app.use(express.urlencoded({ extended: true }));
   await DatabaseDataSource.initialize()
     .then((db: DataSource) => {
       logger.info(`Initialized '${db.options.database}' database successfully`);
-      mapSeeder();
     })
     .catch((err: Error) => {
       logger.error(

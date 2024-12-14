@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
-import Image from "../../../public/image2.jpg";
-import PrimaryButton from "../Button/PrimaryButton";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import { RenderStar } from "../Cards/RenderStar";
-import "./loader.css";
-import axiosInstance from "../../configs/axiosConfig";
-import { useNavigate } from "react-router-dom";
+import Image from '../../../public/image2.jpg';
+import PrimaryButton from '../Button/PrimaryButton';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import { RenderStar } from '../Cards/RenderStar';
+import './loader.css';
+import axiosInstance from '../../configs/axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 export default function AllHostels() {
   const [hostelData, setHostelData] = useState([]);
@@ -17,7 +17,7 @@ export default function AllHostels() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const GOOGLE_MAPS_API_KEY = "AIzaSyChRHG8gb0TwMq2YOdf_djXNkDxtokdAJI";
+        const GOOGLE_MAPS_API_KEY = 'AIzaSyChRHG8gb0TwMq2YOdf_djXNkDxtokdAJI';
         const response = await axiosInstance.get(
           `/hostels?lat=27.7219&lng=85.324`
         );
@@ -25,7 +25,7 @@ export default function AllHostels() {
         const data = response.data.hostels.map((hostel) => ({
           _id: hostel.place_id,
           title: hostel.name,
-          location: hostel.location,
+          location: hostel.address,
           rating: hostel.rating,
           img: hostel.img
             ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hostel.img}&key=${GOOGLE_MAPS_API_KEY}`
@@ -64,7 +64,7 @@ export default function AllHostels() {
         <h1
           data-aos="fade-up"
           className="text-[150px] text-gray-200 font-mono font-semibold"
-          style={{ fontFamily: "Oswald" }}
+          style={{ fontFamily: 'Oswald' }}
         >
           HOSTELS
         </h1>
@@ -80,15 +80,15 @@ export default function AllHostels() {
       </p>
       <div data-aos="fade-up" className="flex justify-center flex-wrap gap-5">
         <PrimaryButton
-          title={"All"}
+          title={'All'}
           className="px-3 py-1 rounded-3xl bg-[--btn-primary] text-white"
         />
         <PrimaryButton
-          title={"Boys"}
+          title={'Boys'}
           className="px-3 py-1 border rounded-3xl hover:text-white border-gray-300 hover:bg-[--btn-primary]"
         />
         <PrimaryButton
-          title={"Girls"}
+          title={'Girls'}
           className="px-3 py-1 border rounded-3xl hover:text-white border-gray-300 hover:bg-[--btn-primary]"
         />
       </div>
@@ -102,10 +102,10 @@ export default function AllHostels() {
             className="shadow-lg border border-gray-200 rounded-2xl cursor-pointer overflow-hidden hover:-translate-y-2 transition-transform"
             onMouseEnter={(e) => {
               e.currentTarget.style.boxShadow =
-                "0px 4px 8px rgba(0, 0, 0, 0.4)";
+                '0px 4px 8px rgba(0, 0, 0, 0.4)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "";
+              e.currentTarget.style.boxShadow = '';
             }}
           >
             <div className="object-cover">
@@ -121,7 +121,7 @@ export default function AllHostels() {
               <p className="mb-4 text-[#acacac] text-sm mt-1">
                 <LocationOnOutlinedIcon
                   fontSize="small"
-                  style={{ color: "var(--btn-primary)" }}
+                  style={{ color: 'var(--btn-primary)' }}
                 />
                 {hostel.location}
               </p>

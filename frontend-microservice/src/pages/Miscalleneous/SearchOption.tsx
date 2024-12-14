@@ -23,7 +23,7 @@ export const SearchOption = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const queryParams = {};
+    const queryParams = {} as any;
 
     // Construct query parameters based on selected fields
     if (formData.location) queryParams.location = formData.location;

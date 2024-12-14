@@ -64,7 +64,61 @@ class HostelService {
     };
   };
 
+  fetchAllHostel = async (coordinates: { lat: string; lng: string }) => {
+    const allHostels = [];
+    const radius = 50000;
+    let nextPageToken = undefined;
+    const hostelCount = await Hostel.count({});
 
+    if (hostelCount > 1) {
+      const datas = await Hostel.find();
+      return datas;
+    }
+    try {
+      while (true) {
+        const response = await this.googleMapClient.placesNearby({
+          params: {
+            location: coordinates as any,
+            radius,
+            keyword: 'hostels',
+            opennow: false,
+            pagetoken: nextPageToken,
+            key: this.GOOGLE_API_KEY as string,
+          },
+          timeout: 1000,
+        });
+
+        const excludedTypes = new Set([
+          'bar',
+          'restaurant',
+          'travel_agency',
+          'food',
+        ]);
+
+        const hostels = response.data.results.filter(
+          (place: any) =>
+            place.types?.includes('lodging' as any) &&
+            place.name.toLowerCase().includes('hostel') &&
+            !place.types?.some((type: any) => excludedTypes.has(type))
+        );
+
+        allHostels.push(...hostels);
+
+        nextPageToken = response.data.next_page_token;
+        if (!nextPageToken) {
+          break;
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+
+      console.log('Total Hostels Found:', allHostels.length);
+      await this.insertDb(allHostels);
+      return allHostels;
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   fetchHostelById = async (hostelId: string) => {
     const isHostel = await Hostel.findOne({
@@ -91,6 +145,10 @@ class HostelService {
           : [];
       const updatedHostel = {
         ...isHostel,
+        location: {
+          lat: placeDetails.geometry.location.lat,
+          lng: placeDetails.geometry.location.lng,
+        },
         review_comments: placeDetails.reviews || 'No Review Info',
         phoneNumber: placeDetails.formatted_phone_number || 'No Phone Info',
         photos: photoReferences,

@@ -17,12 +17,11 @@ import Attendance from '../pages/Dashboards/AdminDashboard/Attendance';
 import PendingBooking from '../pages/Dashboards/AdminDashboard/PendingBooking';
 import HostelerList from '../pages/Dashboards/AdminDashboard/HostelerList';
 import HostelRegistrationForm from '../pages/Dashboards/AdminDashboard/RegisterHostel';
-import { LeaveRequest } from '../pages/Dashboards/UserDashboard/LeaveRequest';
-import UserProfile from '../pages/Dashboards/UserDashboard/UserProfile';
 import { RequestLeave } from '../pages/Dashboards/UserDashboard/RequestLeave';
 import MyDocuments from '../pages/Dashboards/UserDashboard/MyDocuments';
+import UserProfile from '../pages/Dashboards/UserDashboard/UserProfile';
 import UserAttendanceHistory from '../pages/Dashboards/UserDashboard/UserAttendanceHistory';
-
+import HostelsMarket from '../pages/Dashboards/UserDashboard/HostelsMarket';
 export default function AppRoutes() {
   const location = useLocation();
 
@@ -80,6 +79,10 @@ export default function AppRoutes() {
         <Route
           path="/dashboard-user/userattendancehistory"
           element={<UserDashboard children={<UserAttendanceHistory />} />}
+        />
+        <Route
+          path="/dashboard-user/hostelsmarket"
+          element={<UserDashboard children={<HostelsMarket />} />}
         />
         <Route path="/hostel/:place_id" element={<HostelDetails />} />
         // Admin Dashboard Routes
