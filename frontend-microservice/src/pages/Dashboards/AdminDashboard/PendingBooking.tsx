@@ -1,47 +1,49 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../../configs/axiosConfig';
 
 const PendingBooking = () => {
   // Sample initial data for pending bookings
-  const [bookings, setBookings] = useState([
-    {
-      id: 1,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 (555) 123-4567',
-      status: 'Pending',
-    },
-    {
-      id: 2,
-      name: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      phone: '+1 (555) 987-6543',
-      status: 'Pending',
-    },
-    {
-      id: 3,
-      name: 'Mike Johnson',
-      email: 'mike.johnson@example.com',
-      phone: '+1 (555) 456-7890',
-      status: 'Pending',
-    },
-  ]);
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const hostelToken = localStorage.getItem('hostel_id');
+        const token = localStorage.getItem('token');
+        const response = await axiosInstance.get(`/pending/${hostelToken}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        console.log(response.data.hostel);
+        setBookings(response.data.hostel);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, [bookings]);
 
   // Handler for accepting a booking
-  const handleAccept = (id) => {
-    setBookings(
-      bookings.map((booking) =>
-        booking.id === id ? { ...booking, status: 'Accepted' } : booking
-      )
-    );
+  const handleAccept = async (id: any) => {
+    try {
+      const response = await axiosInstance.patch(`/approve/user/${id}`);
+      console.log('update', response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // Handler for rejecting a booking
-  const handleReject = (id) => {
-    setBookings(
-      bookings.map((booking) =>
-        booking.id === id ? { ...booking, status: 'Rejected' } : booking
-      )
-    );
+  const handleReject = async (id) => {
+    try {
+      const response = await axiosInstance.patch(`/reject/user/${id}`);
+      console.log('update', response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -54,7 +56,7 @@ const PendingBooking = () => {
           <thead className="bg-gray-300">
             <tr>
               <th className="px-4 py-3 text-left">Name</th>
-              <th className="px-4 py-3 text-left">Email</th>
+              <th className="px-4 py-3 text-left">College</th>
               <th className="px-4 py-3 text-left">Phone Number</th>
               <th className="px-4 py-3 text-center">Actions</th>
             </tr>
@@ -63,10 +65,10 @@ const PendingBooking = () => {
             {bookings.map((booking) => (
               <tr key={booking.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3">{booking.name}</td>
-                <td className="px-4 py-3">{booking.email}</td>
-                <td className="px-4 py-3">{booking.phone}</td>
+                <td className="px-4 py-3">{booking.college}</td>
+                <td className="px-4 py-3">{booking.phoneNumber}</td>
                 <td className="px-4 py-3 text-center">
-                  {booking.status === "Pending" ? (
+                  {booking.status === 'pending' ? (
                     <div className="flex justify-center space-x-2">
                       <button
                         onClick={() => handleAccept(booking.id)}
@@ -86,9 +88,9 @@ const PendingBooking = () => {
                       className={`
                         px-3 py-1 rounded 
                         ${
-                          booking.status === "Accepted"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
+                          booking.status === 'Accepted'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-red-100 text-red-800'
                         }
                       `}
                     >

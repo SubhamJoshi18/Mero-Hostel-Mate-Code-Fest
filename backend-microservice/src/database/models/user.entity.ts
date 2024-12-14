@@ -5,9 +5,14 @@ import {
   BaseEntity,
   DeleteDateColumn,
   CreateDateColumn,
-  ManyToMany,
+  OneToMany,
+  OneToOne,
 } from 'typeorm';
+
+import { Payment } from './payment.entity';
+import { UserProfile } from './userProfile.entity';
 import Hostel from './hostel.entiy';
+import { Booking } from './booking.entity';
 
 enum RoleEnum {
   OWNER = 'owner',
@@ -16,7 +21,7 @@ enum RoleEnum {
 
 @Entity()
 export class Users extends BaseEntity {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
+  @PrimaryGeneratedColumn()
   id!: number;
 
   @Column({ type: 'varchar', length: 255 })
@@ -40,6 +45,12 @@ export class Users extends BaseEntity {
   @DeleteDateColumn()
   deletedAt!: Date;
 
-  @ManyToMany(() => Hostel, (hostel) => hostel.users)
-  hostels!: Hostel[];
+  @OneToMany(() => Booking, (booking) => booking.user)
+  bookings!: Booking[];
+
+  @OneToOne(() => UserProfile, (userProfile) => userProfile.user)
+  userProfile!: UserProfile;
+
+  @OneToOne(() => Payment, (payment) => payment.user)
+  payment!: Payment;
 }

@@ -16,4 +16,10 @@ userProfileRouter.get(
   UserProfileController.getUserProfile as any
 );
 
+userProfileRouter.post(
+  '/user/hostel/:hostelId',
+  verifyAuthMiddleware as any,
+  UserProfileController.sendHostelApproval as any
+);
+
 export default userProfileRouter;

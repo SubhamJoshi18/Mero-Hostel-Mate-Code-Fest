@@ -2,6 +2,7 @@ import DocumentController from '../controller/document.controller';
 import { IDocumentData } from '../interfaces/document.interface';
 import RabbitMqProducer from '../RabbitMq/producer/rabbitmqProducer';
 import { docmentQueue } from '../config/rabbitmqConfig';
+import axios from 'axios';
 
 class DocumentService {
   private rabbitmqProducer: RabbitMqProducer | null = null;
@@ -11,9 +12,10 @@ class DocumentService {
   }
 
   async verifyAndInsertDocument(data: IDocumentData) {
-    await this.rabbitmqProducer?.connect();
-    await this.rabbitmqProducer?.produce(docmentQueue, data);
-    await this.rabbitmqProducer?.close();
+    const response = await axios.post('/model/yolo', {
+      data,
+    });
+    console.log(response.data);
   }
 }
 

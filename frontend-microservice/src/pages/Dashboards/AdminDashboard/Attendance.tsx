@@ -1,50 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../../configs/axiosConfig';
 
 const Attendance = () => {
   // Get today's date
-  const getTodayDate = () => new Date().toISOString().split("T")[0];
+  const getTodayDate = () => new Date().toISOString().split('T')[0];
 
   // Initial students with added attendance tracking
-  const [students, setStudents] = useState([
-    {
-      id: 1,
-      name: "John Doe",
-      contact: "+1 (555) 123-4567",
-      faculty: "Computer Science",
-      attendance: {
-        [getTodayDate()]: null,
-      },
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      contact: "+1 (555) 987-6543",
-      faculty: "Electrical Engineering",
-      attendance: {
-        [getTodayDate()]: null,
-      },
-    },
-    {
-      id: 3,
-      name: "Mike Johnson",
-      contact: "+1 (555) 456-7890",
-      faculty: "Mechanical Engineering",
-      attendance: {
-        [getTodayDate()]: null,
-      },
-    },
-  ]);
+  const [students, setStudents] = useState([]);
 
-  const [attendanceHistory, setAttendanceHistory] = useState([
-    {
-      studentId: "",
-      studentName: "",
-      date: "",
-      status: "",
-    },
-  ]);
-  const [currentView, setCurrentView] = useState("attendance");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const hostelId = localStorage.getItem('hostel_id');
+        const response = await axiosInstance.get(`/approve/${hostelId}`);
+        const fetchedStudents = response.data.hostel.map((student) => ({
+          ...student,
+          attendance: {
+            [getTodayDate()]: null,
+          },
+        }));
+        setStudents(fetchedStudents);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const [attendanceHistory, setAttendanceHistory] = useState([]);
+  const [currentView, setCurrentView] = useState('attendance');
   const [selectedStudent, setSelectedStudent] = useState(null);
 
   // Mark attendance for a student
@@ -56,7 +42,7 @@ const Attendance = () => {
         if (student.id === studentId) {
           // Check if attendance is already marked for today
           if (student.attendance[today] !== null) {
-            alert("Attendance already marked for today!");
+            alert('Attendance already marked for today!');
             return student;
           }
 
@@ -70,10 +56,10 @@ const Attendance = () => {
           setAttendanceHistory((prev) => [
             ...prev,
             {
-              studentId: student.id as any,
-              studentName: student.name as any,
-              date: today as any,
-              status: status as any,
+              studentId: student.id,
+              studentName: student.name,
+              date: today,
+              status: status,
             },
           ]);
 
@@ -96,7 +82,7 @@ const Attendance = () => {
 
     setSelectedStudent(student);
     setAttendanceHistory(studentHistory);
-    setCurrentView("history");
+    setCurrentView('history');
   };
 
   // Render main attendance table
@@ -132,13 +118,13 @@ const Attendance = () => {
                     {!isAttendanceMarked ? (
                       <div className="flex justify-center space-x-2">
                         <button
-                          onClick={() => markAttendance(student.id, "Present")}
+                          onClick={() => markAttendance(student.id, 'Present')}
                           className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                         >
                           Present
                         </button>
                         <button
-                          onClick={() => markAttendance(student.id, "Absent")}
+                          onClick={() => markAttendance(student.id, 'Absent')}
                           className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                         >
                           Absent
@@ -149,9 +135,9 @@ const Attendance = () => {
                         className={`
                           px-3 py-1 rounded 
                           ${
-                            todayAttendance === "Present"
-                              ? "bg-green-100 text-green-800"
-                              : "bg-red-100 text-red-800"
+                            todayAttendance === 'Present'
+                              ? 'bg-green-100 text-green-800'
+                              : 'bg-red-100 text-red-800'
                           }
                         `}
                       >
@@ -184,7 +170,7 @@ const Attendance = () => {
           Attendance History for {selectedStudent?.name}
         </h2>
         <button
-          onClick={() => setCurrentView("attendance")}
+          onClick={() => setCurrentView('attendance')}
           className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
         >
           Back to Attendance
@@ -206,9 +192,9 @@ const Attendance = () => {
                   className={`
                     px-3 py-1 rounded 
                     ${
-                      record.status === "Present"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-red-100 text-red-800"
+                      record.status === 'Present'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
                     }
                   `}
                 >
@@ -221,9 +207,10 @@ const Attendance = () => {
       </table>
     </div>
   );
+
   return (
     <div>
-      {currentView === "attendance"
+      {currentView === 'attendance'
         ? renderAttendanceTable()
         : renderAttendanceHistory()}
     </div>

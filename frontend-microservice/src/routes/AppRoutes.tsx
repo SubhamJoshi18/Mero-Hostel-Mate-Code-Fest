@@ -17,7 +17,14 @@ import Attendance from "../pages/Dashboards/AdminDashboard/Attendance";
 import PendingBooking from "../pages/Dashboards/AdminDashboard/PendingBooking";
 import HostelerList from "../pages/Dashboards/AdminDashboard/HostelerList";
 import HostelRegistrationForm from "../pages/Dashboards/AdminDashboard/RegisterHostel";
-import { LeaveRequest } from "../pages/Dashboards/UserDashboard/LeaveRequest";
+import UserProfile from "../pages/Dashboards/UserDashboard/UserProfile";
+import { RequestLeave } from "../pages/Dashboards/UserDashboard/RequestLeave";
+import MyDocuments from "../pages/Dashboards/UserDashboard/MyDocuments";
+import UserAttendanceHistory from "../pages/Dashboards/UserDashboard/UserAttendanceHistory";
+import { News } from "../pages/Miscalleneous/News";
+import { FAQs } from "../pages/Miscalleneous/FAQs";
+import { PrivacyPolicy } from "../pages/Miscalleneous/PrivacyPolicy";
+import { TermsAndCondition } from "../pages/Miscalleneous/TermsAndCondition";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -61,7 +68,22 @@ export default function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/hostel" element={<AllHostels />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/dashboard-user" element={<UserDashboard />} />
+        <Route
+          path="/dashboard-user"
+          element={<UserDashboard children={<UserProfile />} />}
+        />
+        <Route
+          path="/dashboard-user/requestleave"
+          element={<UserDashboard children={<RequestLeave />} />}
+        />
+        <Route
+          path="/dashboard-user/mydocuments"
+          element={<UserDashboard children={<MyDocuments />} />}
+        />
+        <Route
+          path="/dashboard-user/userattendancehistory"
+          element={<UserDashboard children={<UserAttendanceHistory />} />}
+        />
         <Route path="/hostel/:place_id" element={<HostelDetails />} />
         // Admin Dashboard Routes
         <Route
@@ -88,6 +110,10 @@ export default function AppRoutes() {
           path="/dashboard-admin/hostelregister"
           element={<AdminDashBoard children={<HostelRegistrationForm />} />}
         />
+        <Route path="/news" element={<News />} />
+        <Route path="/faqs" element={<FAQs />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/termsandcondition" element={<TermsAndCondition />} />
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
         {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
         {/* <Route path="/news" element={<News />} />
