@@ -215,14 +215,27 @@ export default function HostelDetails() {
                 <h2 className="font-medium text-xl text-[--primary-color]">
                   {hostel.hostelName + " Location"}
                 </h2>
-                <div className="mt-4">
+                <div className="mt-4 flex justify-center">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.1585252284285!2d85.34202727481528!3d27.71239132527021!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1970a9ff7041%3A0xfcaa45db29104458!2sTexas%20International%20College!5e0!3m2!1sen!2snp!4v1734182003395!5m2!1sen!2snp"
-                    width="100%"
+                    width="800"
                     height="450"
                     loading="lazy"
                   ></iframe>
                 </div>
+              </div>
+              <div className="virtual_tour mt-8 flex justify-center items-center flex-col">
+                <h2 className="font-medium self-start text-2xl text-[--primary-color] pb-4">
+                  Virtual Tour
+                </h2>
+                <video
+                  src="/video.mp4"
+                  height={600}
+                  width={800}
+                  autoPlay
+                  loop
+                  muted
+                ></video>
               </div>
             </div>
           ))}
