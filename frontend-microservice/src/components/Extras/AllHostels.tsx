@@ -55,9 +55,25 @@ export default function AllHostels() {
             AVAILABLE HOSTELS
           </h2>
         </div>
-        <p data-aos="fade-up" className="text-center mb-8">
+        <p data-aos="fade-up" className="text-center mb-4">
           Take a detour at our most popular hostel for this season
         </p>
+
+        {/* Centered Search Box in a Section */}
+        <div
+          data-aos="fade-up"
+          className="flex justify-center items-center h-24 space-x-2"
+        >
+          <input
+            type="search"
+            placeholder="Search here"
+            className="p-4 w-full max-w-md border outline-none border-gray-300 rounded-lg shadow-sm "
+          />
+          <button className="p-4 rounded-2xl bg-[--primary-color] text-white text-xl ">
+            Search
+          </button>
+        </div>
+
         <div data-aos="fade-up" className="flex justify-center flex-wrap gap-5">
           <PrimaryButton
             title={"All"}
@@ -69,7 +85,7 @@ export default function AllHostels() {
           />
           <PrimaryButton
             title={"Girls"}
-            className="px-3 py-1 text-[--primary-color] border rounded-3xl hover:text-white border-[--btn-color] hover:bg-[--btn-primary]"  
+            className="px-3 py-1 text-[--primary-color] border rounded-3xl hover:text-white border-[--btn-color] hover:bg-[--btn-primary]"
           />
         </div>
         <div

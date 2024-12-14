@@ -47,9 +47,9 @@ export const Contact = () => {
               Submit
             </button>
           </form>
-          <div className="grid col-span-4 px-4 py-6">
-            <div className="bg-[url(/public/news1.jpeg)] bg-no-repeat bg-cover rounded-lg">
-              <div className="backdrop-blur-sm px-6 py-8 flex flex-col gap-4 ">
+          <div className="grid col-span-4 px-4 py-6 rounded-2xl">
+            <div className="bg-[url(/public/news1.jpeg)] bg-no-repeat bg-cover rounded-2xl">
+              <div className="backdrop-blur-sm rounded-2xl px-6 py-8 flex flex-col gap-4 ">
                 <h3 className="text-xl font-semibold">Our NewsLetters</h3>
                 <p>Subscribe to our Newsletter</p>
                 <input
