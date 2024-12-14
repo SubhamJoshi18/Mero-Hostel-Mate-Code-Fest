@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import Image from '../../../public/image2.jpg';
 import PrimaryButton from '../Button/PrimaryButton';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
@@ -25,7 +25,7 @@ export default function AllHostels() {
         const data = response.data.hostels.map((hostel) => ({
           _id: hostel.place_id,
           title: hostel.name,
-          location: hostel.location,
+          location: hostel.address,
           rating: hostel.rating,
           img: hostel.img
             ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hostel.img}&key=${GOOGLE_MAPS_API_KEY}`

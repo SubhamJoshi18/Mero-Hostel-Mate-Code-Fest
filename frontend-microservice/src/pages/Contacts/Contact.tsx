@@ -5,8 +5,8 @@ import CallIcon from "@mui/icons-material/Call";
 export const Contact = () => {
   return (
     <>
-      <div className="w-full h-20  top-0  bg-[#f1c58b]"></div>
-      <div className="bg-[#f1c58b] text-center leading-tight py-10 mb-8 text-white">
+      <div className="w-full h-20  top-0  bg-[--tertiary-color]"></div>
+      <div className="bg-[--tertiary-color] text-center leading-tight py-10 mb-8 text-white">
         <h2
           className="text-[130px] font-extrabold uppercase tracking-wider "
           style={{ fontFamily: "Oswald" }}
@@ -43,13 +43,13 @@ export const Contact = () => {
               className="bg-gray-200 px-2 py-2 max-h-24  rounded-lg outline-none placeholder-gray-400"
               placeholder="Message"
             ></textarea>
-            <button className="text-white text-xl bg-[#f1c58b] px-6 py-2 rounded-lg font-semibold hover:bg-[--btn-secondary] transition-all active:translate-y-0.5">
+            <button className="text-white text-xl bg-[--tertiary-color] px-6 py-2 rounded-lg font-semibold hover:bg-[--btn-secondary] transition-all active:translate-y-0.5">
               Submit
             </button>
           </form>
-          <div className="grid col-span-4 px-4 py-6">
-            <div className="bg-[url(/public/news1.jpeg)] bg-no-repeat bg-cover rounded-lg">
-              <div className="backdrop-blur-sm px-6 py-8 flex flex-col gap-4 ">
+          <div className="grid col-span-4 px-4 py-6 rounded-2xl">
+            <div className="bg-[url(/public/news1.jpeg)] bg-no-repeat bg-cover rounded-2xl">
+              <div className="backdrop-blur-sm rounded-2xl px-6 py-8 flex flex-col gap-4 ">
                 <h3 className="text-xl font-semibold">Our NewsLetters</h3>
                 <p>Subscribe to our Newsletter</p>
                 <input

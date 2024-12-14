@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -6,7 +7,7 @@ import {
   faGithub,
   faLinkedinIn,
 } from '@fortawesome/free-brands-svg-icons';
-import axios from 'axios';
+// import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../configs/axiosConfig';
@@ -59,8 +60,10 @@ export default function Login({ onClose }: LoginProps) {
       const data = response.data;
 
       console.log('Sign In Success:', data); // Handle successful sign-in
-      const userRole = response.data.role;
+      // const userRole = response.data.role;
       // Show success alert
+      localStorage.setItem('token', data.newAccessToken);
+      localStorage.setItem('role', data.role);
       Swal.fire({
         icon: 'success',
         title: 'Sign In Successful',
@@ -127,8 +130,8 @@ export default function Login({ onClose }: LoginProps) {
 
   return (
     <>
-      <div className="h-20 bg-black"></div>
-      <div className="relative flex items-center justify-center h-screen w-screen">
+      <div className="h-20 bg-[--tertiary-color]"></div>
+      <div className="relative flex items-center justify-center h-[88vh] bg-gray-100">
         <div
           ref={loginRef} // Attach the ref to the main login div
           className="relative w-full max-w-4xl h-[500px] rounded-2xl bg-white shadow-lg flex"
@@ -143,7 +146,7 @@ export default function Login({ onClose }: LoginProps) {
               Sign In
             </h1>
             <div className="text-[--primary-color] flex space-x-3 mb-6">
-              <a href="#" className="py-2 px-3  rounded-full">
+              <a href="#" className="py-2 px-3 border rounded-full">
                 <FontAwesomeIcon icon={faGooglePlusG} />
               </a>
               <a href="#" className="py-2 px-4  border rounded-full">
@@ -266,7 +269,7 @@ export default function Login({ onClose }: LoginProps) {
             style={{ zIndex: 10 }}
           >
             <h1 className="text-3xl font-bold mb-6 text-white">
-              {isSignUpVisible ? 'Welcome Back!' : 'Hello, Friend!'}
+              {isSignUpVisible ? 'Welcome Back!' : 'Hello, Hostellers!'}
             </h1>
             <p className="mb-4 text-white">
               {isSignUpVisible

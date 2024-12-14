@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect, useRef } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -54,7 +55,7 @@ export const Navbar = () => {
   return (
     <>
       <div
-        className={`w-full fixed top-0 z-50 transition-colors duration-300 ${
+        className={`w-full fixed top-0 z-50 transition-colors duration-300 shadow-lg ${
           isScrolled ? 'bg-white text-black' : 'bg-transparent text-white'
         }`}
       >
@@ -156,6 +157,7 @@ export const Navbar = () => {
           </div>
 
           <div className="buttons flex gap-4">
+            {/* login */}
             <Link to={'/login-user'}>
               <PrimaryButton
                 title="Login"
@@ -163,7 +165,14 @@ export const Navbar = () => {
               />
             </Link>
             <Link to={'/login-admin'}>
-              <PrimaryButton title="Become a Owner" />
+              <PrimaryButton
+                title="Become an Owner"
+                className={`text-md bg-white border border-[--btn-primary] px-6 py-2 rounded-xl hover:bg-[--primary-color] hover:text-white transition-all active:translate-y-0.5 ${
+                  isScrolled
+                    ? 'bg-white text-[--primary-color]'
+                    : 'bg-transparent text-[--primary-color] border-white'
+                }`}
+              />
             </Link>
           </div>
         </div>

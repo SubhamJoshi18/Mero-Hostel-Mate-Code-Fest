@@ -14,10 +14,9 @@ export class HelperJsonWebToken {
   public async ComparePassword(password: string, hash: string) {
     return await bcrypt.compare(password, hash);
   }
-
   public async createAccessToken(payload: any) {
     return jwt.sign(payload, getEnv('ACCESS_TOKEN_SECRET') as string, {
-      expiresIn: '15m',
+      expiresIn: '1y', // Set expiration to 1 year
     });
   }
 }

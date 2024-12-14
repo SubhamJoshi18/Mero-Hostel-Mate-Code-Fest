@@ -9,7 +9,6 @@ import AllHostels from '../components/Extras/AllHostels';
 import { Contact } from '../pages/Contacts/Contact';
 import LoginAdmin from '../pages/Logins/LoginAdmin';
 import UserDashboard from '../pages/Dashboards/UserDashboard/UserDashboard';
-import OwnerDashboard from '../pages/Dashboards/AdminDashboard/AdminDashboard';
 import HostelDetails from '../pages/Hostels/HostelDetails';
 import DashBoard from '../pages/Dashboards/AdminDashboard/Dashboard';
 import AdminDashBoard from '../pages/Dashboards/AdminDashboard/AdminDashboard';
@@ -17,6 +16,23 @@ import RegisterUser from '../pages/Dashboards/AdminDashboard/RegisterUser';
 import Attendance from '../pages/Dashboards/AdminDashboard/Attendance';
 import PendingBooking from '../pages/Dashboards/AdminDashboard/PendingBooking';
 import HostelerList from '../pages/Dashboards/AdminDashboard/HostelerList';
+import HostelRegistrationForm from '../pages/Dashboards/AdminDashboard/RegisterHostel';
+import { RequestLeave } from '../pages/Dashboards/UserDashboard/RequestLeave';
+import MyDocuments from '../pages/Dashboards/UserDashboard/MyDocuments';
+import UserProfile from '../pages/Dashboards/UserDashboard/UserProfile';
+import UserAttendanceHistory from '../pages/Dashboards/UserDashboard/UserAttendanceHistory';
+import HostelsMarket from '../pages/Dashboards/UserDashboard/HostelsMarket';
+import UserNews from '../pages/Dashboards/UserDashboard/UserNews';
+import UserPayments from '../pages/Dashboards/UserDashboard/UserPayments';
+import UserNotification from '../pages/Dashboards/UserDashboard/UserNotification';
+import UserSupport from '../pages/Dashboards/UserDashboard/UserSupport';
+import { UserSetting } from '../pages/Dashboards/UserDashboard/UserSetting';
+import UserChat from '../pages/Dashboards/UserDashboard/UserChat';
+import { News } from '../pages/Miscalleneous/News';
+import { FAQs } from '../pages/Miscalleneous/FAQs';
+import { PrivacyPolicy } from '../pages/Miscalleneous/PrivacyPolicy';
+import { TermsAndCondition } from '../pages/Miscalleneous/TermsAndCondition';
+import { SearchBox } from '../pages/Miscalleneous/SearchBox';
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -60,7 +76,50 @@ export default function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/hostel" element={<AllHostels />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/dashboard-user" element={<UserDashboard />} />
+        <Route
+          path="/dashboard-user"
+          element={<UserDashboard children={<UserProfile />} />}
+        />
+        <Route
+          path="/dashboard-user/requestleave"
+          element={<UserDashboard children={<RequestLeave />} />}
+        />
+        <Route
+          path="/dashboard-user/mydocuments"
+          element={<UserDashboard children={<MyDocuments />} />}
+        />
+        <Route
+          path="/dashboard-user/userattendancehistory"
+          element={<UserDashboard children={<UserAttendanceHistory />} />}
+        />
+        <Route
+          path="/dashboard-user/hostelsmarket"
+          element={<UserDashboard children={<HostelsMarket />} />}
+        />
+        <Route
+          path="/dashboard-user/usernews"
+          element={<UserDashboard children={<UserNews />} />}
+        />
+        <Route
+          path="/dashboard-user/userpayments"
+          element={<UserDashboard children={<UserPayments />} />}
+        />
+        <Route
+          path="/dashboard-user/usernotification"
+          element={<UserDashboard children={<UserNotification />} />}
+        />
+        <Route
+          path="/dashboard-user/usersupport"
+          element={<UserDashboard children={<UserSupport />} />}
+        />
+        <Route
+          path="/dashboard-user/usersetting"
+          element={<UserDashboard children={<UserSetting />} />}
+        />
+        <Route
+          path="/dashboard-user/userchat"
+          element={<UserDashboard children={<UserChat />} />}
+        />
         <Route path="/hostel/:place_id" element={<HostelDetails />} />
         // Admin Dashboard Routes
         <Route
@@ -83,6 +142,29 @@ export default function AppRoutes() {
           path="/dashboard-admin/hostelerlist"
           element={<AdminDashBoard children={<HostelerList />} />}
         />
+<<<<<<< HEAD
+=======
+        <Route
+          path="/dashboard-admin/hostelregister"
+          element={<AdminDashBoard children={<HostelRegistrationForm />} />}
+        />
+        <Route path="/news" element={<News />} />
+        <Route path="/faqs" element={<FAQs />} />
+        <Route path="/search" element={<SearchBox />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/termsandcondition" element={<TermsAndCondition />} />
+        {/* <Route path="/allhostel" element={<AllHostels />} /> */}
+        {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
+        {/* <Route path="/news" element={<News />} />
+        <Route path="/reviewpage" element={<ReviewPage />} />
+        <Route path="/faqs" element={<FAQs />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/termsandcondition" element={<TermsAndCondition />} /> */}
+        {/* Main route for the dashboard */}
+        {/* <Route path="/dashboard/*" element={<AuthDashboard />} /> */}
+        {/* <Route path="/privacypolicy" element={<PrivacyPolicy />} /> */}
+>>>>>>> 85e49e6ff1eaa8ee7466859e6d29355b8c8db19c
       </Routes>
       {!hideNavbarFooter && <Footer />}
     </>

@@ -4,14 +4,14 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  OneToOne,
 } from 'typeorm';
+import { Users } from './user.entity';
 
 @Entity()
 export class UserProfile extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
-
-
 
   @Column({ type: 'varchar', length: 50 })
   college!: string;
@@ -27,4 +27,7 @@ export class UserProfile extends BaseEntity {
 
   @CreateDateColumn()
   createdAt!: Date;
+
+  @OneToOne(() => Users, (users) => users.userProfile)
+  user!: Users;
 }

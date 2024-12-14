@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axiosInstance from "../../../configs/axiosConfig";
 function RegisterUser() {
-  
-
-  const [hostelers, setHostelers] = useState([]);
+  const navigate = useNavigate();
+  const [hostelers] = useState([]);
   const [newHosteler, setNewHosteler] = useState({
-    name: '',
-    college: '',
-    gender: '',
-    faculty: '',
-    address: '',
-    contact: '',
-    dateofbirth: '',
-    roomNumber: '',
+    name: "",
+    college: "",
+    gender: "",
+    faculty: "",
+    address: "",
+    contact: "",
+    dateofbirth: "",
+    roomNumber: "",
   });
 
   const handleHostelerChange = (e) => {
@@ -21,21 +22,50 @@ function RegisterUser() {
     setNewHosteler({ ...newHosteler, [name]: value });
   };
 
-  const registerHosteler = () => {
+  const registerHosteler = async () => {
     if (!newHosteler.name || !newHosteler.contact || !newHosteler.roomNumber) {
-      alert('Please fill all required fields');
+      alert("Please fill all required fields");
       return;
     }
-    setHostelers([...hostelers, newHosteler]);
+
+    try {
+      const token = localStorage.getItem("token");
+      const hostelId = localStorage.getItem("hostel_id");
+      const response: any = await axiosInstance.post(
+        `/register/hosteler/${hostelId}`,
+        newHosteler,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      const data = response.data;
+
+      console.log("Registration Success:", data); // Handle successful sign-in
+
+      Swal.fire({
+        icon: "success",
+        title: "Register User Successfully",
+        text: "Welcome back!",
+      }).then(() => navigate("/dashboard-admin"));
+    } catch (error) {
+      console.error("Error during sign-in:", error); // Handle sign-in error
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: "Please check your credentials and try again.",
+      });
+    }
     setNewHosteler({
-      name: '',
-      college: '',
-      gender: '',
-      faculty: '',
-      address: '',
-      contact: '',
-      dateofbirth: '',
-      roomNumber: '',
+      name: "",
+      college: "",
+      gender: "",
+      faculty: "",
+      address: "",
+      contact: "",
+      dateofbirth: "",
+      roomNumber: "",
     });
   };
 
@@ -43,7 +73,9 @@ function RegisterUser() {
     <div className="flex-1 p-6 bg-gray-50 min-h-screen">
       {/* Hosteler Registration Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Register Hosteler</h2>
+        <h2 className="text-3xl font-medium text-[--primary-color] mb-4">
+          Register Hosteler
+        </h2>
         <div className="bg-white shadow-md rounded-lg p-6 mb-8">
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
@@ -136,7 +168,9 @@ function RegisterUser() {
         </div>
 
         <div>
-          <h3 className="text-xl font-bold mb-4">Registered Hostelers</h3>
+          <h3 className="text-3xl font-medium text-[--primary-color] mb-4">
+            Registered Hostelers
+          </h3>
           {hostelers.length === 0 ? (
             <p>No hostelers registered yet.</p>
           ) : (

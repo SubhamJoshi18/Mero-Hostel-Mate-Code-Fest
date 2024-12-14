@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import numpy as np
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from collections import Counter
@@ -132,3 +133,16 @@ query = np.array([
 predictions = knn.predict(query)
 
 print("Predictions:", predictions)
+=======
+
+
+
+
+def knn_recommend_model():
+    try:
+
+
+
+    except Exception as error:
+        print(f'Error selecting the reference models: {error}')
+>>>>>>> 85e49e6ff1eaa8ee7466859e6d29355b8c8db19c

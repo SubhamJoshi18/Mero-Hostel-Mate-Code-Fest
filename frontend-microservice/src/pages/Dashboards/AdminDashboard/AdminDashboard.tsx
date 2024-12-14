@@ -1,13 +1,11 @@
-import { useNavigate } from 'react-router-dom';
-import SideBar from './SideBar';
-import { ReactNode, useEffect } from 'react';
+import SideBar from "./SideBar";
+import { ReactNode } from "react";
 
 interface AdminLayoutProps {
   children: ReactNode;
 }
 
 export default function AdminDashBoard({ children }: AdminLayoutProps) {
- 
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}

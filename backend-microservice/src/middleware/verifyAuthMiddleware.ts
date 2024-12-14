@@ -17,13 +17,12 @@ export const verifyAuthMiddleware = async (
 ) => {
   try {
     const userToken = req.headers['authorization'] ?? req.headers.authorization;
-
+    console.log(userToken);
     if (!userToken) {
       return res.status(401).json({
         message: 'Unauthorized',
       });
     }
-    console.log(userToken);
 
     const token = userToken.startsWith('Bearer ')
       ? userToken.slice(7)
@@ -34,6 +33,7 @@ export const verifyAuthMiddleware = async (
       getEnv('ACCESS_TOKEN_SECRET') as string,
       (err, decoded) => {
         if (err) {
+          console.log(err);
           return res.status(401).json({
             message: 'Unauthorized',
           });
