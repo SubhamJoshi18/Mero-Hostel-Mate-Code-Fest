@@ -7,6 +7,7 @@ import DatabaseDataSource from '../src/database/connect';
 import { DataSource } from 'typeorm';
 import { corsConfig } from './config/corsConfig';
 import cors from 'cors';
+import { mapSeeder } from './scripts/mapSeeder';
 
 const logger = createLogger('user-microservice');
 const port = getEnv('PORT');
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
   await DatabaseDataSource.initialize()
     .then((db: DataSource) => {
       logger.info(`Initialized '${db.options.database}' database successfully`);
+      mapSeeder();
     })
     .catch((err: Error) => {
       logger.error(
@@ -32,7 +34,6 @@ app.use(express.urlencoded({ extended: true }));
 })();
 
 serverMiddleware(app as Application);
-
 mainRouter(app as Application);
 
 app.listen(port, () => {

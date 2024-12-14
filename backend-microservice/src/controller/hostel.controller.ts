@@ -1,5 +1,6 @@
 import type, { Request, Response, NextFunction } from 'express';
 import HostelService from '../services/hostel.service';
+import Hostel from '../database/models/hostel.entiy';
 
 class HostelController {
   adminDashboardData = async (
@@ -27,7 +28,7 @@ class HostelController {
         lat,
         lng,
       };
-      const allHostels = await HostelService.fetchAllHostel(coordinates as any);
+      const allHostels = await Hostel.find({});
 
       return res.status(201).json({
         hostels: allHostels,
@@ -72,6 +73,20 @@ class HostelController {
       next(err);
     }
   };
+
+  updateRegister = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const hostelId = req.params.hostelId;
+      const validData = req.body;
+      const response = await HostelService.updateRegister(hostelId, validData);
+      return res.status(201).json({
+        response,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
   showAllPending = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const hostelId = req.params.hostelId;
