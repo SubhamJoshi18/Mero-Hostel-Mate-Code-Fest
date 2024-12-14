@@ -52,7 +52,7 @@ const HostelRegistrationForm = () => {
     <div className="container mx-auto p-6 bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 rounded-2xl"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
         <h2 className="text-4xl text-[--primary-color] font-bold mb-16 mt-4 text-center">
           Hostel Registration Form
@@ -149,9 +149,9 @@ const HostelRegistrationForm = () => {
               <option selected hidden>
                 Choose Your Room Type
               </option>
-              <option value="1">Single</option>
-              <option value="2">Shared</option>
-              <option value="3">Both</option>
+              <option value="Single">Single</option>
+              <option value="Shared">Shared</option>
+              <option value="Both">Both</option>
             </select>
           </div>
 
@@ -172,8 +172,8 @@ const HostelRegistrationForm = () => {
               <option selected hidden>
                 Choose Your Hostel Type
               </option>
-              <option value="1">Girls</option>
-              <option value="2">Boys</option>
+              <option value="Girl">Girls</option>
+              <option value="Boy">Boys</option>
             </select>
           </div>
 
