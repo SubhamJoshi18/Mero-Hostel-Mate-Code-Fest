@@ -8,9 +8,9 @@ import { checkIsAdmin } from '../middleware/rolebaseMiddleware';
 
 const hostelRouter = Router();
 
-hostelRouter.get('/hostels', HostelController.fetchHostel as any);
+// hostelRouter.get('/hostels', HostelController.fetchHostel as any);
 
-hostelRouter.get('/hostel/:hostelId', HostelController.fetchHostelById as any);
+// hostelRouter.get('/hostel/:hostelId', HostelController.fetchHostelById as any);
 
 hostelRouter.get(
   '/rejects',
@@ -20,27 +20,27 @@ hostelRouter.get(
 );
 
 hostelRouter.get(
-  '/approve',
+  '/approve/:hostelId',
   verifyAuthMiddleware as any,
   checkIsAdmin as any,
   HostelController.showAllApprove as any
 );
 
 hostelRouter.get(
-  '/pending',
+  '/pending/:hostelId',
   verifyAuthMiddleware as any,
   checkIsAdmin as any,
   HostelController.showAllPending as any
 );
 
-hostelRouter.get(
-  '/approve/user',
+hostelRouter.patch(
+  '/approve/user/:hostelerId',
   verifyAuthMiddleware as any,
   checkIsAdmin as any,
   HostelController.approveMessage as any
 );
 
-hostelRouter.get(
+hostelRouter.patch(
   '/reject/user',
   verifyAuthMiddleware as any,
   checkIsAdmin as any,
@@ -48,7 +48,7 @@ hostelRouter.get(
 );
 
 hostelRouter.post(
-  '/register/hosteler',
+  '/register/hosteler/:hostelId',
   verifyAuthMiddleware as any,
   checkIsAdmin as any,
   HostelController.registerHosteler as any

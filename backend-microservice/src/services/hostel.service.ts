@@ -228,6 +228,12 @@ class HostelService {
     if (!hostler) {
       throw new DatabaseException(403, 'Hostler Id Does not Exists');
     }
+
+    const isApproved = hostler.status.includes('approved');
+    if (isApproved) {
+      throw new DatabaseException(403, 'It is already Approved');
+    }
+
     const updatedResult = await Hostelers.update(
       { id: hostlerId },
       {
@@ -265,10 +271,6 @@ class HostelService {
       throw new DatabaseException(403, 'Hostel not Found');
     }
 
-    if (!hostel.hostelers) {
-      throw new DatabaseException(403, 'Hostelers not Found');
-    }
-
     const newHostler = await Hostelers.create({
       name: validData.name,
       college: validData.college,
@@ -276,7 +278,7 @@ class HostelService {
       gender: validData.gender,
       address: validData.address,
       phoneNumber: validData.contact,
-      date_of_birth: validData.date_of_birth,
+      date_of_birth: validData.dateofbirth,
       room_number: validData.roomNumber,
     }).save();
     hostel.hostelers = [newHostler];
@@ -319,7 +321,7 @@ class HostelService {
   async createHostel(
     validData: {
       hostelName: string;
-      location: string;
+      address: string;
       panNumber: number;
       price: number;
       roomType: string;
@@ -352,7 +354,7 @@ class HostelService {
       place_id: uuidv1(),
       name: validData.hostelName,
       owner_id: user.id as any,
-      location: validData.location,
+      location: validData.address,
       pan_number: validData.panNumber,
       price: validData.price,
       room_type: validData.roomType,
@@ -364,7 +366,7 @@ class HostelService {
       owner_name: ownerName,
       features: validData.features,
     }).save();
-    return newHostel;
+    return newHostel.place_id;
   }
 }
 

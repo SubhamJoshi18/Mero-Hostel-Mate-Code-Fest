@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import MarkUnreadChatAltOutlinedIcon from "@mui/icons-material/MarkUnreadChatAltOutlined";
-import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import PendingActionsOutlinedIcon from "@mui/icons-material/PendingActionsOutlined";
-import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
-import AddHomeOutlinedIcon from "@mui/icons-material/AddHomeOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
-import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
-import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import { NavLink } from "react-router-dom";
+import React, { useState } from 'react';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import { NavLink } from 'react-router-dom';
 
 export default function SideBar() {
   const [isHostelerDropdownOpen, setHostelerDropdownOpen] = useState(false);
@@ -26,7 +27,7 @@ export default function SideBar() {
       <div className="scrolled-logo">
         <NavLink to="/dashboard-admin">
           <img
-            className="h-12 my-2 w-auto flex-shrink-0"
+            className="h-12 my-2 mb-4 w-auto flex-shrink-0"
             src="/assets/mhmlogo_White.png"
             alt="Scrolled logo"
           />
@@ -39,8 +40,8 @@ export default function SideBar() {
             to="/dashboard-admin"
             className={({ isActive }) =>
               isActive
-                ? "p-3 flex items-center rounded-lg bg-[--primary-color] text-white"
-                : "p-3 flex items-center rounded-lg text-white"
+                ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                : 'p-3 flex items-center rounded-lg text-white'
             }
             end
           >
@@ -50,20 +51,37 @@ export default function SideBar() {
 
           {/* Create Hostel Link (Static) */}
 
-          <li className="text-white  flex items-center">
-            <NavLink
-              to="/dashboard-admin/hostelregister"
-              className={({ isActive }) =>
-                isActive
-                  ? "p-3 flex items-center rounded-lg bg-[--primary-color] text-white"
-                  : "p-3 flex items-center rounded-lg text-white"
-              }
-            >
-              {/* <span className="ml-2">Hosteller List</span> */}
-              <AddHomeOutlinedIcon />
-              <span className="ml-2">Register Hostel</span>
-            </NavLink>
-          </li>
+          {localStorage.getItem('hostel_id') ? (
+            <li className="text-white  flex items-center">
+              <NavLink
+                to="/dashboard-admin/hostelregister"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                    : 'p-3 flex items-center rounded-lg text-white'
+                }
+              >
+                {/* <span className="ml-2">Hosteller List</span> */}
+                <AddHomeOutlinedIcon />
+                <span className="ml-2">Edit Hostel</span>
+              </NavLink>
+            </li>
+          ) : (
+            <li className="text-white  flex items-center">
+              <NavLink
+                to="/dashboard-admin/hostelregister"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                    : 'p-3 flex items-center rounded-lg text-white'
+                }
+              >
+                {/* <span className="ml-2">Hosteller List</span> */}
+                <AddHomeOutlinedIcon />
+                <span className="ml-2">Register Hostel</span>
+              </NavLink>
+            </li>
+          )}
 
           {/* Hostelers Details with Dropdown */}
           <li>
@@ -88,10 +106,11 @@ export default function SideBar() {
                     to="/dashboard-admin/hostelerlist"
                     className={({ isActive }) =>
                       isActive
-                        ? "p-3 flex items-center rounded-lg bg-[--primary-color] text-white"
-                        : "p-3 flex items-center rounded-lg text-white"
+                        ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                        : 'p-3 flex items-center rounded-lg text-white'
                     }
                   >
+                    <FormatListBulletedIcon />
                     <span className="ml-2">Hosteller List</span>
                   </NavLink>
                 </li>
@@ -100,8 +119,8 @@ export default function SideBar() {
                     to="/dashboard-admin/registeruser"
                     className={({ isActive }) =>
                       isActive
-                        ? "p-3 flex items-center rounded-lg bg-[--primary-color] text-white"
-                        : "p-3 flex items-center rounded-lg text-white"
+                        ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                        : 'p-3 flex items-center rounded-lg text-white'
                     }
                   >
                     <PersonAddAltOutlinedIcon />
@@ -113,8 +132,8 @@ export default function SideBar() {
                     to="/dashboard-admin/attendance"
                     className={({ isActive }) =>
                       isActive
-                        ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
-                        : "p-3 flex items-center rounded-lg text-white"
+                        ? 'p-3 flex items-center rounded-lg  bg-[--primary-color] text-white'
+                        : 'p-3 flex items-center rounded-lg text-white'
                     }
                   >
                     <EditNoteOutlinedIcon />
@@ -126,8 +145,8 @@ export default function SideBar() {
                     to="/dashboard-admin/pendingbooking"
                     className={({ isActive }) =>
                       isActive
-                        ? "p-3 flex items-center rounded-lg bg-[--primary-color] text-white"
-                        : "p-3 flex items-center rounded-lg text-white"
+                        ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                        : 'p-3 flex items-center rounded-lg text-white'
                     }
                   >
                     <PendingActionsOutlinedIcon />

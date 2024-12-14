@@ -138,7 +138,7 @@ class HostelController {
       const response = await HostelService.createHostel(validData, user_id);
       return res.status(201).json({
         message: `Hostel Created SuccessFully`,
-        
+        response,
       });
     } catch (err) {
       next(err);

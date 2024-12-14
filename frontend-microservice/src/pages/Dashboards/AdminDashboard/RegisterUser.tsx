@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import Swal from 'sweetalert2';
+import axiosInstance from '../../../configs/axiosConfig';
 function RegisterUser() {
+  const navigate = useNavigate();
   const [hostelers, setHostelers] = useState([]);
   const [newHosteler, setNewHosteler] = useState({
-    name: "",
-    college: "",
-    gender: "",
-    faculty: "",
-    address: "",
-    contact: "",
-    dateofbirth: "",
-    roomNumber: "",
+    name: '',
+    college: '',
+    gender: '',
+    faculty: '',
+    address: '',
+    contact: '',
+    dateofbirth: '',
+    roomNumber: '',
   });
 
   const handleHostelerChange = (e) => {
@@ -24,7 +27,36 @@ function RegisterUser() {
       alert('Please fill all required fields');
       return;
     }
-    setHostelers([...hostelers, newHosteler]);
+
+    try {
+      const token = localStorage.getItem('token');
+      const hostelId = localStorage.getItem('hostel_id');
+      const response: any = await axiosInstance.post(
+        `/register/hosteler/${hostelId}`,
+        newHosteler,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      const data = response.data;
+
+      console.log('Registration Success:', data); // Handle successful sign-in
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Register User Successfully',
+        text: 'Welcome back!',
+      }).then(() => navigate('/dashboard-admin'));
+    } catch (error) {
+      console.error('Error during sign-in:', error); // Handle sign-in error
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration Failed',
+        text: 'Please check your credentials and try again.',
+      });
+    }
     setNewHosteler({
       name: '',
       college: '',

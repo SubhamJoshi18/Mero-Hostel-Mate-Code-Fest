@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 import axiosInstance from '../../../configs/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import { Bar, Pie } from 'react-chartjs-2';
@@ -13,6 +14,7 @@ import {
   Legend,
   ArcElement,
 } from 'chart.js';
+import PrimaryButton from '../../../components/Button/PrimaryButton';
 
 ChartJS.register(
   CategoryScale,
@@ -25,6 +27,7 @@ ChartJS.register(
 );
 
 export default function DashBoard() {
+  const [onClick, setOnClick] = useState(false);
   const [projects, setProjects] = useState([]);
   const [orders, setOrders] = useState([]);
   const [userData, setUserData] = useState({} as any);
@@ -40,6 +43,9 @@ export default function DashBoard() {
     review: 0,
     pendingClient: studentRequests.length,
   });
+  const triggerClick = () => {
+    setOnClick(!onClick);
+  };
 
   useEffect(() => {
     const fetchHostelData = async () => {
@@ -75,6 +81,8 @@ export default function DashBoard() {
 
     fetchHostelData();
   }, []);
+
+  useEffect(() => {}, []);
 
   const chartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -138,30 +146,41 @@ export default function DashBoard() {
     },
   };
 
-  return (
-    <main className="p-6">
-      {/* Header */}
-      <header className="flex justify-between items-center mb-6">
-        <div className="flex items-center gap-4">
-          <MenuOutlinedIcon style={{ height: '2rem' }} />
-          <h1 className="text-3xl font-bold">Dashboard</h1>
-        </div>
-        <input
-          type="search"
-          placeholder="Search here"
-          className="border rounded-xl py-2 px-4 focus:outline-none focus:ring"
-        />
-        <div className="profile flex items-center gap-4">
-          <div className="bg-red-600 h-16 w-16 rounded-full">
-            <img src="" alt="" />
-          </div>
-          <div>
-            <h1 className="font-bold text-xl">{userData.name}</h1>
-            <p>{userData.email}</p>
-          </div>
-        </div>
-      </header>
+  const username = localStorage.getItem('username');
+  const email = localStorage.getItem('email');
 
+  return (
+    <main>
+      {/* Header */}
+      <header className="flex justify-between  items-center mb-6">
+        <div className="flex items-center gap-4 text-[--primary-color]">
+          <h1 className="text-4xl font-bold">Dashboard</h1>
+        </div>
+        {!onClick && (
+          <div
+            className="accountIcon cursor-pointer"
+            onClick={() => triggerClick()}
+          >
+            <AccountCircleIcon style={{ color: '#ff4f18', fontSize: '50px' }} />
+          </div>
+        )}
+      </header>
+      <div
+        className={`d absolute rounded-b-2xl  right-0 top-0 bg-[--tertiary-color] w-[20%] pl-2 h-[40vh] pt-16 ${
+          onClick ? 'visible' : 'hidden'
+        }`}
+      >
+        <div className="userDetails flex flex-col text-white gap-2">
+          <div className='absolute right-6 top-6' onClick={() => triggerClick()}>
+            <NoAccountsIcon className="block" style={{fontSize:'50px'}} />
+          </div>
+          <h2 className="block">{username}</h2>
+          <h2 className="block">{email}</h2>
+          <div>
+            <PrimaryButton title={"Logout"} onClick={() => {localStorage.clear(); window.location.reload();}} />
+          </div>
+        </div>
+      </div>
       {/* Statistics */}
       <div className="grid grid-cols-4 gap-4 mb-6">
         <div className="bg-white p-4 rounded-md shadow space-y-2">
@@ -181,7 +200,6 @@ export default function DashBoard() {
           <p className="text-lg font-bold text-gray-400">Pending Bookings</p>
         </div>
       </div>
-
       {/* Projects */}
       <div className="grid grid-cols-2 gap-4">
         <div className="bg-white p-4 rounded-md shadow">
@@ -201,7 +219,6 @@ export default function DashBoard() {
           </ul>
         </div>
       </div>
-
       {/* Charts */}
       <div className="grid grid-cols-2 gap-4 mt-6">
         <div className="bg-white p-4 rounded-md shadow">

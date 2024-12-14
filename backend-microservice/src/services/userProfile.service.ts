@@ -18,6 +18,10 @@ class UserProfileService {
     return userData;
   }
 
+  async getUserHostel(user_id: number) {
+    
+  }
+
   async sendHostApproval(
     data: {
       college: string;
@@ -53,6 +57,8 @@ class UserProfileService {
         );
         console.log(translatedMessage);
         const saveData = await Hostelers.create({
+          name: user.name,
+          phoneNumber: user.phoneNumber,
           college: data.college,
           gender: data.gender,
           faculty: data.faculty,

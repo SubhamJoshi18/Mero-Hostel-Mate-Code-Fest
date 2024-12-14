@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FileUpload } from './FileUpload';
 import axiosInstance from '../../../configs/axiosConfig';
+import Swal from 'sweetalert2';
 
 const HostelRegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +28,37 @@ const HostelRegistrationForm = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  useEffect(() => {
+    const fetchHostelData = async () => {
+      const hostelId = localStorage.getItem('hostel_id');
+      if (hostelId) {
+        setIsEditMode(true);
+        try {
+          const response = await axiosInstance.get(`/hostel/${hostelId}`);
+          const hostelData = response.data;
+          setFormData({
+            hostelName: hostelData.name,
+            address: hostelData.address,
+            panNumber: hostelData.pan_number,
+            price: hostelData.price,
+            roomType: hostelData.room_type,
+            hostelType: hostelData.hostel_type,
+            email: hostelData.email,
+            phone: hostelData.phone,
+            numberOfRooms: hostelData.number_of_rooms,
+            totalCapacity: hostelData.total_capacity,
+            features: hostelData.features,
+          });
+        } catch (error) {
+          console.error('Error fetching hostel data:', error);
+        }
+      }
+    };
+
+    fetchHostelData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -54,36 +86,41 @@ const HostelRegistrationForm = () => {
     setErrorMessage('');
 
     try {
-      console.log(localStorage.getItem('token'));
-      const response = await axiosInstance.post('/register/hostel', formData, {
-        headers: {
-          Authorization: localStorage.getItem('token'),
-        },
-      });
-      setSuccessMessage('Hostel registered successfully!');
-      setFormData({
-        hostelName: '',
-        address: '',
-        panNumber: '',
-        price: '',
-        roomType: '',
-        hostelType: '',
-        email: '',
-        phone: '',
-        numberOfRooms: '',
-        totalCapacity: '',
-        features: {
-          electricity24Hours: false,
-          hotWater: false,
-          laundry: false,
-          wifi: false,
-          parking: false,
-          lockerRoom: false,
-        },
-      });
+      const hostelId = localStorage.getItem('hostel_id');
+      if (isEditMode && hostelId) {
+        // Update existing hostel
+        await axiosInstance.put(`/hostel/${hostelId}`, formData, {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        });
+        Swal.fire({
+          icon: 'success',
+          title: 'Hostel Updated Successfully',
+          text: 'Your changes have been saved!',
+        });
+      } else {
+        // Create new hostel
+        const response = await axiosInstance.post(
+          '/register/hostel',
+          formData,
+          {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
+          }
+        );
+        localStorage.setItem('hostel_id', response.data.response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Hostel Registered Successfully',
+          text: 'Welcome back!',
+        });
+      }
+      setSuccessMessage('Hostel saved successfully!');
     } catch (error) {
-      setErrorMessage('Error registering hostel. Please try again.');
-      console.error('Error registering hostel:', error);
+      setErrorMessage('Error saving hostel. Please try again.');
+      console.error('Error saving hostel:', error);
     } finally {
       setLoading(false);
     }
@@ -96,7 +133,7 @@ const HostelRegistrationForm = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 rounded-2xl"
       >
         <h2 className="text-4xl text-[--primary-color] font-bold mb-16 mt-4 text-center">
-          Hostel Registration Form
+          {isEditMode ? 'Edit Hostel' : 'Hostel Registration Form'}
         </h2>
 
         {/* Success and Error Messages */}
@@ -196,12 +233,15 @@ const HostelRegistrationForm = () => {
               name="roomType"
               value={formData.roomType}
               onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               required
             >
-              <option value="">Select Room Type</option>
-              <option value="single">Single</option>
-              <option value="multiple">Multiple</option>
+              <option value="" hidden>
+                Choose Your Room Type
+              </option>
+              <option value="Single">Single</option>
+              <option value="Shared">Shared</option>
+              <option value="Both">Both</option>
             </select>
           </div>
 
@@ -216,12 +256,14 @@ const HostelRegistrationForm = () => {
               name="hostelType"
               value={formData.hostelType}
               onChange={handleInputChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
               required
             >
-              <option value="">Select Hostel Type</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
+              <option value="" hidden>
+                Choose Your Hostel Type
+              </option>
+              <option value="Girls">Girls</option>
+              <option value="Boys">Boys</option>
             </select>
           </div>
 
@@ -335,7 +377,11 @@ const HostelRegistrationForm = () => {
             className="text-white text-lg bg-[--btn-primary] px-6 py-3 rounded-md hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
             disabled={loading}
           >
-            {loading ? 'Registering...' : 'Register Hostel'}
+            {loading
+              ? 'Saving...'
+              : isEditMode
+              ? 'Save Changes'
+              : 'Register Hostel'}
           </button>
         </div>
       </form>
