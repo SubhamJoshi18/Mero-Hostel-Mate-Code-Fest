@@ -90,7 +90,7 @@ export default function UserSideBar() {
                         : "p-3 flex items-center rounded-lg text-white"
                     }
                   >
-                    <PersonAddAltOutlinedIcon />
+                    <PendingActionsOutlinedIcon />
                     <span className="ml-2">Request Leave</span>
                   </NavLink>
                 </li>
