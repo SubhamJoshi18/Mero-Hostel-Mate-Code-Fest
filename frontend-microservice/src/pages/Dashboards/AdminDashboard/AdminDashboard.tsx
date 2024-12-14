@@ -1,8 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import SideBar from './SideBar';
-import { ReactNode, useEffect } from 'react';
-import axiosInstance from '../../../configs/axiosConfig';
-
+import SideBar from "./SideBar";
+import { ReactNode } from "react";
 
 interface AdminLayoutProps {
   children: ReactNode;
