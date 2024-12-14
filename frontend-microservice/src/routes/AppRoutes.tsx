@@ -83,17 +83,6 @@ export default function AppRoutes() {
           path="/dashboard-admin/hostelerlist"
           element={<AdminDashBoard children={<HostelerList />} />}
         />
-        {/* <Route path="/allhostel" element={<AllHostels />} /> */}
-        {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
-        {/* <Route path="/news" element={<News />} />
-        <Route path="/reviewpage" element={<ReviewPage />} />
-        <Route path="/faqs" element={<FAQs />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/termsandcondition" element={<TermsAndCondition />} /> */}
-        {/* Main route for the dashboard */}
-        {/* <Route path="/dashboard/*" element={<AuthDashboard />} /> */}
-        {/* <Route path="/privacypolicy" element={<PrivacyPolicy />} /> */}
       </Routes>
       {!hideNavbarFooter && <Footer />}
     </>
