@@ -46,23 +46,17 @@ const PendingBooking = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Pending Bookings</h2>
+      <h2 className="text-3xl font-medium text-[--primary-color] mb-4">
+        Pending Bookings
+      </h2>
       <div className="overflow-x-auto">
         <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
-          <thead className="bg-gray-100">
+          <thead className="bg-gray-300">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Email
-              </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Phone Number
-              </th>
-              <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
+              <th className="px-4 py-3 text-left">Name</th>
+              <th className="px-4 py-3 text-left">Email</th>
+              <th className="px-4 py-3 text-left">Phone Number</th>
+              <th className="px-4 py-3 text-center">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -72,7 +66,7 @@ const PendingBooking = () => {
                 <td className="px-4 py-3">{booking.email}</td>
                 <td className="px-4 py-3">{booking.phone}</td>
                 <td className="px-4 py-3 text-center">
-                  {booking.status === 'Pending' ? (
+                  {booking.status === "Pending" ? (
                     <div className="flex justify-center space-x-2">
                       <button
                         onClick={() => handleAccept(booking.id)}
@@ -92,9 +86,9 @@ const PendingBooking = () => {
                       className={`
                         px-3 py-1 rounded 
                         ${
-                          booking.status === 'Accepted'
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-red-100 text-red-800'
+                          booking.status === "Accepted"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
                         }
                       `}
                     >

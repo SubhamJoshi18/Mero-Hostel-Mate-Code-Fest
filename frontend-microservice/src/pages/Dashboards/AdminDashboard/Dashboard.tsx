@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import axiosInstance from "../../../configs/axiosConfig";
-import { useNavigate } from "react-router-dom";
-import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,

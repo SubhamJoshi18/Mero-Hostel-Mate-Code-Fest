@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useState } from "react";
 function RegisterUser() {
-  
-
   const [hostelers, setHostelers] = useState([]);
   const [newHosteler, setNewHosteler] = useState({
-    name: '',
-    college: '',
-    gender: '',
-    faculty: '',
-    address: '',
-    contact: '',
-    dateofbirth: '',
-    roomNumber: '',
+    name: "",
+    college: "",
+    gender: "",
+    faculty: "",
+    address: "",
+    contact: "",
+    dateofbirth: "",
+    roomNumber: "",
   });
 
   const handleHostelerChange = (e) => {
@@ -23,19 +19,19 @@ function RegisterUser() {
 
   const registerHosteler = () => {
     if (!newHosteler.name || !newHosteler.contact || !newHosteler.roomNumber) {
-      alert('Please fill all required fields');
+      alert("Please fill all required fields");
       return;
     }
     setHostelers([...hostelers, newHosteler]);
     setNewHosteler({
-      name: '',
-      college: '',
-      gender: '',
-      faculty: '',
-      address: '',
-      contact: '',
-      dateofbirth: '',
-      roomNumber: '',
+      name: "",
+      college: "",
+      gender: "",
+      faculty: "",
+      address: "",
+      contact: "",
+      dateofbirth: "",
+      roomNumber: "",
     });
   };
 
@@ -43,7 +39,9 @@ function RegisterUser() {
     <div className="flex-1 p-6 bg-gray-50 min-h-screen">
       {/* Hosteler Registration Section */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Register Hosteler</h2>
+        <h2 className="text-3xl font-medium text-[--primary-color] mb-4">
+          Register Hosteler
+        </h2>
         <div className="bg-white shadow-md rounded-lg p-6 mb-8">
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
@@ -136,7 +134,9 @@ function RegisterUser() {
         </div>
 
         <div>
-          <h3 className="text-xl font-bold mb-4">Registered Hostelers</h3>
+          <h3 className="text-3xl font-medium text-[--primary-color] mb-4">
+            Registered Hostelers
+          </h3>
           {hostelers.length === 0 ? (
             <p>No hostelers registered yet.</p>
           ) : (

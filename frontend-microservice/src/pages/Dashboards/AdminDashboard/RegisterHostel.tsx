@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FileUpload } from "./FileUpload";
-import PrimaryButton from "../../../components/Button/PrimaryButton";
 
 const HostelRegistrationForm = () => {
   const [formData, setFormData] = useState({

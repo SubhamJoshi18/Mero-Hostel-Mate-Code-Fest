@@ -1,35 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
 
 const Attendance = () => {
   // Get today's date
-  const getTodayDate = () => new Date().toISOString().split('T')[0];
+  const getTodayDate = () => new Date().toISOString().split("T")[0];
 
   // Initial students with added attendance tracking
   const [students, setStudents] = useState([
     {
       id: 1,
-      name: 'John Doe',
-      contact: '+1 (555) 123-4567',
-      faculty: 'Computer Science',
+      name: "John Doe",
+      contact: "+1 (555) 123-4567",
+      faculty: "Computer Science",
       attendance: {
         [getTodayDate()]: null,
       },
     },
     {
       id: 2,
-      name: 'Jane Smith',
-      contact: '+1 (555) 987-6543',
-      faculty: 'Electrical Engineering',
+      name: "Jane Smith",
+      contact: "+1 (555) 987-6543",
+      faculty: "Electrical Engineering",
       attendance: {
         [getTodayDate()]: null,
       },
     },
     {
       id: 3,
-      name: 'Mike Johnson',
-      contact: '+1 (555) 456-7890',
-      faculty: 'Mechanical Engineering',
+      name: "Mike Johnson",
+      contact: "+1 (555) 456-7890",
+      faculty: "Mechanical Engineering",
       attendance: {
         [getTodayDate()]: null,
       },
@@ -38,13 +38,13 @@ const Attendance = () => {
 
   const [attendanceHistory, setAttendanceHistory] = useState([
     {
-      studentId: '',
-      studentName: '',
-      date: '',
-      status: '',
+      studentId: "",
+      studentName: "",
+      date: "",
+      status: "",
     },
   ]);
-  const [currentView, setCurrentView] = useState('attendance');
+  const [currentView, setCurrentView] = useState("attendance");
   const [selectedStudent, setSelectedStudent] = useState(null);
 
   // Mark attendance for a student
@@ -56,7 +56,7 @@ const Attendance = () => {
         if (student.id === studentId) {
           // Check if attendance is already marked for today
           if (student.attendance[today] !== null) {
-            alert('Attendance already marked for today!');
+            alert("Attendance already marked for today!");
             return student;
           }
 
@@ -96,7 +96,7 @@ const Attendance = () => {
 
     setSelectedStudent(student);
     setAttendanceHistory(studentHistory);
-    setCurrentView('history');
+    setCurrentView("history");
   };
 
   // Render main attendance table
@@ -105,9 +105,11 @@ const Attendance = () => {
 
     return (
       <div className="container mx-auto p-4">
-        <h2 className="text-2xl font-bold mb-4">Hostel Attendance ({today})</h2>
-        <table className="w-full bg-white shadow-md rounded-lg">
-          <thead className="bg-gray-100">
+        <h2 className="text-3xl font-medium text-[--primary-color] mb-4">
+          Hostel Attendance ({today})
+        </h2>
+        <table className="w-full bg-white shadow-md">
+          <thead className="bg-gray-300">
             <tr>
               <th className="px-4 py-3 text-left">Name</th>
               <th className="px-4 py-3 text-left">Contact</th>
@@ -130,13 +132,13 @@ const Attendance = () => {
                     {!isAttendanceMarked ? (
                       <div className="flex justify-center space-x-2">
                         <button
-                          onClick={() => markAttendance(student.id, 'Present')}
+                          onClick={() => markAttendance(student.id, "Present")}
                           className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                         >
                           Present
                         </button>
                         <button
-                          onClick={() => markAttendance(student.id, 'Absent')}
+                          onClick={() => markAttendance(student.id, "Absent")}
                           className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
                         >
                           Absent
@@ -147,9 +149,9 @@ const Attendance = () => {
                         className={`
                           px-3 py-1 rounded 
                           ${
-                            todayAttendance === 'Present'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-red-100 text-red-800'
+                            todayAttendance === "Present"
+                              ? "bg-green-100 text-green-800"
+                              : "bg-red-100 text-red-800"
                           }
                         `}
                       >
@@ -178,11 +180,11 @@ const Attendance = () => {
   const renderAttendanceHistory = () => (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-3xl font-medium text-[--primary-color] mb-4">
           Attendance History for {selectedStudent?.name}
         </h2>
         <button
-          onClick={() => setCurrentView('attendance')}
+          onClick={() => setCurrentView("attendance")}
           className="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600"
         >
           Back to Attendance
@@ -204,9 +206,9 @@ const Attendance = () => {
                   className={`
                     px-3 py-1 rounded 
                     ${
-                      record.status === 'Present'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
+                      record.status === "Present"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-red-100 text-red-800"
                     }
                   `}
                 >
@@ -221,7 +223,7 @@ const Attendance = () => {
   );
   return (
     <div>
-      {currentView === 'attendance'
+      {currentView === "attendance"
         ? renderAttendanceTable()
         : renderAttendanceHistory()}
     </div>
