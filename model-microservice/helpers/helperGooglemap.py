@@ -1,8 +1,7 @@
 import os
 import googlemaps
-from dotenv import find_dotenv,load_dotenv
 from time import sleep
-load_dotenv(find_dotenv())
+
 
 class HelperGoogleMap:
 
@@ -11,7 +10,7 @@ class HelperGoogleMap:
         pass
 
     def get_google_maps_client(self):
-        return googlemaps.Client(key=os.getenv('GOOGLE_MAP'))
+        return googlemaps.Client(key='AIzaSyChRHG8gb0TwMq2YOdf_djXNkDxtokdAJI')
     
 
   

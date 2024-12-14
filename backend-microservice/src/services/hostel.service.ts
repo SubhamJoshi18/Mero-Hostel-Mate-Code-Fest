@@ -9,6 +9,7 @@ import { Hostelers } from '../database/models/hosteler.entity';
 import axios from 'axios';
 import { NextFunction } from 'express';
 import { v1 as uuidv1 } from 'uuid';
+import { UpdateDateColumn } from 'typeorm';
 
 class HostelService {
   private GOOGLE_API_KEY = getEnv('GOOGLE_API_KEY');
@@ -19,61 +20,51 @@ class HostelService {
     this.producer = new RabbitMqProducer();
   }
 
-  fetchAllHostel = async (coordinates: { lat: string; lng: string }) => {
-    const allHostels = [];
-    const radius = 50000;
-    let nextPageToken = undefined;
-    const hostelCount = await Hostel.count({});
-
-    if (hostelCount > 1) {
-      const datas = await Hostel.find();
-      return datas;
+  updateRegister = async (hostelId: string, validData: any) => {
+    const hostel = await Hostel.findOne({
+      where: {
+        place_id: hostelId,
+      },
+    });
+    if (!hostel) {
+      throw new DatabaseException(403, 'Hostel not Found');
     }
-    try {
-      while (true) {
-        const response = await this.googleMapClient.placesNearby({
-          params: {
-            location: coordinates as any,
-            radius,
-            keyword: 'hostels',
-            opennow: false,
-            pagetoken: nextPageToken,
-            key: this.GOOGLE_API_KEY as string,
-          },
-          timeout: 1000,
-        });
-
-        const excludedTypes = new Set([
-          'bar',
-          'restaurant',
-          'travel_agency',
-          'food',
-        ]);
-
-        const hostels = response.data.results.filter(
-          (place: any) =>
-            place.types?.includes('lodging' as any) &&
-            place.name.toLowerCase().includes('hostel') &&
-            !place.types?.some((type: any) => excludedTypes.has(type))
-        );
-
-        allHostels.push(...hostels);
-
-        nextPageToken = response.data.next_page_token;
-        if (!nextPageToken) {
-          break;
-        }
-
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-      }
-
-      console.log('Total Hostels Found:', allHostels.length);
-      await this.insertDb(allHostels);
-      return allHostels;
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    const updatedResult = await Hostel.update(
+      { place_id: hostelId },
+      validData
+    );
+    return updatedResult;
   };
+
+  adminDashboardData = async (hostelId: string) => {
+    const hostel = await Hostel.findOne({
+      where: {
+        place_id: hostelId,
+      },
+    });
+    if (!hostel) {
+      throw new DatabaseException(403, 'Hostel not Found');
+    }
+    if (hostel.hostelers.length === 0) {
+      throw new DatabaseException(404, 'No Hostelers found');
+    }
+
+    const totalHostelers = hostel.hostelers.length;
+    const totalApproved = hostel.hostelers.filter(
+      (data: any) => data.status === 'approved'
+    ).length;
+
+    const totalPendings = hostel.hostelers.filter(
+      (data: any) => data.status === 'pending'
+    );
+    return {
+      totalApproved,
+      totalHostelers,
+      totalPendings,
+    };
+  };
+
+
 
   fetchHostelById = async (hostelId: string) => {
     const isHostel = await Hostel.findOne({
@@ -354,7 +345,7 @@ class HostelService {
       place_id: uuidv1(),
       name: validData.hostelName,
       owner_id: user.id as any,
-      location: validData.address,
+      address: validData.address,
       pan_number: validData.panNumber,
       price: validData.price,
       room_type: validData.roomType,

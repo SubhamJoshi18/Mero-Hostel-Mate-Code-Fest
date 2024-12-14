@@ -20,7 +20,7 @@ class Hostel extends BaseEntity {
   name!: string;
 
   @Column({ type: 'text', nullable: true })
-  location!: string;
+  address!: string;
 
   @Column({ type: 'bigint', nullable: true })
   pan_number!: number;
@@ -51,9 +51,6 @@ class Hostel extends BaseEntity {
 
   @Column({ type: 'varchar', length: 50, nullable: true })
   owner_name!: string;
-
-  @Column({ type: 'text', nullable: true })
-  address!: string;
 
   @Column({ type: 'varchar', length: 50, nullable: true })
   email!: string;

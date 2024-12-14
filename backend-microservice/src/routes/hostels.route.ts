@@ -8,9 +8,9 @@ import { checkIsAdmin } from '../middleware/rolebaseMiddleware';
 
 const hostelRouter = Router();
 
-// hostelRouter.get('/hostels', HostelController.fetchHostel as any);
+hostelRouter.get('/hostels', HostelController.fetchHostel as any);
 
-// hostelRouter.get('/hostel/:hostelId', HostelController.fetchHostelById as any);
+hostelRouter.get('/hostel/:hostelId', HostelController.fetchHostelById as any);
 
 hostelRouter.get(
   '/rejects',
@@ -62,5 +62,17 @@ hostelRouter.post(
 );
 
 hostelRouter.get('/search', HostelController.searchByPrefreneces as any);
+
+hostelRouter.post(
+  '/dashboard/:hostelId',
+  verifyAuthMiddleware as any,
+  HostelController.adminDashboardData as any
+);
+
+hostelRouter.patch(
+  '/dashboard/:hostelId',
+  verifyAuthMiddleware as any,
+  HostelController.updateRegister as any
+);
 
 export default hostelRouter;

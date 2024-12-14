@@ -157,6 +157,7 @@ export const Navbar = () => {
           </div>
 
           <div className="buttons flex gap-4">
+            {/* login */}
             <Link to={"/login-user"}>
               <PrimaryButton
                 title="Login"
