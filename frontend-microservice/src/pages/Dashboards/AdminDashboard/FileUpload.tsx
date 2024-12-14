@@ -44,7 +44,7 @@ export const FileUpload = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 mt-8 rounded-xl">
+    <div className="p-6 bg-gray-200 mt-8 rounded-xl">
       <h1 className="text-xl font-semibold mb-4 text-gray-800">File Upload</h1>
 
       {/* Photos Upload Section */}
@@ -52,7 +52,7 @@ export const FileUpload = () => {
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Upload Hostel Photos
         </label>
-        <div className="flex items-center justify-center w-full">
+        <div className="flex bg-white items-center justify-center w-full">
           <label className="flex flex-col items-center border-4 border-dashed w-full h-32 hover:bg-gray-100 hover:border-blue-300 group cursor-pointer">
             <div className="flex flex-col items-center justify-center pt-7">
               <svg
@@ -108,7 +108,7 @@ export const FileUpload = () => {
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Upload Hostel Videos
         </label>
-        <div className="flex items-center justify-center w-full">
+        <div className="flex bg-white items-center justify-center w-full">
           <label className="flex flex-col items-center border-4 border-dashed w-full h-32 hover:bg-gray-100 hover:border-blue-300 group cursor-pointer">
             <div className="flex flex-col items-center justify-center pt-7">
               <svg
