@@ -14,6 +14,7 @@ import {
   ArcElement,
 } from "chart.js";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
+import { NavLink, useNavigate } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -44,6 +45,14 @@ export default function DashBoard() {
   });
   const triggerClick = () => {
     setOnClick(!onClick);
+  };
+
+  // handling logouts
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear(); // Clears the local storage
+    navigate("/"); // Redirects to the home page
   };
 
   useEffect(() => {
@@ -84,8 +93,8 @@ export default function DashBoard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const hostelId = localStorage.getItem('hostelId');
-        const token = localStorage.getItem('token');
+        const hostelId = localStorage.getItem("hostelId");
+        const token = localStorage.getItem("token");
         const response = await axiosInstance.get(`/dashboard/${hostelId}`, {
           headers: {
             Authorization: token,
@@ -93,7 +102,7 @@ export default function DashBoard() {
         });
         setStatistics(response.data.response);
       } catch (err) {
-        console.log('Error fetching data:', err);
+        console.log("Error fetching data:", err);
       }
     };
 
@@ -186,7 +195,7 @@ export default function DashBoard() {
           onClick ? "visible" : "hidden"
         }`}
       >
-        <div className="userDetails flex flex-col text-white gap-2">
+        <div className="userDetails flex items-center flex-col text-white gap-2">
           <div
             className="absolute right-6 top-6"
             onClick={() => triggerClick()}
@@ -195,14 +204,8 @@ export default function DashBoard() {
           </div>
           <h2 className="block">{username}</h2>
           <h2 className="block">{email}</h2>
-          <div>
-            <PrimaryButton
-              title={"Logout"}
-              onClick={() => {
-                localStorage.clear();
-                window.location.reload();
-              }}
-            />
+          <div className="mt-32">
+            <PrimaryButton title={"Logout"} onClick={handleLogout} />
           </div>
         </div>
       </div>

@@ -90,7 +90,7 @@ export default function UserSideBar() {
                         : "p-3 flex items-center rounded-lg text-white"
                     }
                   >
-                    <PersonAddAltOutlinedIcon />
+                    <PendingActionsOutlinedIcon />
                     <span className="ml-2">Request Leave</span>
                   </NavLink>
                 </li>
@@ -120,6 +120,20 @@ export default function UserSideBar() {
             <AccountBalanceWalletOutlinedIcon />
             <span className="ml-2">Payments</span>
           </li>
+
+          <li>
+              <NavLink
+                  to="/dashboard-user/hostelsmarket"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                      : "p-3 flex items-center rounded-lg text-white"
+                  }
+                >
+                    <HomeOutlinedIcon />
+                    <span className="ml-2">Hostel</span>
+                  </NavLink>
+                </li>
 
           <li className="text-white p-3 flex items-center">
             <NotificationsNoneOutlinedIcon />

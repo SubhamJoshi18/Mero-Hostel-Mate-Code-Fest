@@ -25,6 +25,7 @@ import { News } from "../pages/Miscalleneous/News";
 import { FAQs } from "../pages/Miscalleneous/FAQs";
 import { PrivacyPolicy } from "../pages/Miscalleneous/PrivacyPolicy";
 import { TermsAndCondition } from "../pages/Miscalleneous/TermsAndCondition";
+import HostelsMarket from "../pages/Dashboards/UserDashboard/HostelsMarket";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -83,6 +84,10 @@ export default function AppRoutes() {
         <Route
           path="/dashboard-user/userattendancehistory"
           element={<UserDashboard children={<UserAttendanceHistory />} />}
+        />
+        <Route
+          path="/dashboard-user/hostelsmarket"
+          element={<UserDashboard children={<HostelsMarket />} />}
         />
         <Route path="/hostel/:place_id" element={<HostelDetails />} />
         // Admin Dashboard Routes
