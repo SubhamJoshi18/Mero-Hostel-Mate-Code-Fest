@@ -54,6 +54,13 @@ hostelRouter.post(
   HostelController.registerHosteler as any
 );
 
+hostelRouter.post(
+  '/register/hostel',
+  verifyAuthMiddleware as any,
+  checkIsAdmin as any,
+  HostelController.createHostel as any
+);
+
 hostelRouter.get('/search', HostelController.searchByPrefreneces as any);
 
 export default hostelRouter;

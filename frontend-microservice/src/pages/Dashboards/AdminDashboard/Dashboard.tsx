@@ -42,24 +42,16 @@ export default function DashBoard() {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userDetails = await axiosInstance.get('/user/profile');
-        setUserData(userDetails.data.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     const fetchHostelData = async () => {
       try {
-        const userHostelDetails = await axiosInstance.get('/user/hostel');
-        setUserHostel(userHostelDetails.data.response);
-        if (userHostelDetails.data.response) {
+        const userDetails = await axiosInstance.get('/user/profile', {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        });
+        console.log(userDetails.data);
+        setUserData(userDetails.data.data);
+        if (userDetails.data.response) {
           setStatistics((prevStats) => ({
             ...prevStats,
             totalHostelers: 30,

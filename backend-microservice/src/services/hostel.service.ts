@@ -8,6 +8,7 @@ import { Users } from '../database/models/user.entity';
 import { Hostelers } from '../database/models/hosteler.entity';
 import axios from 'axios';
 import { NextFunction } from 'express';
+import { v1 as uuidv1 } from 'uuid';
 
 class HostelService {
   private GOOGLE_API_KEY = getEnv('GOOGLE_API_KEY');
@@ -17,8 +18,6 @@ class HostelService {
   constructor() {
     this.producer = new RabbitMqProducer();
   }
-
- 
 
   fetchAllHostel = async (coordinates: { lat: string; lng: string }) => {
     const allHostels = [];
@@ -114,16 +113,10 @@ class HostelService {
   };
 
   private assertGender(item: any) {
-    if (item.toLowerCase().includes('boys')) {
-      return 'Boys';
-    } else if (
-      item.toLowerCase().includes('girls') ||
-      item.toLowerCase().includes('ladies') ||
-      item.toLowerCase().includes('girl')
-    ) {
-      return 'Girls';
+    if (item.toLowerCase().includes('girl')) {
+      return 'Girl';
     } else {
-      return 'Both';
+      return 'Boy';
     }
   }
 
@@ -321,6 +314,57 @@ class HostelService {
         );
       }
     }
+  }
+
+  async createHostel(
+    validData: {
+      hostelName: string;
+      location: string;
+      panNumber: number;
+      price: number;
+      roomType: string;
+      hostelType: string;
+      email: string;
+      phone: string;
+      numberOfRooms: number;
+      totalCapacity: number;
+      features: {
+        electricity24Hours: false;
+        hotWater: false;
+        laundry: false;
+        wifi: false;
+        parking: false;
+        lockerRoom: false;
+      };
+    },
+    user_id: number
+  ) {
+    const user = await Users.findOne({
+      where: {
+        id: user_id,
+      },
+    });
+    if (!user) {
+      throw new DatabaseException(403, 'User not Found');
+    }
+    const ownerName = user.name;
+    const newHostel = await Hostel.create({
+      place_id: uuidv1(),
+      name: validData.hostelName,
+      owner_id: user.id as any,
+      location: validData.location,
+      pan_number: validData.panNumber,
+      price: validData.price,
+      room_type: validData.roomType,
+      hostel_type: validData.hostelType,
+      email: validData.email,
+      phone: validData.phone,
+      number_of_rooms: validData.numberOfRooms,
+      total_capacity: validData.totalCapacity,
+      owner_name: ownerName,
+      features: validData.features,
+    }).save();
+    return newHostel;
   }
 }
 

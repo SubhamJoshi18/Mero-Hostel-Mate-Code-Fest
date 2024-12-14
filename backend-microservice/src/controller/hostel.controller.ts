@@ -130,6 +130,20 @@ class HostelController {
       next(err);
     }
   }
+
+  async createHostel(req: Request, res: Response, next: NextFunction) {
+    try {
+      const validData = req.body;
+      const user_id = req.user._id;
+      const response = await HostelService.createHostel(validData, user_id);
+      return res.status(201).json({
+        message: `Hostel Created SuccessFully`,
+        
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new HostelController();

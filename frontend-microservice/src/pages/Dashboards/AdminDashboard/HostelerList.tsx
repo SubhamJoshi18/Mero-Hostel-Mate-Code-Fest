@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
-import { Check, Eye, X } from 'lucide-react';
+import React, { useState } from "react";
+import { Check, Eye, X } from "lucide-react";
 
 const HostelerList = () => {
   const [hostelers, setHostelers] = useState([
     {
       id: 1,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '1234567890',
-      faculty: 'Computer Science',
-      additionalDetails: 'Room No: 101, Batch: 2022',
+      name: "John Doe",
+      email: "john.doe@example.com",
+      phone: "1234567890",
+      faculty: "Computer Science",
+      additionalDetails: "Room No: 101, Batch: 2022",
     },
   ]);
 
   const [pendingHostelers, setPendingHostelers] = useState([
     {
       id: 1,
-      name: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      phone: '9876543210',
-      faculty: 'Electrical Engineering',
-      additionalDetails: 'Applying for next semester',
+      name: "Jane Smith",
+      email: "jane.smith@example.com",
+      phone: "9876543210",
+      faculty: "Electrical Engineering",
+      additionalDetails: "Applying for next semester",
     },
   ]);
 
   const [selectedHosteler, setSelectedHosteler] = useState(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    faculty: '',
-    additionalDetails: '',
+    name: "",
+    email: "",
+    phone: "",
+    faculty: "",
+    additionalDetails: "",
   });
 
   const handleInputChange = (e) => {
@@ -46,11 +46,11 @@ const HostelerList = () => {
     };
     setPendingHostelers((prev) => [...prev, newHosteler]);
     setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      faculty: '',
-      additionalDetails: '',
+      name: "",
+      email: "",
+      phone: "",
+      faculty: "",
+      additionalDetails: "",
     });
   };
 
@@ -100,7 +100,7 @@ const HostelerList = () => {
               </p>
               {selectedHosteler.additionalDetails && (
                 <p>
-                  <strong>Additional Details:</strong>{' '}
+                  <strong>Additional Details:</strong>{" "}
                   {selectedHosteler.additionalDetails}
                 </p>
               )}
@@ -110,8 +110,10 @@ const HostelerList = () => {
       )}
 
       {/* Active Hostelers */}
-      <div className="bg-white shadow-md rounded-lg p-6 mb-6">
-        <h2 className="text-2xl font-bold mb-4">Active Hostelers</h2>
+      <div className="bg-white shadow-md rounded-lg p-8 mb-8">
+        <h2 className="text-3xl font-medium mb-4 text-[--primary-color]">
+          Active Hostelers
+        </h2>
         <table className="w-full">
           <thead className="bg-gray-200">
             <tr>
@@ -132,7 +134,7 @@ const HostelerList = () => {
                 <td className="p-3">
                   <button
                     onClick={() => viewHostelerDetails(hosteler)}
-                    className="text-blue-500 hover:text-blue-700"
+                    className="text-blue-500 flex items-center gap-1 hover:text-blue-700"
                   >
                     <Eye size={20} /> View
                   </button>
@@ -144,8 +146,10 @@ const HostelerList = () => {
       </div>
 
       {/* Pending Requests */}
-      <div className="bg-white shadow-md rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-4">Pending Hosteler Requests</h2>
+      <div className="bg-white shadow-md rounded-lg p-8">
+        <h2 className="text-3xl font-medium mb-4 text-[--primary-color]">
+          Pending Hosteler Requests
+        </h2>
         <table className="w-full">
           <thead className="bg-gray-200">
             <tr>
@@ -166,7 +170,7 @@ const HostelerList = () => {
                 <td className="p-3">
                   <button
                     onClick={() => acceptHosteler(hosteler)}
-                    className="text-green-500 hover:text-green-700"
+                    className="text-green-500 hover:text-green-700 flex items-center gap-1"
                   >
                     <Check size={20} /> Accept
                   </button>
