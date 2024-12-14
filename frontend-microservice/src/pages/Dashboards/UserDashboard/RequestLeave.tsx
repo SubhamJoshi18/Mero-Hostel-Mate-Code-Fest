@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Calendar, Send, CheckCircle, XCircle } from "lucide-react";
+import React, { useState } from 'react';
+import { Calendar, Send, CheckCircle, XCircle } from 'lucide-react';
 
 // Leave Request Component (Student Side)
 const RequestLeave = () => {
   const [leaveDetails, setLeaveDetails] = useState({
-    studentName: "",
-    roomNumber: "",
-    startDate: "",
-    endDate: "",
-    reason: "",
+    studentName: '',
+    roomNumber: '',
+    startDate: '',
+    endDate: '',
+    reason: '',
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -24,7 +24,7 @@ const RequestLeave = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // In a real app, this would send data to backend
-    console.log("Leave Request Submitted:", leaveDetails);
+    console.log('Leave Request Submitted:', leaveDetails);
     setSubmitted(true);
   };
 
@@ -221,4 +221,4 @@ const RequestLeave = () => {
 //   );
 // };
 
-export { RequestLeave};
+export { RequestLeave };

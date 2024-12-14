@@ -1,25 +1,42 @@
-import React, { useState } from "react";
-import { Edit, Save, User, Phone, MapPin, School } from "lucide-react";
+import React, { useEffect, useState } from 'react';
+import { Edit, Save, User, Phone, MapPin, School } from 'lucide-react';
+import axiosInstance from '../../../configs/axiosConfig';
 
 const UserProfile = () => {
   // State for user profile
   const [userProfile, setUserProfile] = useState({
-    name: "",
-    address: "",
-    phoneNumber: "",
-    collegeName: "",
-    faculty: "",
+    name: '',
+    address: '',
+    phoneNumber: '',
+    collegeName: '',
+    faculty: '',
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axiosInstance.get('/user/profile', {
+          headers: {
+            Authorization: token,
+          },
+        });
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  }, []);
 
   // State to track edit mode
   const [isEditing, setIsEditing] = useState(false);
 
   // Hostel static information
   const hostelInfo = {
-    name: "Green Valley Hostel",
-    address: "123 Campus Road, University Area",
-    phoneNumber: "+91 9876543210",
-    email: "contact@greenvalleyhostel.com",
+    name: 'Green Valley Hostel',
+    address: '123 Campus Road, University Area',
+    phoneNumber: '+91 9876543210',
+    email: 'contact@greenvalleyhostel.com',
   };
 
   // Handle input changes
@@ -39,7 +56,7 @@ const UserProfile = () => {
   // Save profile
   const saveProfile = () => {
     // In a real app, you would send this to a backend
-    console.log("Profile Saved:", userProfile);
+    console.log('Profile Saved:', userProfile);
     setIsEditing(false);
   };
 
@@ -93,7 +110,7 @@ const UserProfile = () => {
                   />
                 ) : (
                   <p className="text-gray-600">
-                    {userProfile.name || "Not set"}
+                    {userProfile.name || 'Not set'}
                   </p>
                 )}
               </div>
@@ -117,7 +134,7 @@ const UserProfile = () => {
                   />
                 ) : (
                   <p className="text-gray-600">
-                    {userProfile.address || "Not set"}
+                    {userProfile.address || 'Not set'}
                   </p>
                 )}
               </div>
@@ -141,7 +158,7 @@ const UserProfile = () => {
                   />
                 ) : (
                   <p className="text-gray-600">
-                    {userProfile.phoneNumber || "Not set"}
+                    {userProfile.phoneNumber || 'Not set'}
                   </p>
                 )}
               </div>
@@ -165,7 +182,7 @@ const UserProfile = () => {
                   />
                 ) : (
                   <p className="text-gray-600">
-                    {userProfile.collegeName || "Not set"}
+                    {userProfile.collegeName || 'Not set'}
                   </p>
                 )}
               </div>
@@ -189,7 +206,7 @@ const UserProfile = () => {
                   />
                 ) : (
                   <p className="text-gray-600">
-                    {userProfile.faculty || "Not set"}
+                    {userProfile.faculty || 'Not set'}
                   </p>
                 )}
               </div>

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+// import axios from 'axios';
 import Swal from 'sweetalert2';
 import {
   Button,
@@ -97,7 +98,7 @@ export default function HostelDetails() {
           setDirectionsResponse(result);
           setCurrentDistance(result.routes[0].legs[0].distance.text);
           setCurrentDuration(result.routes[0].legs[0].duration.text);
-          handleOpenDialog();
+          handleOpenDialog(); // Open dialog when route is calculated
         } else {
           console.error('Error fetching directions:', result);
         }
@@ -126,38 +127,6 @@ export default function HostelDetails() {
         confirmButtonText: 'OK',
       });
     }
-  };
-
-  const handleEsewaPayment = () => {
-    const form = document.createElement('form');
-    form.action = 'https://uat.esewa.com.np/epay/main';
-    form.method = 'POST';
-    form.style.display = 'none';
-
-    const fields = {
-      amt: hostelItem.price,
-      psc: 0,
-      pdc: 0,
-      txAmt: 0,
-      tAmt: hostelItem.price,
-      pid: `hostel_${hostelItem.place_id}`,
-      scd: 'EPAYTEST',
-      su: 'http://localhost:5173',
-      fu: 'http://merchant.com.np/page/esewa_payment_failed',
-    };
-
-    for (const key in fields) {
-      if (fields.hasOwnProperty(key)) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = fields[key];
-        form.appendChild(input);
-      }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
   };
 
   const handleOpenDialog = () => {
@@ -243,9 +212,9 @@ export default function HostelDetails() {
                 <div className="buttons-links flex flex-wrap gap-4 items-center">
                   <button
                     className="flex justify-center border border-gray-300 px-8 py-2 rounded-lg font-semibold hover:bg-[--btn-primary] hover:text-white active:translate-y-0.5 transition-all"
-                    onClick={handleEsewaPayment}
+                    onClick={() => handleSaveHostel(hostelItem.place_id)}
                   >
-                    Pay with eSewa
+                    Book
                   </button>
                   <button
                     className="flex justify-center border border-gray-300 px-8 py-2 rounded-lg font-semibold hover:bg-[--btn-primary] hover:text-white active:translate-y-0.5 transition-all"
