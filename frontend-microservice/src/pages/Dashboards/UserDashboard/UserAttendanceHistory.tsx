@@ -37,7 +37,7 @@ const UserAttendanceHistory = () => {
 
   return (
     <div className="max-w-full mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-      <div className="bg-blue-600 p-4">
+      <div className="bg-[#ff4f18] p-4">
         <h2 className="text-xl font-bold text-white">Attendance History</h2>
       </div>
       
