@@ -22,6 +22,12 @@ import MyDocuments from "../pages/Dashboards/UserDashboard/MyDocuments";
 import UserProfile from "../pages/Dashboards/UserDashboard/UserProfile";
 import UserAttendanceHistory from "../pages/Dashboards/UserDashboard/UserAttendanceHistory";
 import HostelsMarket from "../pages/Dashboards/UserDashboard/HostelsMarket";
+import UserNews from "../pages/Dashboards/UserDashboard/UserNews";
+import UserPayments from "../pages/Dashboards/UserDashboard/UserPayments";
+import UserNotification from "../pages/Dashboards/UserDashboard/UserNotification";
+import UserSupport from "../pages/Dashboards/UserDashboard/UserSupport";
+import UserSetting from "../pages/Dashboards/UserDashboard/UserSetting";
+import UserChat from "../pages/Dashboards/UserDashboard/UserChat";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -70,6 +76,12 @@ export default function AppRoutes() {
         <Route path="/dashboard-user/mydocuments" element={<UserDashboard children={<MyDocuments />} />} />
         <Route path="/dashboard-user/userattendancehistory" element={<UserDashboard children={<UserAttendanceHistory />} />} />
         <Route path="/dashboard-user/hostelsmarket" element={<UserDashboard children={<HostelsMarket/>} />} />
+        <Route path="/dashboard-user/usernews" element={<UserDashboard children={<UserNews/>} />} />
+        <Route path="/dashboard-user/userpayments" element={<UserDashboard children={<UserPayments/>} />} />
+        <Route path="/dashboard-user/usernotification" element={<UserDashboard children={<UserNotification/>} />} />
+        <Route path="/dashboard-user/usersupport" element={<UserDashboard children={<UserSupport/>} />} />
+        <Route path="/dashboard-user/usersetting" element={<UserDashboard children={<UserSetting/>} />} />
+        <Route path="/dashboard-user/userchat" element={<UserDashboard children={<UserChat/>} />} />
         <Route path="/hostel/:place_id" element={<HostelDetails />} />
         // Admin Dashboard Routes
         <Route
