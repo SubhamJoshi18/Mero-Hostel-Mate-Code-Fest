@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+// import axios from 'axios';
+import Swal from "sweetalert2";
 import {
   Button,
   Typography,
@@ -10,21 +11,21 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
-} from '@mui/material';
+} from "@mui/material";
 import {
   GoogleMap,
   LoadScript,
   Marker,
   DirectionsRenderer,
-} from '@react-google-maps/api';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import axiosInstance from '../../configs/axiosConfig';
-import { RenderStar } from '../../components/Cards/RenderStar';
+} from "@react-google-maps/api";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import axiosInstance from "../../configs/axiosConfig";
+import { RenderStar } from "../../components/Cards/RenderStar";
 
 const mapContainerStyle = {
-  width: '100%',
-  height: '400px', // Adjust height as needed
+  width: "100%",
+  height: "400px", // Adjust height as needed
 };
 
 const defaultCenter = { lat: 27.7107273, lng: 85.3109501 }; // Default center coordinates
@@ -33,19 +34,19 @@ export default function HostelDetails() {
   const { place_id } = useParams();
 
   const [hostelItem, setHostelItem] = useState(null);
-  const [activeTab, setActiveTab] = useState('description');
+  const [activeTab, setActiveTab] = useState("description");
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [location, setLocation] = useState(defaultCenter);
   const [savedHostels, setSavedHostels] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [currentDistance, setCurrentDistance] = useState('');
-  const [currentDuration, setCurrentDuration] = useState('');
+  const [currentDistance, setCurrentDistance] = useState("");
+  const [currentDuration, setCurrentDuration] = useState("");
 
   useEffect(() => {
     const fetchHostelDetails = async () => {
-      console.log('Hostel Id', place_id);
+      console.log("Hostel Id", place_id);
       setLoading(true);
       try {
         const response = await axiosInstance.get(`/hostel/${place_id}`);
@@ -57,7 +58,7 @@ export default function HostelDetails() {
           setReviews(data.review_comments || []);
         }
       } catch (error) {
-        console.error('Error fetching hostel details:', error);
+        console.error("Error fetching hostel details:", error);
       } finally {
         setLoading(false);
       }
@@ -66,7 +67,7 @@ export default function HostelDetails() {
     fetchHostelDetails();
 
     // Load saved hostels from localStorage
-    const saved = JSON.parse(localStorage.getItem('savedHostels')) || [];
+    const saved = JSON.parse(localStorage.getItem("savedHostels")) || [];
     setSavedHostels(saved);
 
     if (navigator.geolocation) {
@@ -99,7 +100,7 @@ export default function HostelDetails() {
           setCurrentDuration(result.routes[0].legs[0].duration.text);
           handleOpenDialog(); // Open dialog when route is calculated
         } else {
-          console.error('Error fetching directions:', result);
+          console.error("Error fetching directions:", result);
         }
       }
     );
@@ -112,18 +113,18 @@ export default function HostelDetails() {
         setSavedHostels([...savedHostels, response.data.hostel]);
       }
       Swal.fire({
-        title: 'Success!',
-        text: 'Hostel booked successfully.',
-        icon: 'success',
-        confirmButtonText: 'OK',
+        title: "Success!",
+        text: "Hostel booked successfully.",
+        icon: "success",
+        confirmButtonText: "OK",
       });
     } catch (err) {
       console.error(err);
       Swal.fire({
-        title: 'Error!',
-        text: 'Failed to book hostel. Please Log in First to Book Hostel',
-        icon: 'error',
-        confirmButtonText: 'OK',
+        title: "Error!",
+        text: "Failed to book hostel. Please Log in First to Book Hostel",
+        icon: "error",
+        confirmButtonText: "OK",
       });
     }
   };
@@ -140,7 +141,7 @@ export default function HostelDetails() {
 
   return (
     <>
-      <div className="w-full h-20 bg-[#041E42]"></div>
+      <div className="w-full h-20 bg-[--tertiary-color]"></div>
       <div className="container mx-auto">
         <h2 className="text-center text-5xl font-semibold py-12">
           Hostel <span className="text-[--primary-color]">Details</span>
@@ -168,7 +169,7 @@ export default function HostelDetails() {
                 <p className="pt-2 pb-2 text-sm flex">
                   <LocationOnOutlinedIcon
                     fontSize="small"
-                    style={{ color: 'var(--primary-color)' }}
+                    style={{ color: "var(--primary-color)" }}
                   />
                   {hostelItem.address}
                 </p>
@@ -223,7 +224,7 @@ export default function HostelDetails() {
                   </button>
                   <FavoriteIcon
                     className="cursor-pointer"
-                    style={{ color: '#F5F7F8' }}
+                    style={{ color: "#F5F7F8" }}
                   />
                 </div>
               </div>
@@ -254,31 +255,31 @@ export default function HostelDetails() {
             <div className="flex justify-center gap-10 mb-10">
               <button
                 className={`px-0 py-2 ${
-                  activeTab === 'description'
-                    ? 'border-b-2 border-[--primary-color] font-semibold text-[--primary-color]'
-                    : 'font-semibold'
+                  activeTab === "description"
+                    ? "border-b-2 border-[--primary-color] font-semibold text-[--primary-color]"
+                    : "font-semibold"
                 }`}
-                onClick={() => setActiveTab('description')}
+                onClick={() => setActiveTab("description")}
               >
                 Description
               </button>
               <button
                 className={`px-0 py-2 ${
-                  activeTab === 'reviews'
-                    ? 'border-b-2 border-[--primary-color] font-semibold text-[--primary-color]'
-                    : 'font-semibold'
+                  activeTab === "reviews"
+                    ? "border-b-2 border-[--primary-color] font-semibold text-[--primary-color]"
+                    : "font-semibold"
                 }`}
-                onClick={() => setActiveTab('reviews')}
+                onClick={() => setActiveTab("reviews")}
               >
                 Reviews
               </button>
             </div>
 
             {/* Tab Content */}
-            {activeTab === 'description' ? (
+            {activeTab === "description" ? (
               <div className="px-12 py-4">
                 <h3 className="text-2xl font-semibold mb-2">Description</h3>
-                <p>{hostelItem.description || 'No description available.'}</p>
+                <p>{hostelItem.description || "No description available."}</p>
               </div>
             ) : (
               <div className="px-12 py-4 mb-12">

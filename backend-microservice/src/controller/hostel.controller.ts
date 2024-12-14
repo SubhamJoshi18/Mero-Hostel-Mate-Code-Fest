@@ -96,6 +96,40 @@ class HostelController {
       next(err);
     }
   };
+  registerHosteler = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const validData = req.body;
+      const hostelId = req.params.hostelId;
+      const response = await HostelService.registerHostelers(
+        validData,
+        hostelId
+      );
+      return res.status(201).json({
+        message: 'Hostelers Registered',
+        response,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  async searchByPrefreneces(req: Request, res: Response, next: NextFunction) {
+    try {
+      const queryParams = req.query;
+      const response = await HostelService.searchHostelByPrefrences(
+        queryParams
+      );
+      return res.status(201).json({
+        data: response,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 export default new HostelController();

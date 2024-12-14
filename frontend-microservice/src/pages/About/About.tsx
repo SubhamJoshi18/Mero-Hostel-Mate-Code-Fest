@@ -1,25 +1,15 @@
-import { useEffect } from "react";
-import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import GppGoodIcon from "@mui/icons-material/GppGood";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import Slider from "../../components/Extras/Slider";
 
 export default function About() {
-  // Initialize AOS in useEffect
-  useEffect(() => {
-    AOS.init({
-      duration: 1200, // Animation duration
-      once: true, // Whether animation should happen only once or every time you scroll
-    });
-    AOS.refresh(); // Refresh AOS after the component is rendered
-  }, []);
-
   return (
     <>
-      <div className="bg-[url(/assets/2.webp)] bg-center bg-no-repeat bg-cover top-0 w-full">
+      <div className="bg-[url(/assets/aboutBackground.png)] bg-center bg-no-repeat bg-cover top-0 w-full">
         <div className="container mx-auto">
           <div className="Hero-section h-[100vh] py-32 pt-48 flex-col flex items-center justify-center mx-auto px-12 text-white leading-none">
             <h1
@@ -33,7 +23,7 @@ export default function About() {
               hostel listings, designed to match students with their perfect
               living space.
             </p>
-            <div className="images grid grid-cols-4 items-center gap-4 h-52 mt-8">
+            {/* <div className="images grid grid-cols-4 items-center gap-4 h-52 mt-8">
               <div className="h-52 w-auto shadow-2xl">
                 <img
                   className="rounded-2xl h-full"
@@ -62,7 +52,8 @@ export default function About() {
                   alt="images"
                 />
               </div>
-            </div>
+            </div> */}
+            <Slider />
           </div>
         </div>
       </div>
@@ -115,6 +106,7 @@ export default function About() {
       <div className="grid grid-cols-2 items-center gap-8 w-full container mx-auto px-12 py-16">
         <div className="w-full">
           <img
+            data-aos="fade-up"
             className="rounded-xl"
             src="/assets/our_mission.png"
             alt="our mission"

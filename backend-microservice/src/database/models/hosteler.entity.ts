@@ -4,6 +4,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryColumn,
@@ -21,6 +22,15 @@ export class Hostelers extends BaseEntity {
   @Column({ type: 'text' })
   college!: string;
 
+  @Column({ type: 'text', nullable: true })
+  address!: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  name!: string;
+
+  @Column({ type: 'varchar', length: 50, nullable: true })
+  phoneNumber!: string;
+
   @Column({ type: 'varchar', length: 50 })
   gender!: string;
 
@@ -36,7 +46,7 @@ export class Hostelers extends BaseEntity {
   @Column({ type: 'text', default: 'pending' })
   status!: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   approvedMessage!: string;
 
   @ManyToOne(() => Hostel, (hostel) => hostel.hostelers)

@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Link, NavLink } from 'react-router-dom';
-import PrimaryButton from '../Button/PrimaryButton';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState, useEffect, useRef } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Link, NavLink } from "react-router-dom";
+import PrimaryButton from "../Button/PrimaryButton";
 
 export const Navbar = () => {
   const [isBlogHover, setIsBlogHover] = useState(false);
@@ -28,9 +29,9 @@ export const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -45,9 +46,9 @@ export const Navbar = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isBlogHover]);
 
@@ -55,7 +56,7 @@ export const Navbar = () => {
     <>
       <div
         className={`w-full fixed top-0 z-50 transition-colors duration-300 ${
-          isScrolled ? 'bg-white text-black' : 'bg-transparent text-white'
+          isScrolled ? "bg-white text-black" : "bg-transparent text-white"
         }`}
       >
         <div className="container mx-auto px-12 py-2 navbar flex items-center justify-between">
@@ -88,8 +89,8 @@ export const Navbar = () => {
                   to="/"
                   className={({ isActive }) =>
                     isActive
-                      ? 'text-[--primary-color] border-b-2 border-[--primary-color] transition-all'
-                      : ''
+                      ? "text-[--primary-color] border-b-2 border-[--primary-color] transition-all"
+                      : ""
                   }
                 >
                   Home
@@ -100,8 +101,8 @@ export const Navbar = () => {
                   to="/hostel"
                   className={({ isActive }) =>
                     isActive
-                      ? 'text-[--primary-color] border-b-2 border-[--primary-color] transition-all'
-                      : ''
+                      ? "text-[--primary-color] border-b-2 border-[--primary-color] transition-all"
+                      : ""
                   }
                 >
                   Hostel
@@ -112,8 +113,8 @@ export const Navbar = () => {
                   to="/about"
                   className={({ isActive }) =>
                     isActive
-                      ? 'text-[--primary-color] border-b-2 border-[--primary-color] transition-all'
-                      : ''
+                      ? "text-[--primary-color] border-b-2 border-[--primary-color] transition-all"
+                      : ""
                   }
                 >
                   About
@@ -145,8 +146,8 @@ export const Navbar = () => {
                   to="/contact"
                   className={({ isActive }) =>
                     isActive
-                      ? 'text-[--primary-color] border-b-2 border-[--primary-color] transition-all'
-                      : ''
+                      ? "text-[--primary-color] border-b-2 border-[--primary-color] transition-all"
+                      : ""
                   }
                 >
                   Contact
@@ -156,14 +157,21 @@ export const Navbar = () => {
           </div>
 
           <div className="buttons flex gap-4">
-            <Link to={'/login-user'}>
+            <Link to={"/login-user"}>
               <PrimaryButton
                 title="Login"
                 onClick={() => setIsLoginOpen(true)}
               />
             </Link>
-            <Link to={'/login-admin'}>
-              <PrimaryButton title="Become a Owner" />
+            <Link to={"/login-admin"}>
+              <PrimaryButton
+                title="Become a Owner"
+                className={`text-md bg-white border border-[--btn-primary] px-6 py-2 rounded-xl hover:bg-[--primary-color] hover:text-white transition-all active:translate-y-0.5 ${
+                  isScrolled
+                    ? "bg-white text-[--primary-color]"
+                    : "bg-transparent text-[--primary-color] border-white"
+                }`}
+              />
             </Link>
           </div>
         </div>
@@ -183,12 +191,12 @@ export const Navbar = () => {
         </div>
         {isOpen && (
           <div
-            data-aos={'fade-left'}
+            data-aos={"fade-left"}
             data-aos-duration="100"
             className="chatbot-message absolute bottom-24 z-40 h-96 w-max right-0 bg-white shadow-2xl rounded-l-lg"
           >
             <iframe
-              style={{ borderRadius: '7px 0' }}
+              style={{ borderRadius: "7px 0" }}
               width="350"
               height="380"
               allow="microphone;"

@@ -38,7 +38,7 @@ export default function AllHostels() {
 
   return (
     <>
-      <div className="h-20 bg-black"></div>
+      <div className="h-20 bg-[--tertiary-color]"></div>
       <div className="h-[88vh] w-screen container mx-auto mb-5">
         <div className="relative flex items-center justify-center">
           <h1
@@ -65,11 +65,11 @@ export default function AllHostels() {
           />
           <PrimaryButton
             title={"Boys"}
-            className="px-3 py-1 border rounded-3xl hover:text-white border-gray-300 hover:bg-[--btn-primary]"
+            className="px-3 py-1 text-[--primary-color] border rounded-3xl hover:text-white border-[--btn-color] hover:bg-[--btn-primary]"
           />
           <PrimaryButton
             title={"Girls"}
-            className="px-3 py-1 border rounded-3xl hover:text-white border-gray-300 hover:bg-[--btn-primary]"
+            className="px-3 py-1 text-[--primary-color] border rounded-3xl hover:text-white border-[--btn-color] hover:bg-[--btn-primary]"  
           />
         </div>
         <div

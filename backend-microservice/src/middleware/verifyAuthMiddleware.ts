@@ -23,7 +23,7 @@ export const verifyAuthMiddleware = async (
         message: 'Unauthorized',
       });
     }
-    console.log(userToken);
+  
 
     const token = userToken.startsWith('Bearer ')
       ? userToken.slice(7)

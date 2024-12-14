@@ -26,7 +26,7 @@ export default function AppRoutes() {
       window.requestAnimationFrame(() => {
         window.scrollTo({
           top: 0,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       });
     };
@@ -38,7 +38,7 @@ export default function AppRoutes() {
     return () => clearTimeout(timer);
   }, [location]);
 
-  const noNavbarFooterRoutes = ['/dashboard', '/dashboard/*'];
+  const noNavbarFooterRoutes = ["/dashboard", "/dashboard/*"];
 
   const hideNavbarFooter = noNavbarFooterRoutes.some((route) =>
     location.pathname.startsWith(route)
@@ -51,11 +51,11 @@ export default function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/login-user"
-          element={<Login onClose={() => console.log('Login closed')} />}
+          element={<Login onClose={() => console.log("Login closed")} />}
         />
         <Route
           path="/login-admin"
-          element={<LoginAdmin onClose={() => console.log('Login closed')} />}
+          element={<LoginAdmin onClose={() => console.log("Login closed")} />}
         />
         <Route path="/about" element={<About />} />
         <Route path="/hostel" element={<AllHostels />} />

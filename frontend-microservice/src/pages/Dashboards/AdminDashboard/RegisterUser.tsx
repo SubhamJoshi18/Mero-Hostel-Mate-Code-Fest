@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-function RegisterUser() {
-  
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import axiosInstance from '../../../configs/axiosConfig';
 
+function RegisterUser() {
   const [hostelers, setHostelers] = useState([]);
   const [newHosteler, setNewHosteler] = useState({
     name: '',
@@ -21,22 +22,45 @@ function RegisterUser() {
     setNewHosteler({ ...newHosteler, [name]: value });
   };
 
-  const registerHosteler = () => {
+  const registerHosteler = async () => {
     if (!newHosteler.name || !newHosteler.contact || !newHosteler.roomNumber) {
-      alert('Please fill all required fields');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Please fill all required fields',
+      });
       return;
     }
-    setHostelers([...hostelers, newHosteler]);
-    setNewHosteler({
-      name: '',
-      college: '',
-      gender: '',
-      faculty: '',
-      address: '',
-      contact: '',
-      dateofbirth: '',
-      roomNumber: '',
-    });
+
+    try {
+      const response = await axiosInstance.post(
+        'register/hosteler',
+        newHosteler
+      );
+      console.log(response);
+      setHostelers([...hostelers, response.data]);
+      setNewHosteler({
+        name: '',
+        college: '',
+        gender: '',
+        faculty: '',
+        address: '',
+        contact: '',
+        dateofbirth: '',
+        roomNumber: '',
+      });
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Hosteler registered successfully',
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to register hosteler',
+      });
+    }
   };
 
   return (

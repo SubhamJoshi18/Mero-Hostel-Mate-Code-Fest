@@ -6,6 +6,8 @@ import Hostel from '../database/models/hostel.entiy';
 import { DatabaseException } from '../exceptions';
 import { Users } from '../database/models/user.entity';
 import { Hostelers } from '../database/models/hosteler.entity';
+import axios from 'axios';
+import { NextFunction } from 'express';
 
 class HostelService {
   private GOOGLE_API_KEY = getEnv('GOOGLE_API_KEY');
@@ -15,6 +17,8 @@ class HostelService {
   constructor() {
     this.producer = new RabbitMqProducer();
   }
+
+ 
 
   fetchAllHostel = async (coordinates: { lat: string; lng: string }) => {
     const allHostels = [];
@@ -256,6 +260,67 @@ class HostelService {
       }
     );
     return updatedResult;
+  }
+
+  async registerHostelers(validData: any, hostelId: string) {
+    const hostel = await Hostel.findOne({
+      where: {
+        place_id: hostelId as string,
+      },
+    });
+    if (!hostel) {
+      throw new DatabaseException(403, 'Hostel not Found');
+    }
+
+    if (!hostel.hostelers) {
+      throw new DatabaseException(403, 'Hostelers not Found');
+    }
+
+    const newHostler = await Hostelers.create({
+      name: validData.name,
+      college: validData.college,
+      faculty: validData.faculty,
+      gender: validData.gender,
+      address: validData.address,
+      phoneNumber: validData.contact,
+      date_of_birth: validData.date_of_birth,
+      room_number: validData.roomNumber,
+    }).save();
+    hostel.hostelers = [newHostler];
+    const savedResult = await hostel.save();
+    return savedResult;
+  }
+
+  async searchHostelByPrefrences(queryParams: any) {
+    const queryParamsKeys = Object.keys(queryParams);
+    const hostel = queryParamsKeys[0];
+    if (queryParamsKeys.includes('collegeName')) {
+      const fetchAllHostel = await Hostel.find({});
+      const collegeName = queryParams['collegeName'];
+      const payload = {
+        fetchAllHostel,
+        collegeName,
+      };
+      try {
+        const response = await axios.post(
+          `http://127.0.0.1:5000/model/hostels`,
+          payload,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+        console.log(response.data);
+        return response.data;
+      } catch (error) {
+        console.error('Error:', error);
+        throw new DatabaseException(
+          500,
+          'Failed to search hostels by preferences'
+        );
+      }
+    }
   }
 }
 
