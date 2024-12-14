@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
@@ -8,8 +8,6 @@ import MarkUnreadChatAltOutlinedIcon from "@mui/icons-material/MarkUnreadChatAlt
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import PendingActionsOutlinedIcon from "@mui/icons-material/PendingActionsOutlined";
-import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
-import AddHomeOutlinedIcon from "@mui/icons-material/AddHomeOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
@@ -122,18 +120,18 @@ export default function UserSideBar() {
           </li>
 
           <li>
-              <NavLink
-                  to="/dashboard-user/hostelsmarket"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
-                      : "p-3 flex items-center rounded-lg text-white"
-                  }
-                >
-                    <HomeOutlinedIcon />
-                    <span className="ml-2">Hostel</span>
-                  </NavLink>
-                </li>
+            <NavLink
+              to="/dashboard-user/hostelsmarket"
+              className={({ isActive }) =>
+                isActive
+                  ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                  : "p-3 flex items-center rounded-lg text-white"
+              }
+            >
+              <HomeOutlinedIcon />
+              <span className="ml-2">Hostel</span>
+            </NavLink>
+          </li>
 
           <li className="text-white p-3 flex items-center">
             <NotificationsNoneOutlinedIcon />
@@ -148,8 +146,10 @@ export default function UserSideBar() {
             <span className="ml-2">Support</span>
           </li>
           <li className="text-white p-3 flex items-center">
-            <SettingsOutlinedIcon />
-            <span className="ml-2">Setting</span>
+            <NavLink to="/dashboard-user/userSettings">
+              <SettingsOutlinedIcon />
+              <span className="ml-2">Setting</span>
+            </NavLink>
           </li>
         </ul>
       </nav>
