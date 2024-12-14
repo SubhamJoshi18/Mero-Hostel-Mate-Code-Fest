@@ -6,6 +6,10 @@ import { DatabaseException } from '../exceptions';
 import GenAiSevices from './geminiAi.service';
 
 class UserProfileService {
+  private genAiService: GenAiSevices | null = null;
+  constructor() {
+    this.genAiService = new GenAiSevices();
+  }
   async getUserProfile(id: number) {
     const userData = await Users.findOne({
       where: {
@@ -18,9 +22,7 @@ class UserProfileService {
     return userData;
   }
 
-  async getUserHostel(user_id: number) {
-    
-  }
+  async getUserHostel(user_id: number) {}
 
   async sendHostApproval(
     data: {
@@ -52,7 +54,7 @@ class UserProfileService {
 
     if (flagAi === 'enabled' && data.approvalMessage) {
       try {
-        const translatedMessage = await GenAiSevices.translateToNepali(
+        const translatedMessage = await this.genAiService?.translateToNepali(
           data.approvalMessage
         );
         console.log(translatedMessage);

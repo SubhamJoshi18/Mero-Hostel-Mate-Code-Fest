@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGooglePlusG,
   faFacebookF,
   faGithub,
   faLinkedinIn,
-} from "@fortawesome/free-brands-svg-icons";
+} from '@fortawesome/free-brands-svg-icons';
 // import axios from 'axios';
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../configs/axiosConfig";
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../configs/axiosConfig';
 
 interface LoginProps {
   onClose: () => void; // Define onClose as a function that returns void
@@ -32,14 +32,14 @@ export default function Login({ onClose }: LoginProps) {
   const [isSignUpVisible, setIsSignUpVisible] = useState(false);
   const navigate = useNavigate();
   const [signInData, setSignInData] = useState<SignInData>({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [signUpData, setSignUpData] = useState<SignUpData>({
-    name: "",
-    phoneNumber: "",
-    email: "",
-    password: "",
+    name: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
   });
 
   const loginRef = useRef<HTMLDivElement>(null); // Create a ref for the login div
@@ -55,28 +55,29 @@ export default function Login({ onClose }: LoginProps) {
   // Handle Sign In Request
   const handleSignInSubmit = async () => {
     try {
-      const response: any = await axiosInstance.post("/login", signInData);
+      const response: any = await axiosInstance.post('/login', signInData);
       const data = response.data;
+      console.log(data);
 
-      console.log("Sign In Success:", data); // Handle successful sign-in
-      const userRole = response.data.role;
+      console.log('Sign In Success:', data); // Handle successful sign-in
+
       localStorage.setItem('token', data.newAccessToken);
-      localStorage.setItem('role', userRole);
+      localStorage.setItem('role', data.role);
 
       // Show success alert
       Swal.fire({
-        icon: "success",
-        title: "Sign In Successful",
-        text: "Welcome back!",
-      }).then(() => navigate("/dashboard-admin"));
+        icon: 'success',
+        title: 'Sign In Successful',
+        text: 'Welcome back!',
+      }).then(() => navigate('/dashboard-admin'));
     } catch (error) {
-      console.error("Error during sign-in:", error); // Handle sign-in error
+      console.error('Error during sign-in:', error); // Handle sign-in error
 
       // Show error alert
       Swal.fire({
-        icon: "error",
-        title: "Sign In Failed",
-        text: "Please check your credentials and try again.",
+        icon: 'error',
+        title: 'Sign In Failed',
+        text: 'Please check your credentials and try again.',
       });
     }
   };
@@ -85,27 +86,27 @@ export default function Login({ onClose }: LoginProps) {
   const handleSignUpSubmit = async () => {
     try {
       const response: any = await axiosInstance.post(
-        "/register?role=owner",
+        '/register?role=owner',
         signUpData
       );
       const data = response.data;
 
-      console.log("Sign Up Success:", data); // Handle successful sign-up
+      console.log('Sign Up Success:', data); // Handle successful sign-up
 
       // Show success alert
       Swal.fire({
-        icon: "success",
-        title: "Sign Up Successful",
-        text: "You can now sign in!",
+        icon: 'success',
+        title: 'Sign Up Successful',
+        text: 'You can now sign in!',
       });
     } catch (error) {
-      console.error("Error during sign-up:", error); // Handle sign-up error
+      console.error('Error during sign-up:', error); // Handle sign-up error
 
       // Show error alert
       Swal.fire({
-        icon: "error",
-        title: "Sign Up Failed",
-        text: "Please try again later.",
+        icon: 'error',
+        title: 'Sign Up Failed',
+        text: 'Please try again later.',
       });
     }
   };
@@ -121,9 +122,9 @@ export default function Login({ onClose }: LoginProps) {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [onClose]);
 
@@ -138,7 +139,7 @@ export default function Login({ onClose }: LoginProps) {
           {/* Sign In Form */}
           <div
             className={`w-1/2 h-full bg-white flex flex-col rounded-2xl justify-center items-center px-10 transition-all duration-700 ${
-              isSignUpVisible ? "opacity-0 pointer-events-none" : "opacity-100"
+              isSignUpVisible ? 'opacity-0 pointer-events-none' : 'opacity-100'
             }`}
           >
             <h1 className="text-3xl text-[--primary-color] font-bold mb-6">
@@ -193,7 +194,7 @@ export default function Login({ onClose }: LoginProps) {
           {/* Sign Up Form */}
           <div
             className={`w-1/2 h-full bg-white flex flex-col rounded-2xl justify-center items-center px-10 transition-all duration-700 ${
-              isSignUpVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+              isSignUpVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
             }`}
           >
             <h1 className="text-3xl text-[--primary-color] font-bold mb-6">
@@ -263,23 +264,23 @@ export default function Login({ onClose }: LoginProps) {
           {/* Overlapping Div */}
           <div
             className={`absolute right-0 top-0 rounded-2xl w-1/2 h-full bg-[--primary-color] flex flex-col items-center justify-center transition-transform duration-700 ${
-              isSignUpVisible ? "-translate-x-full" : "translate-x-0"
+              isSignUpVisible ? '-translate-x-full' : 'translate-x-0'
             }`}
             style={{ zIndex: 10 }}
           >
             <h1 className="text-3xl font-bold mb-6 text-white">
-              {isSignUpVisible ? "Welcome Back!" : "Hello, Admin!"}
+              {isSignUpVisible ? 'Welcome Back!' : 'Hello, Admin!'}
             </h1>
             <p className="mb-4 text-white">
               {isSignUpVisible
-                ? "Sign in to continue your journey!"
+                ? 'Sign in to continue your journey!'
                 : "Don't have an account? Sign up and join us."}
             </p>
             <button
               className="bg-transparent border-white text-white border py-2 px-6 rounded-full"
               onClick={isSignUpVisible ? handleSignInClick : handleSignUpClick}
             >
-              {isSignUpVisible ? "Sign In" : "Sign Up"}
+              {isSignUpVisible ? 'Sign In' : 'Sign Up'}
             </button>
           </div>
           <button

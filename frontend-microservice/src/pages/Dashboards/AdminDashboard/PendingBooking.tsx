@@ -24,7 +24,7 @@ const PendingBooking = () => {
     };
 
     fetchData();
-  }, [bookings]);
+  }, []);
 
   // Handler for accepting a booking
   const handleAccept = async (id: any) => {

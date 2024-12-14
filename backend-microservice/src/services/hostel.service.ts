@@ -253,22 +253,24 @@ class HostelService {
   }
 
   async showAllPending(hostelId: string) {
-    const hostel = await Hostel.findOne({
+    const allPendingStatus = [];
+    const hostel = await Hostel.find({
       where: {
         place_id: hostelId,
       },
+
       relations: {
         hostelers: true,
       },
     });
-    if (!hostel?.hostelers) {
+    console.log(hostel);
+    if (!hostel) {
       throw new DatabaseException(404, 'No Hostelers found');
     }
-
-    const extractHostel = (data: any) => {
-      return data.filter((item: any) => item.status === 'pending');
-    };
-    const extractedHostel = extractHostel(hostel.hostelers);
+    const payloadHosteler = hostel[0].hostelers;
+    const extractedHostel = payloadHosteler.filter(
+      (item: any) => item.status === 'pending'
+    );
     return extractedHostel;
   }
 
@@ -341,8 +343,13 @@ class HostelService {
 
   async searchHostelByPrefrences(queryParams: any) {
     const queryParamsKeys = Object.keys(queryParams);
+    console.log(queryParamsKeys);
     const hostel = queryParamsKeys[0];
-    if (queryParamsKeys.includes('collegeName')) {
+    console.log(hostel);
+    if (
+      queryParamsKeys.length == 1 &&
+      queryParamsKeys.includes('collegeName')
+    ) {
       const fetchAllHostel = await Hostel.find({});
       const collegeName = queryParams['collegeName'];
       const payload = {
@@ -359,7 +366,6 @@ class HostelService {
             },
           }
         );
-        console.log(response.data);
         return response.data;
       } catch (error) {
         console.error('Error:', error);

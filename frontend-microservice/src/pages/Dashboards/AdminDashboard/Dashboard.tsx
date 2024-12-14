@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import NoAccountsIcon from "@mui/icons-material/NoAccounts";
-import axiosInstance from "../../../configs/axiosConfig";
-import { Bar, Pie } from "react-chartjs-2";
+import React, { useEffect, useState } from 'react';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NoAccountsIcon from '@mui/icons-material/NoAccounts';
+import axiosInstance from '../../../configs/axiosConfig';
+import { Bar, Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,9 +12,9 @@ import {
   Tooltip,
   Legend,
   ArcElement,
-} from "chart.js";
-import PrimaryButton from "../../../components/Button/PrimaryButton";
-import { NavLink, useNavigate } from "react-router-dom";
+} from 'chart.js';
+import PrimaryButton from '../../../components/Button/PrimaryButton';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 ChartJS.register(
   CategoryScale,
@@ -33,9 +33,9 @@ export default function DashBoard() {
   const [userData, setUserData] = useState({} as any);
   const [userHostel, setUserHostel] = useState(null);
   const [studentRequests, setStudentRequests] = useState([
-    { name: "John Doe", date: "2023-10-01" },
-    { name: "Jane Smith", date: "2023-10-02" },
-    { name: "Alice Johnson", date: "2023-10-03" },
+    { name: 'John Doe', date: '2023-10-01' },
+    { name: 'Jane Smith', date: '2023-10-02' },
+    { name: 'Alice Johnson', date: '2023-10-03' },
   ]);
   const [statistics, setStatistics] = useState({
     totalHostelers: 0,
@@ -52,15 +52,15 @@ export default function DashBoard() {
 
   const handleLogout = () => {
     localStorage.clear(); // Clears the local storage
-    navigate("/"); // Redirects to the home page
+    navigate('/'); // Redirects to the home page
   };
 
   useEffect(() => {
     const fetchHostelData = async () => {
       try {
-        const userDetails = await axiosInstance.get("/user/profile", {
+        const userDetails = await axiosInstance.get('/user/profile', {
           headers: {
-            Authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem('token'),
           },
         });
 
@@ -83,7 +83,7 @@ export default function DashBoard() {
           }));
         }
       } catch (error) {
-        console.error("Error fetching hostel data:", error);
+        console.error('Error fetching hostel data:', error);
       }
     };
 
@@ -93,8 +93,8 @@ export default function DashBoard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const hostelId = localStorage.getItem("hostelId");
-        const token = localStorage.getItem("token");
+        const hostelId = localStorage.getItem('hostel_id');
+        const token = localStorage.getItem('token');
         const response = await axiosInstance.get(`/dashboard/${hostelId}`, {
           headers: {
             Authorization: token,
@@ -102,7 +102,7 @@ export default function DashBoard() {
         });
         setStatistics(response.data.response);
       } catch (err) {
-        console.log("Error fetching data:", err);
+        console.log('Error fetching data:', err);
       }
     };
 
@@ -110,12 +110,12 @@ export default function DashBoard() {
   }, []);
 
   const chartData = {
-    labels: ["January", "February", "March", "April", "May", "June"],
+    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
     datasets: [
       {
-        label: "Hostel Occupancy",
+        label: 'Hostel Occupancy',
         data: [65, 59, 80, 81, 56, 55],
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        backgroundColor: 'rgba(75, 192, 192, 0.6)',
       },
     ],
   };
@@ -124,21 +124,21 @@ export default function DashBoard() {
     responsive: true,
     plugins: {
       legend: {
-        position: "top" as const,
+        position: 'top' as const,
       },
       title: {
         display: true,
-        text: "Hostel Occupancy Over Time",
+        text: 'Hostel Occupancy Over Time',
       },
     },
   };
 
   const pieData = {
     labels: [
-      "Total Hostelers",
-      "Present",
-      "Leave Requests",
-      "Pending Bookings",
+      'Total Hostelers',
+      'Present',
+      'Leave Requests',
+      'Pending Bookings',
     ],
     datasets: [
       {
@@ -149,10 +149,10 @@ export default function DashBoard() {
           statistics.totalPendings,
         ],
         backgroundColor: [
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-          "rgba(255, 206, 86, 0.6)",
-          "rgba(255, 99, 132, 0.6)",
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
         ],
       },
     ],
@@ -162,17 +162,17 @@ export default function DashBoard() {
     responsive: true,
     plugins: {
       legend: {
-        position: "top" as const,
+        position: 'top' as const,
       },
       title: {
         display: true,
-        text: "Hostel Statistics",
+        text: 'Hostel Statistics',
       },
     },
   };
 
-  const username = localStorage.getItem("username");
-  const email = localStorage.getItem("email");
+  const username = localStorage.getItem('username');
+  const email = localStorage.getItem('email');
 
   return (
     <main>
@@ -186,13 +186,13 @@ export default function DashBoard() {
             className="accountIcon cursor-pointer"
             onClick={() => triggerClick()}
           >
-            <AccountCircleIcon style={{ color: "#ff4f18", fontSize: "50px" }} />
+            <AccountCircleIcon style={{ color: '#ff4f18', fontSize: '50px' }} />
           </div>
         )}
       </header>
       <div
         className={`d absolute rounded-b-2xl  right-0 top-0 bg-[--tertiary-color] w-[20%] pl-2 h-[40vh] pt-16 ${
-          onClick ? "visible" : "hidden"
+          onClick ? 'visible' : 'hidden'
         }`}
       >
         <div className="userDetails flex items-center flex-col text-white gap-2">
@@ -200,12 +200,12 @@ export default function DashBoard() {
             className="absolute right-6 top-6"
             onClick={() => triggerClick()}
           >
-            <NoAccountsIcon className="block" style={{ fontSize: "50px" }} />
+            <NoAccountsIcon className="block" style={{ fontSize: '50px' }} />
           </div>
           <h2 className="block">{username}</h2>
           <h2 className="block">{email}</h2>
           <div className="mt-32">
-            <PrimaryButton title={"Logout"} onClick={handleLogout} />
+            <PrimaryButton title={'Logout'} onClick={handleLogout} />
           </div>
         </div>
       </div>

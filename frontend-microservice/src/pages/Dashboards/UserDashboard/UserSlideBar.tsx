@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined';
-import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
-import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
-import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
-import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
-import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
-import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
-import { NavLink } from 'react-router-dom';
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import MarkUnreadChatAltOutlinedIcon from "@mui/icons-material/MarkUnreadChatAltOutlined";
+import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import PendingActionsOutlinedIcon from "@mui/icons-material/PendingActionsOutlined";
+// import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
+// import AddHomeOutlinedIcon from "@mui/icons-material/AddHomeOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
+import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+import { NavLink } from "react-router-dom";
 
 export default function UserSideBar() {
   const [isHostelerDropdownOpen, setHostelerDropdownOpen] = useState(false);
@@ -112,44 +112,97 @@ export default function UserSideBar() {
           </li>
 
           {/* Other Static Links */}
-          <li className="text-white p-3 flex items-center">
-            <MarkUnreadChatAltOutlinedIcon />
-            <span className="ml-2">Chat</span>
+          <li>
+            <NavLink
+              to="/dashboard-user/userchat"
+              className={({ isActive }) =>
+                isActive
+                  ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                  : "p-3 flex items-center rounded-lg text-white"
+                }
+                >
+                  <MarkUnreadChatAltOutlinedIcon />
+                  <span className="ml-2">Chat</span>
+                </NavLink>
           </li>
-          <li className="text-white p-3 flex items-center">
-            <AccountBalanceWalletOutlinedIcon />
-            <span className="ml-2">Payments</span>
+          <li>
+            <NavLink
+              to="/dashboard-user/userpayments"
+              className={({ isActive }) =>
+                isActive
+                  ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                  : "p-3 flex items-center rounded-lg text-white"
+                }
+                >
+                  <AccountBalanceWalletOutlinedIcon />
+                  <span className="ml-2">Payments</span>
+                </NavLink>
           </li>
 
           <li>
             <NavLink
-              to="/dashboard-user/profile"
+              to="/dashboard-user/hostelsmarket"
               className={({ isActive }) =>
                 isActive
-                  ? 'p-3 flex items-center rounded-lg  bg-[--primary-color] text-white'
-                  : 'p-3 flex items-center rounded-lg text-white'
-              }
-            >
-              <AccountCircleOutlinedIcon />
-              <span className="ml-2">Profile</span>
-            </NavLink>
+                  ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                  : "p-3 flex items-center rounded-lg text-white"
+                }
+                >
+                  <HomeOutlinedIcon />
+                  <span className="ml-2">Hostel</span>
+                </NavLink>
           </li>
-
-          <li className="text-white p-3 flex items-center">
-            <NotificationsNoneOutlinedIcon />
-            <span className="ml-2">Notification</span>
+          <li>
+            <NavLink
+              to="/dashboard-user/usernotification"
+              className={({ isActive }) =>
+                isActive
+                  ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                  : "p-3 flex items-center rounded-lg text-white"
+                }
+                >
+                  <NotificationsNoneOutlinedIcon />
+                  <span className="ml-2">Notification</span>
+                </NavLink>
           </li>
-          <li className="text-white p-3 flex items-center">
-            <FeedOutlinedIcon />
-            <span className="ml-2">News</span>
+          <li>
+            <NavLink
+              to="/dashboard-user/usernews"
+              className={({ isActive }) =>
+                isActive
+                  ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                  : "p-3 flex items-center rounded-lg text-white"
+                }
+                >
+                  <FeedOutlinedIcon />
+                  <span className="ml-2">News</span>
+                </NavLink>
           </li>
-          <li className="text-white p-3 flex items-center">
-            <SupportAgentOutlinedIcon />
-            <span className="ml-2">Support</span>
+          <li>
+            <NavLink
+              to="/dashboard-user/usersupport"
+              className={({ isActive }) =>
+                isActive
+                  ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                  : "p-3 flex items-center rounded-lg text-white"
+                }
+                >
+                  <SupportAgentOutlinedIcon />
+                  <span className="ml-2">Support</span>
+                </NavLink>
           </li>
-          <li className="text-white p-3 flex items-center">
-            <SettingsOutlinedIcon />
-            <span className="ml-2">Setting</span>
+          <li>
+            <NavLink
+              to="/dashboard-user/usersetting"
+              className={({ isActive }) =>
+                isActive
+                  ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
+                  : "p-3 flex items-center rounded-lg text-white"
+                }
+                >
+                  <SettingsOutlinedIcon />
+                  <span className="ml-2">Setting</span>
+                </NavLink>
           </li>
         </ul>
       </nav>
