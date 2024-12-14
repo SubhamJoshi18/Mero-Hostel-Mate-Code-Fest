@@ -17,6 +17,7 @@ import Attendance from "../pages/Dashboards/AdminDashboard/Attendance";
 import PendingBooking from "../pages/Dashboards/AdminDashboard/PendingBooking";
 import HostelerList from "../pages/Dashboards/AdminDashboard/HostelerList";
 import HostelRegistrationForm from "../pages/Dashboards/AdminDashboard/RegisterHostel";
+import { LeaveRequest } from "../pages/Dashboards/UserDashboard/LeaveRequest";
 
 export default function AppRoutes() {
   const location = useLocation();
