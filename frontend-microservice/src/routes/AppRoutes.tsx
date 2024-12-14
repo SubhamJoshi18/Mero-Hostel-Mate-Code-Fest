@@ -1,22 +1,22 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import About from '../pages/About/About';
-import HomePage from '../pages/Home/HomePage';
-import { Navbar } from '../components/Navbar/Navbar';
-import Footer from '../components/Footer/Footer';
-import Login from '../pages/Logins/Login';
-import AllHostels from '../components/Extras/AllHostels';
-import { Contact } from '../pages/Contacts/Contact';
-import LoginAdmin from '../pages/Logins/LoginAdmin';
-import UserDashboard from '../pages/Dashboards/UserDashboard/UserDashboard';
-import OwnerDashboard from '../pages/Dashboards/AdminDashboard/AdminDashboard';
-import HostelDetails from '../pages/Hostels/HostelDetails';
-import DashBoard from '../pages/Dashboards/AdminDashboard/Dashboard';
-import AdminDashBoard from '../pages/Dashboards/AdminDashboard/AdminDashboard';
-import RegisterUser from '../pages/Dashboards/AdminDashboard/RegisterUser';
-import Attendance from '../pages/Dashboards/AdminDashboard/Attendance';
-import PendingBooking from '../pages/Dashboards/AdminDashboard/PendingBooking';
-import HostelerList from '../pages/Dashboards/AdminDashboard/HostelerList';
+import { Route, Routes, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import About from "../pages/About/About";
+import HomePage from "../pages/Home/HomePage";
+import { Navbar } from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
+import Login from "../pages/Logins/Login";
+import AllHostels from "../components/Extras/AllHostels";
+import { Contact } from "../pages/Contacts/Contact";
+import LoginAdmin from "../pages/Logins/LoginAdmin";
+import UserDashboard from "../pages/Dashboards/UserDashboard/UserDashboard";
+import HostelDetails from "../pages/Hostels/HostelDetails";
+import DashBoard from "../pages/Dashboards/AdminDashboard/Dashboard";
+import AdminDashBoard from "../pages/Dashboards/AdminDashboard/AdminDashboard";
+import RegisterUser from "../pages/Dashboards/AdminDashboard/RegisterUser";
+import Attendance from "../pages/Dashboards/AdminDashboard/Attendance";
+import PendingBooking from "../pages/Dashboards/AdminDashboard/PendingBooking";
+import HostelerList from "../pages/Dashboards/AdminDashboard/HostelerList";
+import HostelRegistrationForm from "../pages/Dashboards/AdminDashboard/RegisterHostel";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -82,6 +82,10 @@ export default function AppRoutes() {
         <Route
           path="/dashboard-admin/hostelerlist"
           element={<AdminDashBoard children={<HostelerList />} />}
+        />
+        <Route
+          path="/dashboard-admin/hostelregister"
+          element={<AdminDashBoard children={<HostelRegistrationForm />} />}
         />
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
         {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import axiosInstance from '../../../configs/axiosConfig';
-import { useNavigate } from 'react-router-dom';
-import { Bar } from 'react-chartjs-2';
+import React, { useEffect, useState } from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import axiosInstance from "../../../configs/axiosConfig";
+import { useNavigate } from "react-router-dom";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +12,7 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
+} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -22,15 +23,15 @@ ChartJS.register(
   Legend
 );
 
-export default function DashBoard() {
+export default function AdminHome() {
   const [projects, setProjects] = useState([]);
   const [orders, setOrders] = useState([]);
   const [userData, setUserData] = useState({} as any);
   const [userHostel, setUserHostel] = useState(null);
   const [studentRequests, setStudentRequests] = useState([
-    { name: 'John Doe', date: '2023-10-01' },
-    { name: 'Jane Smith', date: '2023-10-02' },
-    { name: 'Alice Johnson', date: '2023-10-03' },
+    { name: "John Doe", date: "2023-10-01" },
+    { name: "Jane Smith", date: "2023-10-02" },
+    { name: "Alice Johnson", date: "2023-10-03" },
   ]);
   const [statistics, setStatistics] = useState({
     totalHostelers: 0,
@@ -42,10 +43,10 @@ export default function DashBoard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userDetails = await axiosInstance.get('/user/profile');
+        const userDetails = await axiosInstance.get("/user/profile");
         setUserData(userDetails.data.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -55,10 +56,10 @@ export default function DashBoard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userHostelDetails = await axiosInstance.get('/user/hostel');
+        const userHostelDetails = await axiosInstance.get("/user/hostel");
         setUserHostel(userHostelDetails.data.response);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -66,12 +67,12 @@ export default function DashBoard() {
   }, []);
 
   const chartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
       {
-        label: 'Hostel Occupancy',
+        label: "Hostel Occupancy",
         data: [65, 59, 80, 81, 56, 55],
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
       },
     ],
   };
@@ -80,11 +81,11 @@ export default function DashBoard() {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: "top" as const,
       },
       title: {
         display: true,
-        text: 'Hostel Occupancy Over Time',
+        text: "Hostel Occupancy Over Time",
       },
     },
   };
@@ -94,18 +95,17 @@ export default function DashBoard() {
       {/* Header */}
       <header className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-4">
-          <MenuOutlinedIcon style={{ height: '2rem' }} />
-          <h1 className="text-3xl font-bold">Dashboard</h1>
+          <h1 className="text-3xl font-bold text-[--primary-color]">
+            Dashboard
+          </h1>
         </div>
         <input
           type="search"
           placeholder="Search here"
-          className="border rounded-xl py-2 px-4 focus:outline-none focus:ring"
+          className="outline-none rounded-xl w-[50%] py-2 px-4"
         />
         <div className="profile flex items-center gap-4">
-          <div className="bg-red-600 h-16 w-16 rounded-full">
-            <img src="" alt="" />
-          </div>
+          <AccountCircleIcon style={{ fontSize: "60px", color: "#ff4f18" }} />
           <div>
             <h1 className="font-bold text-xl">Admin 1</h1>
             <p>Hostel 420</p>
