@@ -166,7 +166,7 @@ export const Navbar = () => {
             </Link>
             <Link to={'/login-admin'}>
               <PrimaryButton
-                title="Become a Owner"
+                title="Become an Owner"
                 className={`text-md bg-white border border-[--btn-primary] px-6 py-2 rounded-xl hover:bg-[--primary-color] hover:text-white transition-all active:translate-y-0.5 ${
                   isScrolled
                     ? 'bg-white text-[--primary-color]'

@@ -22,6 +22,10 @@ import MyDocuments from '../pages/Dashboards/UserDashboard/MyDocuments';
 import UserProfile from '../pages/Dashboards/UserDashboard/UserProfile';
 import UserAttendanceHistory from '../pages/Dashboards/UserDashboard/UserAttendanceHistory';
 import HostelsMarket from '../pages/Dashboards/UserDashboard/HostelsMarket';
+import { News } from '../pages/Miscalleneous/News';
+import { FAQs } from '../pages/Miscalleneous/FAQs';
+import { PrivacyPolicy } from '../pages/Miscalleneous/PrivacyPolicy';
+import { TermsAndCondition } from '../pages/Miscalleneous/TermsAndCondition';
 export default function AppRoutes() {
   const location = useLocation();
 
@@ -66,7 +70,7 @@ export default function AppRoutes() {
         <Route path="/contact" element={<Contact />} />
         <Route
           path="/dashboard-user"
-          element={<UserDashboard children={<UserProfile />} />}
+          element={<UserDashboard children={<HostelsMarket />} />}
         />
         <Route
           path="/dashboard-user/requestleave"
@@ -81,8 +85,8 @@ export default function AppRoutes() {
           element={<UserDashboard children={<UserAttendanceHistory />} />}
         />
         <Route
-          path="/dashboard-user/hostelsmarket"
-          element={<UserDashboard children={<HostelsMarket />} />}
+          path="/dashboard-user/profile"
+          element={<UserDashboard children={<UserProfile />} />}
         />
         <Route path="/hostel/:place_id" element={<HostelDetails />} />
         // Admin Dashboard Routes
@@ -110,6 +114,10 @@ export default function AppRoutes() {
           path="/dashboard-admin/hostelregister"
           element={<AdminDashBoard children={<HostelRegistrationForm />} />}
         />
+        <Route path="/news" element={<News />} />
+        <Route path="/faqs" element={<FAQs />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+        <Route path="/termsandcondition" element={<TermsAndCondition />} />
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
         {/* <Route path="/hostel/:hostelId" element={<HostelDetails />} /> */}
         {/* <Route path="/news" element={<News />} />

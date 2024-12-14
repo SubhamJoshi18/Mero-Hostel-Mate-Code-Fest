@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import MarkUnreadChatAltOutlinedIcon from "@mui/icons-material/MarkUnreadChatAltOutlined";
-import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
-import PendingActionsOutlinedIcon from "@mui/icons-material/PendingActionsOutlined";
-import PersonAddAltOutlinedIcon from "@mui/icons-material/PersonAddAltOutlined";
-import AddHomeOutlinedIcon from "@mui/icons-material/AddHomeOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
-import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
-import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import { NavLink } from "react-router-dom";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined';
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
+import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
+import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
+import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
+import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import { NavLink } from 'react-router-dom';
 
 export default function UserSideBar() {
   const [isHostelerDropdownOpen, setHostelerDropdownOpen] = useState(false);
@@ -41,13 +41,13 @@ export default function UserSideBar() {
             to="/dashboard-user"
             className={({ isActive }) =>
               isActive
-                ? "p-3 flex items-center rounded-lg bg-[--primary-color] text-white"
-                : "p-3 flex items-center rounded-lg text-white"
+                ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                : 'p-3 flex items-center rounded-lg text-white'
             }
             end
           >
-            <AccountCircleOutlinedIcon />
-            <span className="ml-2">Profile</span>
+            <HomeOutlinedIcon />
+            <span className="ml-2">Hostel</span>
           </NavLink>
 
           {/* User Details with Dropdown */}
@@ -73,8 +73,8 @@ export default function UserSideBar() {
                     to="/dashboard-user/mydocuments"
                     className={({ isActive }) =>
                       isActive
-                        ? "p-3 flex items-center rounded-lg bg-[--primary-color] text-white"
-                        : "p-3 flex items-center rounded-lg text-white"
+                        ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                        : 'p-3 flex items-center rounded-lg text-white'
                     }
                   >
                     <FormatListBulletedIcon />
@@ -86,8 +86,8 @@ export default function UserSideBar() {
                     to="/dashboard-user/requestleave"
                     className={({ isActive }) =>
                       isActive
-                        ? "p-3 flex items-center rounded-lg bg-[--primary-color] text-white"
-                        : "p-3 flex items-center rounded-lg text-white"
+                        ? 'p-3 flex items-center rounded-lg bg-[--primary-color] text-white'
+                        : 'p-3 flex items-center rounded-lg text-white'
                     }
                   >
                     <PendingActionsOutlinedIcon />
@@ -99,8 +99,8 @@ export default function UserSideBar() {
                     to="/dashboard-user/userattendancehistory"
                     className={({ isActive }) =>
                       isActive
-                        ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
-                        : "p-3 flex items-center rounded-lg text-white"
+                        ? 'p-3 flex items-center rounded-lg  bg-[--primary-color] text-white'
+                        : 'p-3 flex items-center rounded-lg text-white'
                     }
                   >
                     <EditNoteOutlinedIcon />
@@ -122,18 +122,18 @@ export default function UserSideBar() {
           </li>
 
           <li>
-              <NavLink
-                  to="/dashboard-user/hostelsmarket"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "p-3 flex items-center rounded-lg  bg-[--primary-color] text-white"
-                      : "p-3 flex items-center rounded-lg text-white"
-                  }
-                >
-                    <HomeOutlinedIcon />
-                    <span className="ml-2">Hostel</span>
-                  </NavLink>
-                </li>
+            <NavLink
+              to="/dashboard-user/profile"
+              className={({ isActive }) =>
+                isActive
+                  ? 'p-3 flex items-center rounded-lg  bg-[--primary-color] text-white'
+                  : 'p-3 flex items-center rounded-lg text-white'
+              }
+            >
+              <AccountCircleOutlinedIcon />
+              <span className="ml-2">Profile</span>
+            </NavLink>
+          </li>
 
           <li className="text-white p-3 flex items-center">
             <NotificationsNoneOutlinedIcon />

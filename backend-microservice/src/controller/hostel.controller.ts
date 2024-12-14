@@ -23,11 +23,15 @@ class HostelController {
     try {
       const lat = req.query.lat;
       const lng = req.query.lng;
+      const type = req.query.type;
       const coordinates = {
         lat,
         lng,
       };
-      const allHostels = await HostelService.fetchAllHostel(coordinates as any);
+      const allHostels = await HostelService.fetchAllHostel(
+        coordinates as any,
+        type as any
+      );
 
       return res.status(201).json({
         hostels: allHostels,

@@ -5,11 +5,9 @@ class BookingController {
   bookHostel = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const userId =
-        typeof req.user._id === 'string'
-          ? Number(req.user._id)
-          : req.user._id.toString();
+        typeof req.user._id === 'string' ? Number(req.user._id) : req.user._id;
 
-      const hostelId = req.params.hostelId;
+      const hostelId = req.params.place_id;
       const response = await BookingService.bookHostel(userId, hostelId);
       return res.status(201).json({
         message: `User with id ${userId} has successfully booked hostel with id ${hostelId}`,

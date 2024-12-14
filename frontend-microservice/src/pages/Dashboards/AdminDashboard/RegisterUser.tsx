@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import Swal from 'sweetalert2';
-import axiosInstance from '../../../configs/axiosConfig';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axiosInstance from "../../../configs/axiosConfig";
 function RegisterUser() {
   const navigate = useNavigate();
-  const [hostelers, setHostelers] = useState([]);
+  const [hostelers] = useState([]);
   const [newHosteler, setNewHosteler] = useState({
-    name: '',
-    college: '',
-    gender: '',
-    faculty: '',
-    address: '',
-    contact: '',
-    dateofbirth: '',
-    roomNumber: '',
+    name: "",
+    college: "",
+    gender: "",
+    faculty: "",
+    address: "",
+    contact: "",
+    dateofbirth: "",
+    roomNumber: "",
   });
 
   const handleHostelerChange = (e) => {
@@ -24,13 +24,13 @@ function RegisterUser() {
 
   const registerHosteler = async () => {
     if (!newHosteler.name || !newHosteler.contact || !newHosteler.roomNumber) {
-      alert('Please fill all required fields');
+      alert("Please fill all required fields");
       return;
     }
 
     try {
-      const token = localStorage.getItem('token');
-      const hostelId = localStorage.getItem('hostel_id');
+      const token = localStorage.getItem("token");
+      const hostelId = localStorage.getItem("hostel_id");
       const response: any = await axiosInstance.post(
         `/register/hosteler/${hostelId}`,
         newHosteler,
@@ -42,30 +42,30 @@ function RegisterUser() {
       );
       const data = response.data;
 
-      console.log('Registration Success:', data); // Handle successful sign-in
+      console.log("Registration Success:", data); // Handle successful sign-in
 
       Swal.fire({
-        icon: 'success',
-        title: 'Register User Successfully',
-        text: 'Welcome back!',
-      }).then(() => navigate('/dashboard-admin'));
+        icon: "success",
+        title: "Register User Successfully",
+        text: "Welcome back!",
+      }).then(() => navigate("/dashboard-admin"));
     } catch (error) {
-      console.error('Error during sign-in:', error); // Handle sign-in error
+      console.error("Error during sign-in:", error); // Handle sign-in error
       Swal.fire({
-        icon: 'error',
-        title: 'Registration Failed',
-        text: 'Please check your credentials and try again.',
+        icon: "error",
+        title: "Registration Failed",
+        text: "Please check your credentials and try again.",
       });
     }
     setNewHosteler({
-      name: '',
-      college: '',
-      gender: '',
-      faculty: '',
-      address: '',
-      contact: '',
-      dateofbirth: '',
-      roomNumber: '',
+      name: "",
+      college: "",
+      gender: "",
+      faculty: "",
+      address: "",
+      contact: "",
+      dateofbirth: "",
+      roomNumber: "",
     });
   };
 

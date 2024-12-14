@@ -64,7 +64,10 @@ class HostelService {
     };
   };
 
-  fetchAllHostel = async (coordinates: { lat: string; lng: string }) => {
+  fetchAllHostel = async (
+    coordinates: { lat: string; lng: string },
+    type: any | null = null
+  ) => {
     const allHostels = [];
     const radius = 50000;
     let nextPageToken = undefined;
@@ -114,6 +117,7 @@ class HostelService {
 
       console.log('Total Hostels Found:', allHostels.length);
       await this.insertDb(allHostels);
+
       return allHostels;
     } catch (error) {
       console.error('Error:', error);

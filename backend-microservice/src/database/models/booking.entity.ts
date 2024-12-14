@@ -20,9 +20,6 @@ export class Booking extends BaseEntity {
   @ManyToOne(() => Hostel, (hostel) => hostel.bookings)
   hostel!: Hostel;
 
-  @Column({ type: 'date' })
-  bookingDate!: Date;
-
   @CreateDateColumn()
-  createdAt!: Date;
+  bookingDate!: Date;
 }

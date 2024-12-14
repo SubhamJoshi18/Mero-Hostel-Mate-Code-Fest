@@ -5,7 +5,7 @@ import { checkIsAdmin } from '../middleware/rolebaseMiddleware';
 const bookingRouter = Router();
 
 bookingRouter.post(
-  '/book/hostel',
+  '/book/hostel/:place_id',
   verifyAuthMiddleware as any,
   BookingController.bookHostel as any
 );

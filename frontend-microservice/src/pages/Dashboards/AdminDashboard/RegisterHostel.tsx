@@ -130,7 +130,7 @@ const HostelRegistrationForm = () => {
     <div className="container mx-auto p-6 bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 rounded-2xl"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       >
         <h2 className="text-4xl text-[--primary-color] font-bold mb-16 mt-4 text-center">
           {isEditMode ? 'Edit Hostel' : 'Hostel Registration Form'}
