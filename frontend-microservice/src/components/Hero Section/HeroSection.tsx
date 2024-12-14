@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../Button/PrimaryButton";
-import { SearchOption } from "../../pages/Miscalleneous/SearchOption";
 
 export const HeroSection = () => {
   const navigate = useNavigate();
 
   const handleSearchNavigate = () => {
-    navigate("/searchOption");
+    navigate("/search");
   };
 
   return (
@@ -26,16 +25,16 @@ export const HeroSection = () => {
         </p>
 
         {/* Search Button */}
-        {/* <div className="shadow-2xl">
+        <div className="shadow-2xl">
           <PrimaryButton
             title={"Search Hostels"}
             className=" text-2xl z-30 bg-[--btn-primary] py-4 px-10 rounded-xl text-white hover:bg-[--btn-secondary] transition-all active:translate-y-0.5"
             onClick={handleSearchNavigate}
           />
-        </div> */}
-        <div className="bg-[#041E42] p-4 w-[75%] h-[29%] rounded-2xl shadow-2xl">
-          <SearchOption />
         </div>
+        {/* <div className="bg-[#041E42] p-4 w-[75%] h-[29%] rounded-2xl shadow-2xl">
+          <SearchOption />
+        </div> */}
       </div>
     </div>
   );

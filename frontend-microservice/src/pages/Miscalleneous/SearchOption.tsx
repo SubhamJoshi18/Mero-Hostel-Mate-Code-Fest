@@ -56,7 +56,7 @@ export const SearchOption = () => {
           className={`text-lg font-medium cursor-pointer ${
             showDiv === 'search1'
               ? 'text-[--primary-color] border-b-2 border-b-[--primary-color]'
-              : 'text-white'
+              : 'text-black'
           }`}
           onClick={() => handleSearchClick('search1')}
         >
@@ -66,7 +66,7 @@ export const SearchOption = () => {
           className={`text-lg font-medium cursor-pointer ${
             showDiv === 'search2'
               ? 'text-[--primary-color] border-b-2 border-b-[--primary-color]'
-              : 'text-white'
+              : 'text-black'
           }`}
           onClick={() => handleSearchClick('search2')}
         >
@@ -75,7 +75,7 @@ export const SearchOption = () => {
       </div>
       {showDiv === 'search1' ? (
         <form onSubmit={handleSubmit}>
-          <div className="overflow-hidden">
+          <div className="overflow-hidden w-[80%] mx-auto pt-4">
             <div className="grid grid-cols-4 gap-4">
               <div>
                 <input
@@ -138,7 +138,7 @@ export const SearchOption = () => {
                   name="collegeName"
                   value={formData.collegeName}
                   onChange={handleInputChange}
-                  className="py-2 px-2 w-full outline-none text-gray-500 rounded-lg shadow placeholder-gray-400"
+                  className="py-2 px-2 w-full outline-none border text-gray-500 rounded-lg shadow placeholder-gray-400"
                   placeholder="Enter College Name (Optional)"
                 />
               </div>

@@ -3,8 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import { RenderStar } from "../../components/Cards/RenderStar";
+import { SearchOption } from "./SearchOption";
 
-export const Search = () => {
+export const SearchBox = () => {
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
   const [faculty, setFaculty] = useState("");
@@ -138,9 +139,9 @@ export const Search = () => {
   return (
     <>
       <div className="h-20 bg-[--tertiary-color]"></div>
-      <div className="h-auto w-screen container mx-auto mb-5">
+      <div className="h-auto mt-16 container mx-auto mb-4">
         {/* Search 1 and Search 2 buttons */}
-        <div className="flex space-x-4 justify-center mb-6">
+        {/* <div className="flex space-x-4 justify-center mb-6">
           <div
             className={`text-lg font-medium cursor-pointer ${
               showDiv === "search1"
@@ -161,10 +162,10 @@ export const Search = () => {
           >
             <h3>By Nearby</h3>
           </div>
-        </div>
+        </div> */}
 
         {/* Search Form */}
-        <form
+        {/* <form
           onSubmit={handleSearch}
           className="flex justify-center gap-5 mb-10"
         >
@@ -198,8 +199,9 @@ export const Search = () => {
           >
             Search
           </button>
-        </form>
+        </form> */}
 
+        <SearchOption />
         {/* Error Message */}
         {error && <p className="text-red-500 text-center">{error}</p>}
 

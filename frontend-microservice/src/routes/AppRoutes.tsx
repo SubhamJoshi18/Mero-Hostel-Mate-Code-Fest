@@ -27,6 +27,7 @@ import { PrivacyPolicy } from "../pages/Miscalleneous/PrivacyPolicy";
 import { TermsAndCondition } from "../pages/Miscalleneous/TermsAndCondition";
 import HostelsMarket from "../pages/Dashboards/UserDashboard/HostelsMarket";
 import { UserSetting } from "../pages/Dashboards/UserDashboard/UserSetting";
+import { SearchBox } from "../pages/Miscalleneous/SearchBox";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -122,6 +123,7 @@ export default function AppRoutes() {
         />
         <Route path="/news" element={<News />} />
         <Route path="/faqs" element={<FAQs />} />
+        <Route path="/search" element={<SearchBox />}/>
         <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/termsandcondition" element={<TermsAndCondition />} />
         {/* <Route path="/allhostel" element={<AllHostels />} /> */}
