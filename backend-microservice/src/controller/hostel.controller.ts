@@ -32,28 +32,49 @@ class HostelController {
     }
   };
 
-  bookHostel = async (req: Request, res: Response, next: NextFunction) => {
+  showAllReject = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const placeId = req.params.place_id;
-      const userId =
-        typeof req.user._id === 'string' ? Number(req.user._id) : req.user._id;
-
-      const response = await HostelService.bookHostel(userId, placeId);
+      const hostelId = req.params.hostelId;
+      const hostel = await HostelService.showAllReject(hostelId);
       return res.status(201).json({
-        message: response,
+        hostel,
       });
     } catch (err) {
       next(err);
     }
   };
 
-  fetchUserHostel = async (req: Request, res: Response, next: NextFunction) => {
+  showAllApprove = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const userId = req.user._id;
-      const parseUserId = Number(req.user._id);
-      const response = await HostelService.fetchUserHostel(parseUserId);
+      const hostelId = req.params.hostelId;
+      const hostel = await HostelService.showAllApprove(hostelId);
       return res.status(201).json({
-        message: `User Hostels`,
+        hostel,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+  showAllPending = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const hostelId = req.params.hostelId;
+      const hostel = await HostelService.showAllPending(hostelId);
+      return res.status(201).json({
+        hostel,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  approveMessage = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const HostelerId =
+        typeof req.params.hostelerId === 'string'
+          ? Number(req.params.hostelerId)
+          : req.params.hostelerId;
+      const response = await HostelService.approveRequest(HostelerId);
+      return res.status(201).json({
         response,
       });
     } catch (err) {
@@ -61,12 +82,16 @@ class HostelController {
     }
   };
 
-  registerHosteler = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  rejectMessage = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const HostelerId =
+        typeof req.params.hostelerId === 'string'
+          ? Number(req.params.hostelerId)
+          : req.params.hostelerId;
+      const response = await HostelService.rejectRequest(HostelerId);
+      return res.status(201).json({
+        response,
+      });
     } catch (err) {
       next(err);
     }

@@ -2,11 +2,13 @@ import {
   BaseEntity,
   Column,
   Entity,
-  ManyToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
-  JoinTable,
 } from 'typeorm';
 import { Users } from './user.entity';
+import { Booking } from './booking.entity';
+import { Hostelers } from './hosteler.entity';
 
 @Entity()
 class Hostel extends BaseEntity {
@@ -34,18 +36,23 @@ class Hostel extends BaseEntity {
   @Column({ type: 'numeric', nullable: true })
   price!: number;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   hostel_type!: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'text', nullable: true })
+  owner_id!: string;
+
+  @Column({ type: 'int', default: 0 })
   total_rooms_left!: number;
 
   @Column({ type: 'varchar', length: 50, nullable: true })
   owner_name!: string;
 
-  @ManyToMany(() => Users, (user) => user.hostels)
-  @JoinTable()
-  users!: Users[];
+  @OneToMany(() => Booking, (booking) => booking.hostel)
+  bookings!: Booking[];
+
+  @OneToMany(() => Hostelers, (hostelers) => hostelers.hostel)
+  hostelers!: Hostelers[];
 }
 
 export default Hostel;

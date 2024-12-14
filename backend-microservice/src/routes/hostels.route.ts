@@ -12,14 +12,39 @@ hostelRouter.get('/hostels', HostelController.fetchHostel as any);
 
 hostelRouter.get('/hostel/:hostelId', HostelController.fetchHostelById as any);
 
-hostelRouter.post(
-  '/book/hostel/:place_id',
-  checkBookMiddleware as any,
+hostelRouter.get(
+  '/rejects',
   verifyAuthMiddleware as any,
   checkIsAdmin as any,
-  HostelController.bookHostel as any
+  HostelController.showAllReject as any
 );
 
+hostelRouter.get(
+  '/approve',
+  verifyAuthMiddleware as any,
+  checkIsAdmin as any,
+  HostelController.showAllApprove as any
+);
 
+hostelRouter.get(
+  '/pending',
+  verifyAuthMiddleware as any,
+  checkIsAdmin as any,
+  HostelController.showAllPending as any
+);
+
+hostelRouter.get(
+  '/approve/user',
+  verifyAuthMiddleware as any,
+  checkIsAdmin as any,
+  HostelController.approveMessage as any
+);
+
+hostelRouter.get(
+  '/reject/user',
+  verifyAuthMiddleware as any,
+  checkIsAdmin as any,
+  HostelController.rejectMessage as any
+);
 
 export default hostelRouter;

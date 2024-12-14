@@ -5,6 +5,7 @@ import { Client } from '@googlemaps/google-maps-services-js';
 import Hostel from '../database/models/hostel.entiy';
 import { DatabaseException } from '../exceptions';
 import { Users } from '../database/models/user.entity';
+import { Hostelers } from '../database/models/hosteler.entity';
 
 class HostelService {
   private GOOGLE_API_KEY = getEnv('GOOGLE_API_KEY');
@@ -161,51 +162,100 @@ class HostelService {
     }
   }
 
-  bookHostel = async (user_id: number, place_id: string) => {
-    try {
-      const findUser = await Users.findOne({
-        where: {
-          id: user_id,
-        },
-        relations: ['hostels'],
-      });
-
-      const existsHostel = await Hostel.findOne({
-        where: {
-          place_id: place_id,
-        },
-        relations: ['users'],
-      });
-
-      if (!findUser || !existsHostel) {
-        throw new DatabaseException(403, 'Hostel or User is Missing');
-      }
-
-      if (!existsHostel.users.some((user) => user.id === findUser.id)) {
-        existsHostel.users.push(findUser);
-        await existsHostel.save();
-      }
-
-      return {
-        message: 'Hostel booked successfully',
-        hostel: existsHostel,
-      };
-    } catch (error) {
-      console.error('Error booking hostel:', error);
-      throw new DatabaseException(500, 'Internal Server Error');
-    }
-  };
-
-  async fetchUserHostel(userId: number) {
-    const userData = await Users.findOne({
+  async showAllReject(hostelId: string) {
+    const hostel = await Hostel.findOne({
       where: {
-        id: userId,
+        place_id: hostelId,
       },
       relations: {
-        hostels: true,
+        hostelers: true,
       },
     });
-    return userData;
+    if (!hostel?.hostelers) {
+      throw new DatabaseException(404, 'No Hostelers found');
+    }
+
+    const extractHostel = (data: any) => {
+      return data.filter((item: any) => item.status === 'rejected');
+    };
+    const extractedHostel = extractHostel(hostel.hostelers);
+    return extractedHostel;
+  }
+
+  async showAllApprove(hostelId: string) {
+    const hostel = await Hostel.findOne({
+      where: {
+        place_id: hostelId,
+      },
+      relations: {
+        hostelers: true,
+      },
+    });
+    if (!hostel?.hostelers) {
+      throw new DatabaseException(404, 'No Hostelers found');
+    }
+
+    const extractHostel = (data: any) => {
+      return data.filter((item: any) => item.status === 'approved');
+    };
+    const extractedHostel = extractHostel(hostel.hostelers);
+    return extractedHostel;
+  }
+
+  async showAllPending(hostelId: string) {
+    const hostel = await Hostel.findOne({
+      where: {
+        place_id: hostelId,
+      },
+      relations: {
+        hostelers: true,
+      },
+    });
+    if (!hostel?.hostelers) {
+      throw new DatabaseException(404, 'No Hostelers found');
+    }
+
+    const extractHostel = (data: any) => {
+      return data.filter((item: any) => item.status === 'pending');
+    };
+    const extractedHostel = extractHostel(hostel.hostelers);
+    return extractedHostel;
+  }
+
+  async approveRequest(hostlerId: number) {
+    const hostler = await Hostelers.findOne({
+      where: {
+        id: hostlerId,
+      },
+    });
+    if (!hostler) {
+      throw new DatabaseException(403, 'Hostler Id Does not Exists');
+    }
+    const updatedResult = await Hostelers.update(
+      { id: hostlerId },
+      {
+        status: 'approved',
+      }
+    );
+    return updatedResult;
+  }
+
+  async rejectRequest(hostlerId: number) {
+    const hostler = await Hostelers.findOne({
+      where: {
+        id: hostlerId,
+      },
+    });
+    if (!hostler) {
+      throw new DatabaseException(403, 'Hostler Id Does not Exists');
+    }
+    const updatedResult = await Hostelers.update(
+      { id: hostlerId },
+      {
+        status: 'rejected',
+      }
+    );
+    return updatedResult;
   }
 }
 
