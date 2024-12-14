@@ -98,7 +98,7 @@ export const Navbar = () => {
               </li>
               <li className="hover:text-[--primary-color]">
                 <NavLink
-                  to="/hostel"
+                  to="/hostelsmarket"
                   className={({ isActive }) =>
                     isActive
                       ? "text-[--primary-color] border-b-2 border-[--primary-color] transition-all"

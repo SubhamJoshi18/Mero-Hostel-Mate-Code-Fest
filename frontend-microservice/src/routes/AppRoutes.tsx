@@ -21,6 +21,7 @@ import { RequestLeave } from "../pages/Dashboards/UserDashboard/RequestLeave";
 import MyDocuments from "../pages/Dashboards/UserDashboard/MyDocuments";
 import UserProfile from "../pages/Dashboards/UserDashboard/UserProfile";
 import UserAttendanceHistory from "../pages/Dashboards/UserDashboard/UserAttendanceHistory";
+import HostelsMarket from "../pages/Dashboards/UserDashboard/HostelsMarket";
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -68,6 +69,7 @@ export default function AppRoutes() {
         <Route path="/dashboard-user/requestleave" element={<UserDashboard children={<RequestLeave />} />} />
         <Route path="/dashboard-user/mydocuments" element={<UserDashboard children={<MyDocuments />} />} />
         <Route path="/dashboard-user/userattendancehistory" element={<UserDashboard children={<UserAttendanceHistory />} />} />
+        <Route path="/dashboard-user/hostelsmarket" element={<UserDashboard children={<HostelsMarket/>} />} />
         <Route path="/hostel/:place_id" element={<HostelDetails />} />
         // Admin Dashboard Routes
         <Route
